@@ -30,8 +30,11 @@ nChains <- 4
 nCores <- 2
 nIter <- 4000
 
+seroFitted <- read.csv("../data/processed_data/PCR_to_serotest_all.csv",
+                       stringsAsFactors=FALSE)
+
 ###################
-# 4) Get initial values for the fitting
+# Get initial values for the fitting
 ###################
 
 ### Estimate some initial values for the fit

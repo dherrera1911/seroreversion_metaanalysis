@@ -40,7 +40,7 @@ seroKnown$testTime <- as.numeric(seroKnown$testTime)
 ############
 # 2) Data with estimated diagnosis to serosurvey time
 ############
-seroEstimated <- read.csv("../data/analysis_results/PCR_to_serotest_estimated_times.csv",
+seroEstimated <- read.csv("../data/processed_data/PCR_to_serotest_estimated_times.csv",
                           stringsAsFactors=FALSE) %>%
   dplyr::mutate(., timeKnown=FALSE)
 

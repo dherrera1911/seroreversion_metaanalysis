@@ -125,7 +125,7 @@ estimatedTime[ischglInd] <- lubridate::interval(date("2020-03-15"),
 seroUnknown$testTime <- pmax(round(estimatedTime), 1)
 seroUnknown <- dplyr::select(seroUnknown, -newLoc, -pcrReferenceDate)
 
-write.csv(seroUnknown, "../data/analysis_results/PCR_to_serotest_estimated_times.csv",
+write.csv(seroUnknown, "../data/processed_data/PCR_to_serotest_estimated_times.csv",
           row.names=FALSE)
 
 
@@ -175,7 +175,5 @@ seroUnknown$testTime[seroUnknown$testTime=="3 - 4"] <- "3.5"
 seroUnknown$testTime[seroUnknown$testTime=="≥5"] <- "6"
 # Convert test times to integer
 seroUnknown$testTime <- as.numeric(seroUnknown$testTime)
-
-
 
 

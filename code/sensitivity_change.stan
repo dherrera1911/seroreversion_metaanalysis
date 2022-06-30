@@ -29,7 +29,7 @@ transformed parameters{
 model {
   timeSlope ~ normal(0, 100);
   intercept ~ normal(0, 100);
-  slopeSigma ~ gamma(4, 8);
+  slopeSigma ~ gamma(4, 4);
   interceptSigma ~ gamma(4, 4);
   studySigma ~ gamma(4, 4);
   assaySlope ~ normal(timeSlope, slopeSigma);

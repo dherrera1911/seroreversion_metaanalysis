@@ -34,7 +34,7 @@ dataAlpha <- 0.5
 posteriorTraces <- read.csv("../data/analysis_results/sensitivity_decay_all.csv",
                             stringsAsFactors=FALSE)
 # Load the fitted serology data
-seroAll <- read.csv("../data/analysis_results/PCR_to_serotest_all.csv",
+seroAll <- read.csv("../data/processed_data/PCR_to_serotest_all.csv",
                     stringsAsFactors=FALSE)
 seroFitted <- seroAll
 
