@@ -120,8 +120,12 @@ seroFitted$antigenTarget <- antigenVec
 seroFitted$antibodyTarget <- antibodyVec
 seroFitted$technique <- techniqueVec
 
+# Filter tests that don't belong
+seroFitted <- dplyr::filter(seroFitted, !stringr::str_detect(testName, "Oxford"))
+seroFitted <- dplyr::filter(seroFitted, !stringr::str_detect(testName, "Obolensk"))
+
 # save data to fit, for easier access
-write.csv(seroFitted, "../data/analysis_results/PCR_to_serotest_all.csv",
+write.csv(seroFitted, "../data/processed_data/PCR_to_serotest_all.csv",
           row.names=FALSE)
 
 

@@ -5,75 +5,7 @@ library(ggplot2)
 library(ggpubr)
 library(matrixStats)
 
-# Return a vector with the mean age in each bin
-mid_bin_age <- function(binsVec) {
-  defaultW <- getOption("warn")
-  options(warn = -1)
-  ageBins <- strsplit(binsVec, "-") %>%
-    lapply(., as.numeric) %>%
-    lapply(., mean) %>%
-    unlist(.)
-  for (naInd in which(is.na(ageBins))) {
-    naVal <- as.numeric(substr(binsVec[naInd], start=1, stop=2))
-    ageBins[naInd] <- mean(c(naVal, 90))
-  }
-  # extract last value
-  options(warn = defaultW)
-  return(ageBins)
-}
-
-# Take a demography dataframe and a vector indicating a
-# new subdivission, and return demography for the new division
-change_demography_bins <- function(demographyDf, newBins) {
-  midAges <- mid_bin_age(as.character(demographyDf$age))
-  newDemRow <- bin_ages(midAges, newBins)
-  newDemography <- dplyr::mutate(demographyDf, newBin = newDemRow) %>%
-    group_by(newBin) %>%
-    summarize(., proportion = sum(proportion)) %>%
-    ungroup(.) %>%
-    dplyr::mutate(age = newBins) %>%
-    dplyr::select(-newBin)
-  return(newDemography)
-}
-
-# take a vector with numbers and bin them as given in
-# binsVec. binsVec can be a character vector indicating
-# the ranges as "Xi-Xf" or a numeric vector indicating
-# the superior limits of the bins
-bin_ages <- function(agesVec, binsVec) {
-  if (is.character(binsVec)) {
-    ageBins <- strsplit(binsVec, "-") %>%
-      lapply(., as.numeric) %>%
-      unlist(.)
-    supInd <-seq(2, length(ageBins), by = 2)
-    ageBins <- ageBins[supInd]
-    if (any(is.na(ageBins))) {
-      ageBins <- ageBins[-which(is.na(ageBins))]
-    }
-    ageBins <- c(-1, ageBins, 200)
-  } else {
-    ageBins <- binsVec
-  }
-  indVec <- .bincode(agesVec, ageBins)
-  return(indVec)
-}
-
-get_bins_limits <- function(ageBins) {
-  ageList <- strsplit(ageBins, "-") %>%
-    lapply(., as.numeric)
-  ageLow <- NULL
-  ageHigh <- NULL
-  for (l in c(1:length(ageList))) {
-    if (is.na(ageList[[l]])) {
-      naVal <- as.numeric(substr(ageBins[l], start=1, stop=2))
-      ageList[[l]] <- c(naVal, 300)
-    }
-    ageLow[l] <- ageList[[l]][1]
-    ageHigh[l] <- ageList[[l]][2]
-  }
-  return(list(lower=ageLow, upper=ageHigh))
-}
-
+# return the 95% CI of a binomial coefficient
 binomial_confint <- function(countTotal, occurrences, input="count"){
   lower <- NULL
   upper <- NULL
@@ -90,44 +22,11 @@ binomial_confint <- function(countTotal, occurrences, input="count"){
   confintList <- list(lower=lower, upper=upper)
 }
 
-extract_country_population <- function(popM, popF, countryName, ageBins) {
-  countryPopM <- dplyr::filter(popM, name==countryName) %>%
-    dplyr::select(., age, "2020")
-  countryPopF <- dplyr::filter(popF, name==countryName) %>%
-    dplyr::select(age, "2020")
-  countryPop <- data.frame(age=countryPopM$age,
-                         pop=(countryPopM[["2020"]]+countryPopF[["2020"]])*1000)
-  countryPop$proportion <- countryPop$pop # rename pop to proportion so function works 
-  countryPop <- change_demography_bins(countryPop, ageBins) %>%
-    rename(., pop=proportion)
-  return(round(countryPop$pop))
-}
-
-
 # function used for plotting log axis
 scaleFun <- function(x) sprintf("%1g", x)
 
-# estimate the number of out of hospital (or ICU) deaths
-# from the hospital mortality fit, hospitalizations (or ICU) and deaths
-ooh_deaths_estimation <- function(mortalitySamples,
-                                  hospitalized,
-                                  deaths) {
-  sampleMat <- matrix(nrow=length(hospitalized), ncol=0)
-  for (s in unique(mortalitySamples$samples$sample)) {
-    sampleMort <- dplyr::filter(mortalitySamples$samples, sample==s)
-    oohDeaths <- deaths - hospitalized*sampleMort$proportion
-    sampleMat <- cbind(sampleMat, oohDeaths)
-  }
-  oohDeaths <- pmax(0, round(rowMeans(sampleMat)))
-  oohDeaths_ci <- round(matrixStats::rowQuantiles(sampleMat, probs=c(0.025, 0.975)))
-  oohDeaths_ci[,1] <- pmax(0, oohDeaths_ci[,1])
-  oohDeaths_ci[,2] <- pmax(0, oohDeaths_ci[,2])
-  oohDeathsDf <- data.frame(mean=oohDeaths, lower=oohDeaths_ci[,1],
-                          upper=oohDeaths_ci[,2])
-  return(oohDeathsDf)
-}
-
-# beta fitting by moment matching
+# Return the parameters of a beta distribution, as
+# estimated from moment matching its mean and 95% CI bounds
 fit_beta_ci <- function(meanEstimate, lower, upper) {
   var <- ((upper-lower)/4)^2
   commonFactor <- meanEstimate*(1-meanEstimate)/var - 1
@@ -150,3 +49,71 @@ fit_beta_ci <- function(meanEstimate, lower, upper) {
   }
   return(fittingDf)
 }
+
+
+# Make the batches for grouped-in-time cross-validation of the
+# seroreversion fit.
+#
+# Each batch contains, for nAssayPerGroup assays, either
+# all datapoints with times shorter than the average time
+# for that test, or datapoints with times larger. That is,
+# either the first half or the second half of the points for a test
+# are left out in each batch. This way, this crossvalidation
+# reflects extrapolation across time and assays
+#
+# Also, the function tries to balance the batches by pairing
+# assays with high number of datapoints to those with low number
+# of datapoints.
+grouped_val_batches <- function(seroFitted, testsPerGroup) {
+  # Get number of data points in each test, and sort to
+  # match together high N tests with low N tests for CV
+  testSamples <- group_by(seroFitted, testName) %>%
+    summarize(., multiTime=length(unique(testTime)) > 1,
+              nTimes=length(unique(testTime)),
+              meanTime=mean(testTime))
+  testSamples <- arrange(testSamples, nTimes)
+  halfRows <- ceiling(nrow(testSamples)/2)
+  testSamples[c(1:halfRows),] <- testSamples[c(halfRows:1),]
+  # Make the CV group indexing
+  nGroups <- ceiling(nrow(testSamples)/testsPerGroup)
+  testGroup <- rep(c(1:nGroups), testsPerGroup)[1:nrow(testSamples)]
+  validationGroup <- rep(NA, nrow(seroFitted))
+  for (ng in c(1:nGroups)) {
+    # tests belonging to this group
+    tempTests <- testSamples$testName[testGroup==ng]
+    for (tt in tempTests) {
+      testInds <- which(seroFitted$testName == tt)
+      meanTime <- testSamples$meanTime[testSamples$testName==tt]
+      # Group data points by first or second half
+      if (testSamples$multiTime[testSamples$testName==tt]) {
+        timeGroup <- as.integer(seroFitted$testTime[testInds] >= meanTime) + 1
+      } else {
+        timeGroup <- 1
+      }
+      # Add group index (ng-1)*2 to the timeGroup
+      validationGroup[testInds] <- (ng-1)*2 + timeGroup
+    }
+  }
+  return(validationGroup)
+}
+
+
+# Make matrix with indicator variable for assay characteristics, to use for
+# model fit
+make_characteristics_matrix <- function(seroFitted, charsName) {
+  nChars <- length(charsName)
+  assayVec <- as.factor(seroFitted$testName)
+  charLong <- NULL
+  for (cn in charsName) {
+    charLong <- c(charLong, as.integer(seroFitted[[cn]]))
+  }
+  charLong <- c(charLong, as.integer(assayVec))
+  charMatrix <- matrix(charLong, ncol=nChars+1)
+  charMatrix <- unique(charMatrix)
+  charMatrix <- charMatrix[order(charMatrix[,nChars+1]),]
+  charMatrix <- charMatrix[,c(1:nChars)]
+  return(charMatrix)
+}
+
+
+

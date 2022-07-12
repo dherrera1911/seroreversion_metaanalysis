@@ -30,13 +30,9 @@ dataAlpha <- 0.5
 #######################
 
 ### Load data
-# model fit
-posteriorTraces <- read.csv("../data/analysis_results/sensitivity_decay_all.csv",
-                            stringsAsFactors=FALSE)
 # Load the fitted serology data
-seroAll <- read.csv("../data/processed_data/PCR_to_serotest_all.csv",
+seroFitted <- read.csv("../data/processed_data/PCR_to_serotest_all.csv",
                     stringsAsFactors=FALSE)
-seroFitted <- seroAll
 
 # Get the samples of the sensitivity across time posterior for each test
 testNames <- unique(seroFitted$testName)
@@ -114,7 +110,7 @@ ggsave(paste("../data/figures/seroreversion_fit", np, ".png", sep=""),
 # Plot model parameters vs their priors
 sigmas <- c("interceptSigma", "slopeSigma", "studySigma")
 modelSigmas <- dplyr::filter(posteriorTraces, .variable%in%sigmas)
-gammaPars <- list(c(4,4), c(4,8), c(4,4))
+gammaPars <- list(c(4,4), c(4,4), c(4,4))
 priorDf <- NULL
 for (ss in c(1:length(sigmas))) {
   x <- seq(0, 2.5, 0.01)
