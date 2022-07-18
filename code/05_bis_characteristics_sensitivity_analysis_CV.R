@@ -29,13 +29,13 @@ nCores <- 2
 nIter <- 4000
 warmup <- 1000
 
-characteristics <- "antigen"
+characteristics <- "antibody"
 
-crossValidationType <- "grouped"
-testsPerGroup <- 2 # for grouped CV only
+#crossValidationType <- "grouped"
+#testsPerGroup <- 2 # for grouped CV only
 #
-#crossValidationType <- "random"
-#pointsPerGroup <- 7
+crossValidationType <- "random"
+pointsPerGroup <- 7
 
 
 ############

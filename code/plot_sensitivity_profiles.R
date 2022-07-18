@@ -2,7 +2,6 @@ library(dplyr)
 library(tidyr)
 library(ggplot2)
 library(lubridate)
-library(rstan)
 library(bayesplot)
 library(tidybayes)
 library(viridis)
@@ -23,7 +22,6 @@ sampleLineSize=0.1
 sampleLineAlpha=0.1
 dataAlpha <- 0.5
 
-
 # Load raw data
 seroFitted <- read.csv("../data/processed_data/PCR_to_serotest_all.csv",
                     stringsAsFactors=FALSE)
@@ -34,8 +32,15 @@ validationDf <- read.csv("../data/analysis_results/04_predicted_sensitivities_gr
 dplyr::mutate(., inInterval=(nSeropositives>=predictedPosL) &
               (nSeropositives<=predictedPosH))
 
+
+#################################
+#################################
+# Individual assays sensitivity profiles
+#################################
+#################################
+
 #####################
-# Sensitivity profiles fitted by the basic model
+# Basic model
 #####################
 # Load sensitivity profile of basic model
 sensProfileDf <- read.csv("../data/analysis_results/04_assay_sensitivity_curve.csv",
@@ -74,20 +79,21 @@ ggsave(paste("../data/figures/seroreversion_fit", np, ".png", sep=""),
        sensitivityPlot[[np]], units="cm", width=24, height=30)
 }
 
-
-####
-antigenProfile <- read.csv("../data/analysis_results/05_characteristics_fullModel_assay_sensitivity_curve.csv",
+#####################
+# Full model
+#####################
+fullModelProfile <- read.csv("../data/analysis_results/05_characteristics_fullModel_assay_sensitivity_curve.csv",
                            stringsAsFactors=FALSE)
 
 sensitivityCompPlot <- list()
 for (np in c(1:nPlots)) {
   testsPlot <- unique(seroFitted$testName)[testLists[[np]]]
   sensitivityCompPlot[[np]] <- sensitivityPlot[[np]] +
-    geom_line(data=dplyr::filter(antigenProfile,
+    geom_line(data=dplyr::filter(fullModelProfile,
                                  !is.na(testName) & (testName %in% testsPlot)),
               aes(x=time, y=sensitivityMean*100), color="red", linetype="solid",
               size=regLineSize, inherit.aes=FALSE) +
-    geom_ribbon(data=dplyr::filter(antigenProfile,
+    geom_ribbon(data=dplyr::filter(fullModelProfile,
                                    !is.na(testName) & testName %in% testsPlot),
                 aes(x=time, ymin=sensitivityL*100, ymax=sensitivityH*100),
                 alpha=ribbonAlpha, colour=NA, show.legend=FALSE,
@@ -97,9 +103,155 @@ ggsave(paste("../data/figures/seroreversion_fit_characteristics", np, ".png", se
 }
 
 
-validationDf2 <- read.csv("../data/analysis_results/05_characteristics_antigen_grouped_CV.csv",
-                         stringsAsFactors=FALSE) %>%
-  dplyr::mutate(., inInterval=(nSeropositives>=predictedPosL) &
-                (nSeropositives<=predictedPosH))
+
+#################################
+#################################
+# Average assay sensitivity profiles
+#################################
+#################################
+
+############
+# Antigen
+############
+
+antigenProfile <- read.csv("../data/analysis_results/05_characteristics_antigen_assay_sensitivity_curve.csv",
+                           stringsAsFactors=FALSE) %>%
+  dplyr::mutate(., averageSens=is.na(testName))
+
+antigenProfile$antigen[with(antigenProfile, N & (!S))] <- "N"
+antigenProfile$antigen[with(antigenProfile, N & S & !(RBD))] <- "N-S"
+antigenProfile$antigen[with(antigenProfile, !(N) & S & !(RBD))] <- "S"
+antigenProfile$antigen[with(antigenProfile, !(N) & S & RBD)] <- "S-RBD"
+antigenProfile$antigen[with(antigenProfile, N & S & RBD)] <- "N-S-RBD"
+
+antigenAverages <- filter(antigenProfile, averageSens)
+antigenAssays <- filter(antigenProfile, !averageSens)
+
+testAntigens <- dplyr::select(antigenAssays, testName, antigen) %>%
+  unique()
+
+antigenPoints <- filter(seroFitted, testName %in% antigenProfile$testName) %>%
+  merge(., testAntigens) %>%
+  dplyr::mutate(., time=testTime)
+
+
+antigenProfilePlot <- antigenAverages %>%
+  ggplot(., aes(x=time, y=sensitivityMean*100, color=antigen, fill=antigen)) +
+  geom_point(data=antigenPoints,
+             aes(x=time, y=sensitivityMean, size=sqrt(nSamples)/10),
+             color="black", alpha=0.3) +
+  geom_line(data=antigenAssays, aes(x=time, y=sensitivityMean*100, group=testName),
+            color="black", alpha=0.3) +
+  geom_line(size=regLineSize) +
+  geom_ribbon(aes(ymin=sensitivityL*100, ymax=sensitivityH*100),
+              alpha=ribbonAlpha) +
+  facet_wrap(.~antigen, ncol=3, labeller=label_wrap_gen(width=35)) +
+  theme_bw() +
+  theme(legend.position="top") +
+  guides(color=FALSE, size=FALSE, fill=FALSE) +
+  xlim(0, 15) +
+  xlab("Diagnosis to test (months)") +
+  ylab("Sensitivity (%)")
+
+ggsave("../data/figures/characteristics_profiles_antigen.png", antigenProfilePlot,
+       units="cm", width=24, height=15)
+
+
+
+############
+# Technique
+############
+
+techniqueProfile <- read.csv("../data/analysis_results/05_characteristics_technique_assay_sensitivity_curve.csv",
+                           stringsAsFactors=FALSE) %>%
+  dplyr::mutate(., averageSens=is.na(testName))
+
+techniqueProfile$technique[techniqueProfile$LFA] <- "LFA"
+techniqueProfile$technique[!techniqueProfile$LFA] <- "Rest"
+
+techniqueAverages <- filter(techniqueProfile, averageSens)
+techniqueAssays <- filter(techniqueProfile, !averageSens)
+
+testTechniques <- dplyr::select(techniqueAssays, testName, technique) %>%
+  unique()
+
+techniquePoints <- filter(seroFitted, testName %in% techniqueProfile$testName) %>%
+  dplyr::select(., -technique) %>%
+  merge(., testTechniques) %>%
+  dplyr::mutate(., time=testTime)
+
+
+techniqueProfilePlot <- techniqueAverages %>%
+  ggplot(., aes(x=time, y=sensitivityMean*100, color=technique, fill=technique)) +
+  geom_point(data=techniquePoints,
+             aes(x=time, y=sensitivityMean, size=sqrt(nSamples)/10),
+             color="black", alpha=0.3) +
+  geom_line(data=techniqueAssays, aes(x=time, y=sensitivityMean*100, group=testName),
+            color="black", alpha=0.3) +
+  geom_line(size=regLineSize) +
+  geom_ribbon(aes(ymin=sensitivityL*100, ymax=sensitivityH*100),
+              alpha=ribbonAlpha) +
+  facet_wrap(.~technique, ncol=2, labeller=label_wrap_gen(width=35)) +
+  theme_bw() +
+  theme(legend.position="top") +
+  guides(color=FALSE, size=FALSE, fill=FALSE) +
+  xlim(0, 15) +
+  xlab("Diagnosis to test (months)") +
+  ylab("Sensitivity (%)")
+
+ggsave("../data/figures/characteristics_profiles_technique.png", techniqueProfilePlot,
+       units="cm", width=19, height=15)
+
+
+
+############
+# Antibody
+############
+
+antibodyProfile <- read.csv("../data/analysis_results/05_characteristics_antibody_assay_sensitivity_curve.csv",
+                           stringsAsFactors=FALSE) %>%
+  dplyr::mutate(., averageSens=is.na(testName))
+
+antibodyProfile$antibody[with(antibodyProfile, (!IgM) & (!IgA))] <- "IgG"
+antibodyProfile$antibody[with(antibodyProfile, IgM & (!IgA))] <- "IgG-IgM"
+antibodyProfile$antibody[with(antibodyProfile, (!IgM) & IgA)] <- "IgG-IgA"
+antibodyProfile$antibody[with(antibodyProfile, IgM & IgA)] <- "IgG-IgM-IgA"
+
+antibodyAverages <- filter(antibodyProfile, averageSens)
+antibodyAssays <- filter(antibodyProfile, !averageSens)
+
+testAntibodies <- dplyr::select(antibodyAssays, testName, antibody) %>%
+  unique()
+
+antibodyPoints <- filter(seroFitted, testName %in% antibodyProfile$testName) %>%
+  merge(., testAntibodies) %>%
+  dplyr::mutate(., time=testTime)
+
+antibodyProfilePlot <- antibodyAverages %>%
+  ggplot(., aes(x=time, y=sensitivityMean*100, color=antibody, fill=antibody)) +
+  geom_point(data=antibodyPoints,
+             aes(x=time, y=sensitivityMean, size=sqrt(nSamples)/10),
+             color="black", alpha=0.3) +
+  geom_line(data=antibodyAssays, aes(x=time, y=sensitivityMean*100, group=testName),
+            color="black", alpha=0.3) +
+  geom_line(size=regLineSize) +
+  geom_ribbon(aes(ymin=sensitivityL*100, ymax=sensitivityH*100),
+              alpha=ribbonAlpha) +
+  facet_wrap(.~antibody, ncol=2, labeller=label_wrap_gen(width=35)) +
+  theme_bw() +
+  theme(legend.position="top") +
+  guides(color=FALSE, size=FALSE, fill=FALSE) +
+  xlim(0, 15) +
+  xlab("Diagnosis to test (months)") +
+  ylab("Sensitivity (%)")
+
+ggsave("../data/figures/characteristics_profiles_antibody.png", antibodyProfilePlot,
+       units="cm", width=19, height=15)
+
+
+############
+# Full Model
+############
+
 
 
