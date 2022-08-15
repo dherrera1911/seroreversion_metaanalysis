@@ -24,7 +24,7 @@ sampleLineAlpha=0.1
 dataAlpha <- 0.5
 
 
-modelNames <- c("antigen", "antibody", "technique", "fullModel")
+modelNames <- c("antigen", "antibody", "technique", "design", "fullModel")
 
 charPlot <- list()
 slopePosteriors <- list()
@@ -34,16 +34,26 @@ for (m in c(1:length(modelNames))) {
                           mN, "_posterior_samples.csv", sep="")
   slopePosteriors[[mN]] <- read.csv(posteriorsName, stringsAsFactors=FALSE) %>%
     dplyr::filter(., !is.na(parName))
+  if (mN == "fullModel") {
+    slopePosteriors[[mN]]$isAntigen <- slopePosteriors[[mN]]$parName %in% c("S", "N", "RBD")
+    levelOrder <- c("N", "S", "RBD", "LFA", "sandwich")
+    slopePosteriors[[mN]]$parName <- factor(slopePosteriors[[mN]]$parName,
+                                            levels=levelOrder)
+  }
   charPlot[[m]] <- slopePosteriors[[mN]] %>%
-    ggplot(data=., aes(x=.value, fill=parName)) +
-    geom_density(alpha=0.3) +
+    ggplot(data=., aes(x=.value)) +
+    geom_density(alpha=0.3, fill="blue") +
+    facet_wrap(~parName, ncol=1, scales="free_y", shrink=TRUE) +
     theme_bw() +
-    theme(axis.title.y=element_blank()) +
-    guides(fill=guide_legend("Parameter")) +
-    xlab("Value")
+    theme(axis.text.y=element_blank(),
+          axis.ticks.y=element_blank()) +
+    scale_y_continuous(breaks = NULL) +
+    #guides(fill=guide_legend("Parameter")) +
+    xlab("Value") +
+    ylab("Density")
   plotName <- paste("../data/figures/characteristics_effects_plot_",
                     mN, ".png", sep="")
-  ggsave(plotName, charPlot[[m]], units="cm", width=16, height=12)
+  ggsave(plotName, charPlot[[m]], units="cm", width=7, height=12)
 }
 
 comparisonsDf <- NULL
@@ -76,6 +86,22 @@ techniqueComps <- data.frame(Model="technique",
                            Comparison=comparisonsTechnique,
                            Frequency=c(prob_RESTlargerLFA))
 
+### Design
+designWide <- slopePosteriors[["design"]] %>%
+  pivot_wider(., id_cols=.draw, names_from=parName, values_from=.value)
+
+prob_SandwichlargerNotSandwich <- mean(designWide$notSandwich<designWide$sandwich)
+prob_Sandwichlarger0 <- mean(0<designWide$sandwich)
+prob_NotSandwichlarger0 <- mean(0<designWide$notSandwich)
+comparisonsTechnique <- c("Sandwich > Not Sandwich", "Sandwich > 0",
+  "Not Sandwich > 0")
+
+designComps <- data.frame(Model="design",
+                           Comparison=comparisonsTechnique,
+                           Frequency=c(prob_SandwichlargerNotSandwich,
+                                       prob_Sandwichlarger0,
+                                       prob_NotSandwichlarger0))
+
 
 
 ### Antibody
@@ -102,23 +128,26 @@ fullModelWide <- slopePosteriors[["fullModel"]] %>%
   pivot_wider(., id_cols=.draw, names_from=parName, values_from=.value)
 
 prob_LFAlarger0 <- mean(fullModelWide$LFA>0)
+prob_Sandwichlarger0 <- mean(fullModelWide$sandwich>0)
 prob_SlargerN <- with(fullModelWide, mean(S>N))
 prob_RBDlarger0 <- mean(fullModelWide$RBD>0)
 prob_SRBDlarger0 <- with(fullModelWide, mean(RBD+S>0))
 
-comparisonsFullModel <- c("LFA > 0", "S > N", "RBD > 0",
+comparisonsFullModel <- c("LFA > 0", "Sandwich > 0",
+                          "S > N", "RBD > 0",
                           "S + RBD > 0")
 
 fullModelComps <- data.frame(Model="fullModel",
                            Comparison=comparisonsFullModel,
                            Frequency=c(prob_LFAlarger0,
+                                       prob_Sandwichlarger0,
                                        prob_SlargerN,
                                        prob_RBDlarger0,
                                        prob_SRBDlarger0))
 
 ### Save the comparisons performed
-allComparisons <- rbind(antigenComps, techniqueComps, antibodyComps,
-                        fullModelComps)
+allComparisons <- rbind(antigenComps, techniqueComps, designComps,
+                        antibodyComps, fullModelComps)
 
 write.csv(allComparisons,
           "../data/analysis_results/05_characteristics_statistical_significance.csv",

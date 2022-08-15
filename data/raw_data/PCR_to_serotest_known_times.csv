@@ -27,8 +27,12 @@ phase_id,global region,country / entity,location,type of sample drawn from,start
 --,Europe,Germany,Dresden,hospitalized + non-hospitalized patients,*January 2021,*March 2021,*February 2021,10,Abbott Architect IgG,n-133,26,109,23.9,,,Yes,table 2
 --,Oceania,New Zealand,{ Southern District Health Board region },hospitalized + non-hospitalized patients,3/11/2020,4/5/2020,--,10,Abbott Architect IgG,n-198,10,37,27.0,,,Yes,
 --,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,1,Abbott Architect IgG,n-290,33,39,84.6,,,,table 1
+"1,2",South Asia,India,Tamil Nadu: Chennai,representative,7/17/2020,10/15/2020,8/31/2020,1 - 2,Abbott Architect IgG,n-89,22,24,91.7,,,,appendix table 8 (not yet included in seroreversion paper)
 --,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,2,Abbott Architect IgG,n-290,186,194,95.9,,,,table 1
+"1,2",South Asia,India,Tamil Nadu: Chennai,representative,7/17/2020,10/15/2020,8/31/2020,2 - 3,Abbott Architect IgG,n-89,26,29,89.7,,,,appendix table 8 (not yet included in seroreversion paper)
+"1,2",South Asia,India,Tamil Nadu: Chennai,representative,7/17/2020,10/15/2020,8/31/2020,3 - 4,Abbott Architect IgG,n-89,16,22,72.7,,,,appendix table 8 (not yet included in seroreversion paper)
 --,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,4,Abbott Architect IgG,n-290,106,123,86.2,,,,table 1
+"1,2",South Asia,India,Tamil Nadu: Chennai,representative,7/17/2020,10/15/2020,8/31/2020,4 - 5,Abbott Architect IgG,n-89,10,14,71.4,,,,appendix table 8 (not yet included in seroreversion paper)
 --,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,6,Abbott Architect IgG,n-290,101,162,62.3,,,,table 1
 --,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,8,Abbott Architect IgG,n-290,41,95,43.2,,,,table 1
 --,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,10,Abbott Architect IgG,n-290,22,89,24.7,,,,table 1
@@ -122,7 +126,8 @@ phase_id,global region,country / entity,location,type of sample drawn from,start
 --,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,10,Euroimmun anti-nucleocapsid IgG IgM,n-290,31,89,34.8,,,,table 1
 --,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,12,Euroimmun anti-nucleocapsid IgG IgM,n-290,23,91,25.3,,,,table 1
 --,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,14,Euroimmun anti-nucleocapsid IgG IgM,n-290,6,35,17.1,,,,table 1
---,Latin America,Brazil,{ Rio de Janeiro city },hospitalized + non-hospitalized patients,--,--,--,1 - 3,Euroimmun anti-spike,n-170,104,104,100.0,,,Yes,
+--,Latin America,Brazil,{ Rio de Janeiro city },hospitalized + non-hospitalized patients,--,--,--,1,Euroimmun anti-spike,n-170,53,54,98.1,,,,table 1 (not yet included in seroreversion paper)
+--,Latin America,Brazil,{ Rio de Janeiro city },hospitalized + non-hospitalized patients,--,--,--,1 - 3,Euroimmun anti-spike,n-170,104,104,100.0,,,Yes,table 1
 --,Europe,Netherlands,{ ? },convenience (general population),4/14/2020,--,--,2,Euroimmun anti-spike,n-226,83,85,97.6,,,Yes,
 --,Europe,Germany,{ Cologne },hospitalized + non-hospitalized patients,4/6/2020,--,--,2,Euroimmun anti-spike,n-243,113,131,86,,,Yes,"figure 5c, seropositives back-calculated from seroprevalence"
 --,Oceania,Australia,{ Sydney },hospitalized + non-hospitalized patients,*March 2020,*August 2020,--,2,Euroimmun anti-spike,n-215,121,166,72.9,,,Yes,table 2
@@ -178,6 +183,7 @@ phase_id,global region,country / entity,location,type of sample drawn from,start
 --,Europe,Scotland,{ ? },hospitalized + non-hospitalized patients,*September 2020,*November 2020,--,2,Roche SARS-CoV-2 rapid antibody test anti-spike anti-nucleocapsid IgG IgM,n-213,151,154,98.1,,,Yes,table 3
 --,Europe,Scotland,{ ? },hospitalized + non-hospitalized patients,*September 2020,*November 2020,--,4,Roche SARS-CoV-2 rapid antibody test anti-spike anti-nucleocapsid IgG IgM,n-213,41,44,93.2,,,Yes,table 3
 --,Europe,Scotland,{ ? },hospitalized + non-hospitalized patients,*September 2020,*November 2020,--,6,Roche SARS-CoV-2 rapid antibody test anti-spike anti-nucleocapsid IgG IgM,n-213,65,79,82.3,,,Yes,table 3
+1,Europe,Switzerland,{ Vaud },convenience (general population),5/4/2020,6/27/2020,5/31/2020,2 - 3,SenASTrIS test (Sensitive Anti-SARS-CoV-2 Spike Trimer Immunoglobulin Serological),n-301,215,219,98.2,,,,table 1 (not yet included in seroreversion paper)
 3,South Asia,India,National,representative,--,--,12/27/2020,0.5 - 2,Siemens Advia SARS-CoV-2 IgG anti-RBD,n-96,25,38,65.8,,,Yes,supplementary table (page 8)
 3,South Asia,India,National,representative,--,--,12/27/2020,2 - 4,Siemens Advia SARS-CoV-2 IgG anti-RBD,n-96,60,96,62.5,,,Yes,supplementary table (page 8)
 3,South Asia,India,National,representative,--,--,12/27/2020,4 - 6,Siemens Advia SARS-CoV-2 IgG anti-RBD,n-96,44,74,59.5,,,Yes,supplementary table (page 8)
@@ -188,10 +194,9 @@ phase_id,global region,country / entity,location,type of sample drawn from,start
 --,East Asia,Japan,{ ? },convenience (general population),9/2/2020,10/26/2020,9/29/2020,6,Tosoh anti-nucleocapsid total Ig with AIA-CL1200 ,n-167,365,376,97.1,,,Yes,
 --,East Asia,Japan,{ ? },convenience (general population),9/2/2020,10/26/2020,9/29/2020,6,Tosoh anti-spike IgG with AIA-CL1200 ,n-167,344,376,91.5,,,Yes,
 --,East Asia,Japan,{ ? },convenience (general population),9/2/2020,10/26/2020,9/29/2020,6,Tosoh anti-spike total Ig with AIA-CL1200 ,n-167,369,376,98.1,,,Yes,
-3,Europe,Great Britain,Kingdom-wide,representative,5/27/2020,12/4/2020,8/30/2020,3,"University of Oxford, IgG for spike",n-117,700,705,99.3,,,Yes,see figure 12 on page 15
-3,Europe,Great Britain,Kingdom-wide,representative,5/27/2020,12/4/2020,8/30/2020,6,"University of Oxford, IgG for spike",n-117,619,705,87.8,,,Yes,see figure 12 on page 15
 --,Latin America,Brazil,{ Pelotas },hospitalized + non-hospitalized patients,--,--,*November 2020,1,University of Rio de Janeiro (UFRJ) anti-spike ELISA,n-171,23,26,88.5,,,Yes,
---,Latin America,Brazil,{ Rio de Janeiro city },hospitalized + non-hospitalized patients,--,--,--,1 - 3,University of Rio de Janeiro (UFRJ) anti-spike ELISA,n-170,107,107,100.0,,,Yes,
+--,Latin America,Brazil,{ Rio de Janeiro city },hospitalized + non-hospitalized patients,--,--,--,1,University of Rio de Janeiro (UFRJ) anti-spike ELISA,n-170,54,54,100.0,,,Yes,table 1 (not yet included in seroreversion paper)
+--,Latin America,Brazil,{ Rio de Janeiro city },hospitalized + non-hospitalized patients,--,--,--,1 - 3,University of Rio de Janeiro (UFRJ) anti-spike ELISA,n-170,107,107,100.0,,,Yes,table 1
 --,Latin America,Brazil,{ Pelotas },hospitalized + non-hospitalized patients,--,--,*November 2020,2,University of Rio de Janeiro (UFRJ) anti-spike ELISA,n-171,24,26,92.3,,,Yes,
 --,Latin America,Brazil,{ Pelotas },hospitalized + non-hospitalized patients,--,--,*November 2020,3,University of Rio de Janeiro (UFRJ) anti-spike ELISA,n-171,23,25,92.0,,,Yes,
 --,Latin America,Brazil,{ Pelotas },hospitalized + non-hospitalized patients,--,--,*November 2020,4,University of Rio de Janeiro (UFRJ) anti-spike ELISA,n-171,26,26,100.0,,,Yes,

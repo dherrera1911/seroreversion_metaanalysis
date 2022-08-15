@@ -24,6 +24,7 @@ seroUnknown <- read.csv("../data/raw_data/PCR_to_serotest_unknown_times.csv",
                   as.integer(number.of.seropositives.among.prior.positives),
                 number.of.prior.positives=as.integer(number.of.prior.positives)) %>%
   as_tibble(.)
+
 # Change variable names to be more friendly
 newVarNames <- c("phase_id", "region", "country", "location", "sampleType",
                  "startDate", "endDate", "midpointDate", 
@@ -34,16 +35,16 @@ names(seroUnknown) <- newVarNames
 # Make dates dates
 seroUnknown$midpointDate <- lubridate::mdy(seroUnknown$midpointDate)
 
-# make names of serotest table compatible with dynamics table
+# make names of serotest table compatible with case dynamics table
 newLocs <- c("Ischgl", "Spain", "Salt Lake",
-             "Ethiopia", "Tamil Nadu", "India", "Tamil Nadu", "Kashmir",
-             "Kashmir", "India", "Ireland", "Lithuania", "Tirschenreuth",
+             "Ethiopia", "India", "Kashmir", "Kashmir", "India",
+             "Ireland", "Lithuania", "Tirschenreuth",
              "Arkansas", "Arkansas", "Arkansas",
              "United States", "Houston", "Canada", "Madryn",
              "Puducherry", "Puducherry", "Puducherry", "Indonesia",
              "Hyderabad", "Japan", "Japan",
              "Delhi", "Delhi", "Ischgl",
-             "France", "France", "Kupferzell", "Feilnbach",
+             "France", "France regions", "Kupferzell", "Feilnbach",
              "Pune", "Reutlingen",
              "Freiburg", "Straubing", "Aachen",
              "Reutlingen", "Osnabruck", "Mitte", "Freiburg", "Magdeburg",
@@ -58,7 +59,8 @@ newLocs <- c("Ischgl", "Spain", "Salt Lake",
              "Saratov", "Kaliningrad", "Murmansk", "Krasnoyarsk",
              "Novosibirsk", "Stavropol",
              "Spain", "Spain",  "Spain",  "Spain",
-             "Portugal", "India", "India", "Lebanon", 
+             "11 Cantons", "Portugal", "India", "India",
+             "Peru", "Lebanon", 
              "Connecticut", "Delhi", "Delhi")
 
 new <- c("Arkansas", "Japan", "Feilnbach")

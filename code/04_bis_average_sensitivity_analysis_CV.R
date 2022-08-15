@@ -27,15 +27,15 @@ source("./functions_seroreversion_fit_analysis.R")
 ### Fitting parameters
 nChains <- 4
 nCores <- 2
-nIter <- 3000
+nIter <- 4000
 warmup <- 1000
 nChar <- 1
 
-#crossValidationType <- "grouped"
-#testsPerGroup <- 2 # for grouped CV only
+crossValidationType <- "grouped"
+testsPerGroup <- 1 # for grouped CV only
 
-crossValidationType <- "random"
-pointsPerGroup <- 7
+#crossValidationType <- "random"
+#pointsPerGroup <- 7
 
 seroFitted <- read.csv("../data/processed_data/PCR_to_serotest_all.csv",
                        stringsAsFactors=FALSE)

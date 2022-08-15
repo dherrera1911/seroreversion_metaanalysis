@@ -45,9 +45,9 @@ testSamples <- group_by(basicValGr, testName) %>%
             nSamples=n())
 
 testSamples <- arrange(testSamples, nSamples)
-fewSampleTests <- testSamples$testName[testSamples$nSamples<=8]
-nFewSamples <- sum(testSamples$nSamples[testSamples$nSamples<=8])
-nManySamples <- sum(testSamples$nSamples[testSamples$nSamples>8])
+fewSampleTests <- testSamples$testName[testSamples$nSamples<=9]
+nFewSamples <- sum(testSamples$nSamples[testSamples$nSamples<=9])
+nManySamples <- sum(testSamples$nSamples[testSamples$nSamples>9])
 
 fewSampleVal_basic <- dplyr::filter(basicValGr, testName %in% fewSampleTests)
 

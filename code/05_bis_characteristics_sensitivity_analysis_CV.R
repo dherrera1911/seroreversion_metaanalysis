@@ -29,13 +29,13 @@ nCores <- 2
 nIter <- 4000
 warmup <- 1000
 
-characteristics <- "antibody"
+characteristics <- "fullModel"
 
-#crossValidationType <- "grouped"
-#testsPerGroup <- 2 # for grouped CV only
+crossValidationType <- "grouped"
+testsPerGroup <- 1 # for grouped CV only
 #
-crossValidationType <- "random"
-pointsPerGroup <- 7
+#crossValidationType <- "random"
+#pointsPerGroup <- 7
 
 
 ############
@@ -61,6 +61,11 @@ seroFitted$IgM <- stringr::str_detect(seroFitted$antibodyTarget, "IgM")
 seroFitted$IgA <- stringr::str_detect(seroFitted$antibodyTarget, "IgA")
 seroFitted$IgG <- TRUE
 seroFitted$Total <- seroFitted$IgM & seroFitted$IgA
+seroFitted$sandwich <- stringr::str_detect(seroFitted$design, "sandwich")
+seroFitted$indirect <- stringr::str_detect(seroFitted$design, "indirect")
+seroFitted$competitive <- stringr::str_detect(seroFitted$design, "competitive")
+seroFitted$notSandwich <- seroFitted$indirect | seroFitted$competitive
+
 
 
 ############
@@ -83,7 +88,7 @@ if (characteristics=="antigen") {
   fileIdentifier <- "antibody"
 } else if (characteristics=="fullModel") {
   #### Fit full model characteristics
-  charsName <- c("S", "N", "RBD", "LFA")
+  charsName <- c("S", "N", "RBD", "LFA", "sandwich")
   fileIdentifier <- "fullModel"
 }
 

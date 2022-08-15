@@ -3,9 +3,7 @@ phase_id,global region,country / entity,location,type of sample drawn from,start
 1,Europe,Spain,National,representative,4/27/2020,5/11/2020,5/4/2020,Abbott Architect IgG,n-44,176,195,90.3,,,table 3
 1,North America,USA,"Davis, Salt Lake, Summit, and Utah counties",representative,5/1/2020,6/30/2020,5/31/2020,Abbott Architect IgG,n-10,25,30,83.3,,,
 1,Africa,Ethiopia,14 towns (including Addis Ababa #2),representative,6/24/2020,7/8/2020,7/1/2020,Abbott Architect IgG,n-98,30,55,54.5,,,
-1,South Asia,India,Tamil Nadu: Chennai,representative,7/17/2020,7/28/2020,7/22/2020,Abbott Architect IgG,n-88,99,105,94.3,,,
 2,South Asia,India,National,representative,8/17/2020,9/22/2020,9/4/2020,Abbott Architect IgG,n-85,38,44,86.4,,,table 2 (excluded 3 samples for taken within 14 days)
-2,South Asia,India,Tamil Nadu: Chennai,representative,10/8/2020,10/15/2020,10/11/2020,Abbott Architect IgG,n-89,135,166,81.3,,,table 1
 1,South Asia,India,Kashmir: Srinagar district,representative,10/17/2020,10/20/2020,10/18/2020,Abbott Architect IgG,n-92,100,121,82.6,,,table 1 (1 - 4 month time interval stated on page 1795)
 1,South Asia,India,Kashmir (whole region),representative,10/17/2020,11/4/2020,10/26/2020,Abbott Architect IgG,n-91,140,172,81.4,,,176 individuals (with 4 seronegatives removed for testing earlier than 14 days)
 4,South Asia,India,National,representative,6/14/2021,7/6/2021,6/25/2021,Abbott Architect IgG ,n-97,464,782,59.3,,,S1 table
@@ -14,10 +12,10 @@ phase_id,global region,country / entity,location,type of sample drawn from,start
 1,Europe,Germany,Tirschenreuth district,representative,6/28/2020,7/10/2020,7/4/2020,analysis of: in-house RBD ELISA + Elecsys Anti-SARS-CoV-2 Roche nucleocapsid  +  YHLO iFlash SARS CoV-2 (spike + nucleocapsid)  ,n-29,62,66,93.9,,,table 2
 --,North America,USA,{ Arkansas },non-hospitalized patients,8/15/2020,9/5/2020,8/25/2020,Beckman ACCESS SARS-CoV-2 anti-RBD,n-281,10,12,83.3,,,supplementary table 1 and table 1
 --,North America,USA,{ Arkansas },non-hospitalized patients,9/12/2020,10/24/2020,10/3/2020,Beckman ACCESS SARS-CoV-2 anti-RBD,n-281,14,17,82.4,,,supplementary table 1 and table 1
---,North America,USA,{Arkansas},non-hospitalized patients,11/7/2020,12/19/2020,11/28/2020,Beckman ACCESS SARS-CoV-2 anti-RBD,n-281,4,8,,,,supplementary table 1 and table 1
+--,North America,USA,{ Arkansas },non-hospitalized patients,11/7/2020,12/19/2020,11/28/2020,Beckman ACCESS SARS-CoV-2 anti-RBD,n-281,4,8,,,,supplementary table 1 and table 1
 1,North America,USA,National (COVIDVu),representative,--,--,10/30/2020,BioRad Platelia Total Antibody nucleocapsid,n-143,77,127,60.6,,,
-1,North America,USA,Houston,representative,9/8/2020,9/19/2020,9/13/2020,BioRad Platelia Total Antibody nucleocapsid OR  in-house ELISA IgG anti-spike (positive on either,"n-8 , n-144",29,34,85.3,,,n-8 (supplementary table 2)
-1,North America,Canada,"National (CCAHS), unvaccinated population",representative,11/2/2020,4/30/2021,1/30/2021,CCAHS ELISA anti-spike anti-RBD anti-nucleocapsid (positive on at least 2 out of 3),n-261,115,145,79.3,,,table 1
+1,North America,USA,Houston,representative,9/8/2020,9/19/2020,9/13/2020,BioRad Platelia Total Antibody nucleocapsid OR  in-house ELISA IgG anti-spike (positive on either),"n-8 , n-144",29,34,85.3,,,n-8 (supplementary table 2)
+2,North America,Canada,"National (CCAHS), unvaccinated population",representative,11/2/2020,4/30/2021,1/30/2021,CCAHS ELISA anti-spike anti-RBD anti-nucleocapsid (positive on at least 2 out of 3),n-261,115,145,79.3,,,table 1
 1,Latin America,Argentina,Puerto Madryn,representative,03/03/2021,4/17/2021,03/25/2021,COVIDAR anti-spike anti-RBD,n-248,57,78,73.1,,,positive on nasal swab (supplemental S2 data)
 1,South Asia,India,Puducherry: Puducherry district,representative,8/11/2020,8/16/2020,8/13/2020,Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ,n-87,3,3,,,,
 2,South Asia,India,Puducherry: Puducherry district,representative,9/10/2020,9/16/2020,9/13/2020,Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ,n-87,3,7,,,,
@@ -30,21 +28,21 @@ phase_id,global region,country / entity,location,type of sample drawn from,start
 4,South Asia,India,Delhi,representative,10/15/2020,10/21/2020,10/18/2020,ERBALISA COVID-19 IgG,n-83,147,260,56.5,,,
 1,Europe,Austria,Ischgl,representative,4/21/2020,4/27/2020,4/24/2020,Euroimmun anti-spike,n-109,98,105,93.3,,,table 2
 1,Europe,France,National,representative,--,--,5/21/2020,Euroimmun anti-spike,n-149,74,83,89.2,,,table 2
-1,Europe,France,"Grand Est, Ile-de-France, Nouvelle-Aquitaine",representative,5/4/2020,6/23/2020,5/29/2020,Euroimmun anti-spike,n-31,68,78,87.2,,,table 2
+1,Europe,France,"Grand Est, Île-de-France, Nouvelle-Aquitaine",representative,5/4/2020,6/23/2020,5/29/2020,Euroimmun anti-spike,n-31,68,78,87.2,,,table 2
 1,Europe,Germany,Kupferzell,representative,5/20/2020,6/9/2020,5/30/2020,Euroimmun anti-spike,"n-110 , n-295",43,50,86.0,,,table 3
 1,Europe,Germany,Bad Feilnbach,representative,6/23/2020,7/4/2020,6/28/2020,Euroimmun anti-spike,n-295,22,42,52.4,,,n-295 (tabelle 3 on page 25)
 1,South Asia,India,Pune (five prabhags/subwards),representative,7/20/2020,8/5/2020,7/28/2020,Euroimmun anti-spike,n-84,19,21,90.5,,,tables 1 and 2
-1,Europe,Germany,Reutlingen city,representative,7/1/2020,7/28/2020,7/14/2020,Euroimmun anti-spike,n-26,10,11,90.9,,,page 20
-1,Europe,Germany,Freiburg,representative,8/5/2020,9/1/2020,8/18/2020,Euroimmun anti-spike,n-26,12,16,75.0,,,page 20
+1,Europe,Germany,Reutlingen district,representative,7/1/2020,7/28/2020,7/14/2020,Euroimmun anti-spike,n-26,10,11,90.9,,,page 20
+1,Europe,Germany,Freiburg + Breisgau-Hochschwarzwald,representative,8/5/2020,9/1/2020,8/18/2020,Euroimmun anti-spike,n-26,12,16,75.0,,,page 20
 1,Europe,Germany,Straubing,representative,9/8/2020,9/26/2020,9/17/2020,Euroimmun anti-spike,"n-295 , n-234",17,32,53.1,,,n-295 (tabelle 3 on page 25)
 1,Europe,Germany,Aachen,representative,9/9/2020,10/9/2020,9/24/2020,Euroimmun anti-spike,n-26,9,14,64.3,,,page 20
-2,Europe,Germany,Reutlingen city,representative,10/14/2020,11/10/2020,10/27/2020,Euroimmun anti-spike,"n-26 , n-173",17,21,81.0,,,"n-26 (page 20), n-173 (eSupplement-Table 3)"
-1,Europe,Germany,Osnabrück district,representative,10/15/2020,11/15/2020,10/30/2020,Euroimmun anti-spike,n-26,11,17,64.7,,,page 20
+2,Europe,Germany,Reutlingen district,representative,10/14/2020,11/10/2020,10/27/2020,Euroimmun anti-spike,"n-26 , n-173",17,21,81.0,,,"n-26 (page 20), n-173 (eSupplement-Table 3)"
+1,Europe,Germany,Osnabrück district + Osnabrück city,representative,10/15/2020,11/15/2020,10/30/2020,Euroimmun anti-spike,n-26,11,17,64.7,,,page 20
 1,Europe,Germany,Mitte (in Berlin),representative,11/17/2020,12/5/2020,11/26/2020,Euroimmun anti-spike,"n-295 , n-236",21,35,60.0,,,n-295 (tabelle 3 on page 25)
-2,Europe,Germany,Freiburg,representative,11/18/2020,12/15/2020,12/1/2020,Euroimmun anti-spike,"n-26 , n-173",10,11,90.9,,,"n-26 (page 20), n-173 (eSupplement-Table 3)"
+2,Europe,Germany,Freiburg + Breisgau-Hochschwarzwald,representative,11/18/2020,12/15/2020,12/1/2020,Euroimmun anti-spike,"n-26 , n-173",10,11,90.9,,,"n-26 (page 20), n-173 (eSupplement-Table 3)"
 1,Europe,Germany,Magdeburg,representative,11/18/2020,12/15/2020,12/1/2020,Euroimmun anti-spike,n-26,26,28,92.9,,,page 20
 2,Europe,Germany,"Aachen region, unvaccinated population",representative,1/25/2021,2/27/2021,2/10/2021,Euroimmun anti-spike,"n-26 , n-173",61,70,87.1,,,"n-26 (page 20), n-173 (eSupplement-Table 3)"
-2,Europe,Germany,"Osnabrück district, unvaccinated population",representative,3/1/2021,3/31/2021,3/16/2021,Euroimmun anti-spike,"n-26 , n-173",34,37,91.9,,,"n-26 (page 20), n-173 (eSupplement-Table 3)"
+2,Europe,Germany,"Osnabrück district + Osnabrück city, unvaccinated population",representative,3/1/2021,3/31/2021,3/16/2021,Euroimmun anti-spike,"n-26 , n-173",34,37,91.9,,,"n-26 (page 20), n-173 (eSupplement-Table 3)"
 2,Europe,Germany,"Magdeburg, unvaccinated population",representative,4/7/2021,5/5/2021,4/21/2021,Euroimmun anti-spike,"n-26 , n-173",33,40,82.5,,,"n-26 (page 20), n-173 (eSupplement-Table 3)"
 "1,2",Europe,Germany,"Chemnitz, unvaccinated population",representative,3/3/2021,8/17/2021,5/25/2021,Euroimmun anti-spike,n-173,220,257,85.6,,,eSupplement-Table 3
 1,Europe,Germany,"Vorpommern-Greifswald, unvaccinated population",representative,5/12/2021,6/8/2021,5/25/2021,Euroimmun anti-spike,n-173,70,86,81.4,,,eSupplement-Table 3
@@ -83,9 +81,11 @@ phase_id,global region,country / entity,location,type of sample drawn from,start
 2,Europe,Spain,National,representative,5/18/2020,6/1/2020,5/25/2020,Orient Gene Biotech COVID-19 IgG/IgM Rapid Test anti-spike,n-104,276,360,76.7,,,tabla 6 (page 19)
 3,Europe,Spain,National,representative,6/8/2020,6/22/2020,6/15/2020,Orient Gene Biotech COVID-19 IgG/IgM Rapid Test anti-spike,n-104,341,460,74.1,,,tabla 6 (page 19)
 4,Europe,Spain,National,representative,11/16/2020,11/29/2020,11/22/2020,Orient Gene Biotech COVID-19 IgG/IgM Rapid Test anti-spike,n-45,1137,1777,64.0,,,tabla 8 (page 20)
+1,Europe,Switzerland,11 cantons,representative,*October 2020,*February 2021,*December 2020,SenASTrIS test (Sensitive Anti-SARS-CoV-2 Spike Trimer Immunoglobulin Serological),n-299,128,143,89.5,,,table 1 (not yet in seroreversion paper nor in PRISMA list / tab)
 1,Europe,Portugal,National (Castro et al.),convenience (general population),9/8/2020,10/14/2020,9/26/2020,Siemens SARS-CoV-2 Total Advia Centaur,n-155,112,136,82.4,,,appendix 11
 3,South Asia,India,National,representative,12/18/2020,1/6/2021,12/27/2020,"Siemens Advia SARS-CoV-2 IgG anti-RBD, OR Abbott Architect IgG ",n-96,178,287,62.0,,,table 3
 4,South Asia,India,National (unvaccinated population),representative,6/14/2021,7/6/2021,6/25/2021,"Siemens Advia SARS-CoV-2 IgG anti-RBD, OR Abbott Architect IgG ",n-97,402,487,82.5,,,table 3 (can't use values for individual values in the text because it's unclear if it's weighted instead of raw)
+1,Latin America,Peru,Lima Metropolitana (provinces of Lima + Callao),representative,6/28/2020,7/9/2020,7/3/2020,Standard Q COVID-19 IgM/IgG Plus,k-15,77,84,91.7,,,table S9
 1,Middle East,Lebanon,National,representative,12/7/2020,1/15/2021,12/26/2020,"Techno Genetics anti-RBD, nCOVID-19 IgG/IgM POCT (point-of-care test)",n-150,38,60,63.3,,,table 3
 1,North America,USA,Connecticut,representative,6/10/2020,7/29/2020,7/4/2020,Vitros Ortho (not total) IgG anti-spike,n-2,11,11,100.0,,,table 3
 5,South Asia,India,"Delhi, unvaccinated population",representative,1/11/2021,1/22/2021,1/16/2021,Vitros Ortho (not total) IgG anti-spike,n-86,817,1121,72.9,,,table 2

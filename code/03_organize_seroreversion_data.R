@@ -27,9 +27,11 @@ names(seroKnown) <- newVarNames
 
 # Relabel test times that give intervals into single times
 seroKnown$testTime[seroKnown$testTime=="0.5 - 2"] <- "1"
+seroKnown$testTime[seroKnown$testTime=="1 - 2"] <- "1.5"
 seroKnown$testTime[seroKnown$testTime=="1 - 3"] <- "2"
 seroKnown$testTime[seroKnown$testTime=="2 - 3"] <- "2.5"
 seroKnown$testTime[seroKnown$testTime=="2 - 4"] <- "3"
+seroKnown$testTime[seroKnown$testTime=="3 - 4"] <- "3.5"
 seroKnown$testTime[seroKnown$testTime=="4 - 5"] <- "4.5"
 seroKnown$testTime[seroKnown$testTime=="4 - 6"] <- "5"
 seroKnown$testTime[seroKnown$testTime=="5 - 7"] <- "6"
@@ -96,32 +98,36 @@ seroFitted$nSeropositives[nonRaw] <- round(fittedBetas$shape1)
 assayChars <- read.csv("../data/raw_data/assay_characteristics.csv",
                        stringsAsFactors=FALSE, na.strings=c("", "--")) %>%
   dplyr::rename(., testName=test_name_long, antigen_target=antigen.target,
-  assay_type=assay.type, isotype_target=isotype.target) %>%
+  isotype_target=isotype.target, assay_type=assay.type, 
+  test_design=test.design) %>%
   dplyr::filter(., testName %in% seroFitted$testName)
 
 # add assay characteristics column to the data on sensitivity
 antigenVec <- NULL
 antibodyVec <- NULL
 techniqueVec <- NULL
+designVec <- NULL
 for (r in c(1:nrow(seroFitted))) {
   charRow <- assayChars$testName == seroFitted$testName[r]
   if (any(charRow )) {
     antigenVec <- c(antigenVec, assayChars$antigen_target[charRow])
     antibodyVec <- c(antibodyVec, assayChars$isotype_target[charRow])
     techniqueVec <- c(techniqueVec, assayChars$assay_type[charRow])
+    designVec <- c(designVec, assayChars$test_design[charRow])
   } else {
     antigenVec <- c(antigenVec, NA)
     antibodyVec <- c(antibodyVec, NA)
     techniqueVec <- c(techniqueVec, NA)
+    designVec <- c(designVec, NA)
   }
 }
 
 seroFitted$antigenTarget <- antigenVec
 seroFitted$antibodyTarget <- antibodyVec
 seroFitted$technique <- techniqueVec
+seroFitted$design <- designVec
 
 # Filter tests that don't belong
-seroFitted <- dplyr::filter(seroFitted, !stringr::str_detect(testName, "Oxford"))
 seroFitted <- dplyr::filter(seroFitted, !stringr::str_detect(testName, "Obolensk"))
 
 # save data to fit, for easier access

@@ -84,12 +84,10 @@ countriesDeaths <- covid19(country=countries) %>%
 #  dplyr::filter(., Location %in% countries) %>%
 #  dplyr::mutate(., date=date(date))
 
-franceDeaths <- read.csv("../data/downloaded_datasets/france/owid-covid-data.csv",
+franceDeaths <- read.csv("../data/downloaded_datasets/death_dynamics_covid19_datahub/FRA.csv",
                          stringsAsFactors=FALSE) %>%
-  dplyr::filter(., location=="France" & (!is.na(total_deaths) | !is.na(total_cases))) %>%
-  dplyr::mutate(., deaths=total_deaths, cases=total_cases, Location="France",
-                date=date(date)) %>%
-  dplyr::select(., date, cases, deaths, Location)
+  dplyr::mutate(., Location=administrative_area_level_1) %>%
+  covid19_tidying()
 
 #jersey <- covid19(country="Jersey") %>%
 #  dplyr::mutate(., Location=country) %>%
@@ -177,6 +175,23 @@ genevaDeaths <- swissCovid_tidy(switzerlandDeaths, switzerlandCases, "GE", "Gene
 neuchatelDeaths <- swissCovid_tidy(switzerlandDeaths, switzerlandCases, "NE", "Neuchatel")
 fribourgDeaths <- swissCovid_tidy(switzerlandDeaths, switzerlandCases, "FR", "Fribourg")
 ticinoDeaths <- swissCovid_tidy(switzerlandDeaths, switzerlandCases, "TI", "Ticino")
+# 11 cantons cases
+basleDeaths <- swissCovid_tidy(switzerlandDeaths, switzerlandCases, "BS", "Basle")
+basleCountyDeaths <- swissCovid_tidy(switzerlandDeaths, switzerlandCases, "BL", "BasleC")
+berneDeaths <- swissCovid_tidy(switzerlandDeaths, switzerlandCases, "BE", "Berne")
+grisonsDeaths <- swissCovid_tidy(switzerlandDeaths, switzerlandCases, "GR", "Grisons")
+lucerneDeaths <- swissCovid_tidy(switzerlandDeaths, switzerlandCases, "LU", "Lucerne")
+gallenDeaths <- swissCovid_tidy(switzerlandDeaths, switzerlandCases, "SG", "Gallen")
+vaudDeaths <- swissCovid_tidy(switzerlandDeaths, switzerlandCases, "VD", "Vaud")
+zurichDeaths <- swissCovid_tidy(switzerlandDeaths, switzerlandCases, "ZH", "Zurich")
+cantonsDeathsVec <- neuchatelDeaths$deaths + fribourgDeaths$deaths + ticinoDeaths$deaths +
+  basleDeaths$deaths + basleCountyDeaths$deaths + berneDeaths$deaths + grisonsDeaths$deaths +
+  lucerneDeaths$deaths + gallenDeaths$deaths + vaudDeaths$deaths + zurichDeaths$deaths
+cantonsCasesVec <- neuchatelDeaths$cases + fribourgDeaths$cases + ticinoDeaths$cases +
+  basleDeaths$cases + basleCountyDeaths$cases + berneDeaths$cases + grisonsDeaths$cases +
+  lucerneDeaths$cases + gallenDeaths$cases + vaudDeaths$cases + zurichDeaths$cases
+cantonsDeaths <- data.frame(date=neuchatelDeaths$date, Location="11 Cantons",
+                            deaths=cantonsCasesVec, cases=cantonsCasesVec)
 
 ### Germany deaths
 germanCovid_tidy <- function(germanyDf, locationName) {
@@ -291,6 +306,9 @@ addaDeaths <- dplyr::filter(dataItaly, administrative_area_level_3=="Lodi") %>%
   covid19_tidying(.)
 caldariDeaths <- dplyr::filter(dataItaly, administrative_area_level_3=="Chieti") %>%
   dplyr::mutate(., Location="Caldari") %>%
+  covid19_tidying(.)
+cogneDeaths <- dplyr::filter(dataItaly, administrative_area_level_3=="Aosta") %>%
+  dplyr::mutate(., Location="Cogne") %>%
   covid19_tidying(.)
 
 ### China
@@ -481,6 +499,59 @@ tunisiaDeaths <- read.csv("../data/downloaded_datasets/death_dynamics_covid19_da
   dplyr::mutate(., Location="Tunisia") %>%
   covid19_tidying(.)
 
+### Lima deaths
+limaDeaths <- read.csv("../data/downloaded_datasets/death_dynamics_covid19_datahub/Lima.csv",
+                        stringsAsFactors=FALSE) %>%
+  dplyr::mutate(., Location="Lima") %>%
+  covid19_tidying(.)
+
+### France regions
+ileDeFranceDeaths <- read.csv("../data/downloaded_datasets/death_dynamics_covid19_datahub/ile_de_france.csv",
+                         stringsAsFactors=FALSE) %>%
+  dplyr::mutate(., Location=administrative_area_level_2) %>%
+  covid19_tidying()
+ileDeFranceDeaths$cases[is.na(ileDeFranceDeaths$cases)] <- 0
+ileDeFranceDeaths$deaths[is.na(ileDeFranceDeaths$deaths)] <- 0
+aquitaineDeaths <- read.csv("../data/downloaded_datasets/death_dynamics_covid19_datahub/aquitaine.csv",
+                         stringsAsFactors=FALSE) %>%
+  dplyr::mutate(., Location=administrative_area_level_2) %>%
+  covid19_tidying()
+aquitaineDeaths$cases[is.na(aquitaineDeaths$cases)] <- 0
+aquitaineDeaths$deaths[is.na(aquitaineDeaths$deaths)] <- 0
+grandEstDeaths <- read.csv("../data/downloaded_datasets/death_dynamics_covid19_datahub/Grand_Est.csv",
+                         stringsAsFactors=FALSE) %>%
+  dplyr::mutate(., Location=administrative_area_level_2) %>%
+  covid19_tidying()
+grandEstDeaths$cases[is.na(grandEstDeaths$cases)] <- 0
+grandEstDeaths$deaths[is.na(grandEstDeaths$deaths)] <- 0
+
+regionFranceDeathsVec <- ileDeFranceDeaths$deaths + aquitaineDeaths$deaths + grandEstDeaths$deaths
+regionFranceCasesVec <- ileDeFranceDeaths$cases + aquitaineDeaths$cases + grandEstDeaths$cases
+regionFranceDeaths <- data.frame(date=ileDeFranceDeaths$date, Location="France regions",
+                                 deaths=regionFranceDeathsVec, cases=regionFranceCasesVec)
+
+
+### Castellon
+castellonDeaths <- read.csv("../data/downloaded_datasets/death_dynamics_covid19_datahub/castellon.csv",
+                         stringsAsFactors=FALSE) %>%
+  dplyr::mutate(., Location="Castellon") %>%
+  covid19_tidying()
+
+### Madrid
+madridDeaths <- read.csv("../data/downloaded_datasets/death_dynamics_covid19_datahub/madrid.csv",
+                         stringsAsFactors=FALSE) %>%
+  dplyr::mutate(., Location="Madrid") %>%
+  covid19_tidying()
+
+
+### Santa Fe
+santafeDeaths <- read.csv("../data/downloaded_datasets/death_dynamics_covid19_datahub/santa_fe.csv",
+                         stringsAsFactors=FALSE) %>%
+  dplyr::mutate(., Location="Santa Fe") %>%
+  covid19_tidying()
+
+
+
 #######################
 # Put data together
 #######################
@@ -501,7 +572,8 @@ allDeaths <- rbind(countriesDeaths, franceDeaths, usaStatesDeaths,
   petersburgDeaths, tyumenDeaths, khabarovskDeaths, leningradDeaths,
   sverdlovskDeaths, tatarstanDeaths, moscowDeaths, chelyabinskDeaths,
   irkutskDeaths, saratovDeaths, kaliningradDeaths, murmanskDeaths,
-  krasnoyarskDeaths, novosibirskDeaths, stavropolDeaths)
+  krasnoyarskDeaths, novosibirskDeaths, stavropolDeaths,
+  cantonsDeaths, limaDeaths, regionFranceDeaths, cogneDeaths)
 
 write.csv(allDeaths, "../data/raw_data/death_dynamics.csv", row.names=FALSE)
 

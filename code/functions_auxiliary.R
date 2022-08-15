@@ -63,35 +63,37 @@ fit_beta_ci <- function(meanEstimate, lower, upper) {
 #
 # Also, the function tries to balance the batches by pairing
 # assays with high number of datapoints to those with low number
-# of datapoints.
+# of datapoints (This only works for 2 tests per group)
 grouped_val_batches <- function(seroFitted, testsPerGroup) {
   # Get number of data points in each test, and sort to
   # match together high N tests with low N tests for CV
-  testSamples <- group_by(seroFitted, testName) %>%
+  testSamplesDf <- group_by(seroFitted, testName) %>%
     summarize(., multiTime=length(unique(testTime)) > 1,
               nTimes=length(unique(testTime)),
               meanTime=mean(testTime))
-  testSamples <- arrange(testSamples, nTimes)
-  halfRows <- ceiling(nrow(testSamples)/2)
-  testSamples[c(1:halfRows),] <- testSamples[c(halfRows:1),]
+  testSamplesDf <- arrange(testSamplesDf, nTimes)
+  halfRows <- ceiling(nrow(testSamplesDf)/2)
+  # Invert the order of the upper half, that have most sampled patients
+  # This is to make a matching of assays with most and least data points,
+  # when crossvalidated in pairs
+  testSamplesDf[c(1:halfRows),] <- testSamplesDf[c(halfRows:1),]
   # Make the CV group indexing
-  nGroups <- ceiling(nrow(testSamples)/testsPerGroup)
-  testGroup <- rep(c(1:nGroups), testsPerGroup)[1:nrow(testSamples)]
-  validationGroup <- rep(NA, nrow(seroFitted))
+  nGroups <- ceiling(nrow(testSamplesDf)/testsPerGroup)
+  testGroup <- rep(c(1:nGroups), testsPerGroup)[1:nrow(testSamplesDf)]
+  validationGroup <- rep(0, nrow(seroFitted))
   for (ng in c(1:nGroups)) {
     # tests belonging to this group
-    tempTests <- testSamples$testName[testGroup==ng]
+    tempTests <- testSamplesDf$testName[testGroup==ng]
     for (tt in tempTests) {
       testInds <- which(seroFitted$testName == tt)
-      meanTime <- testSamples$meanTime[testSamples$testName==tt]
+      meanTime <- testSamplesDf$meanTime[testSamplesDf$testName==tt]
       # Group data points by first or second half
-      if (testSamples$multiTime[testSamples$testName==tt]) {
+      if (testSamplesDf$multiTime[testSamplesDf$testName==tt]) {
         timeGroup <- as.integer(seroFitted$testTime[testInds] >= meanTime) + 1
       } else {
-        timeGroup <- 1
+        timeGroup <- rep(1, length(testInds))
       }
-      # Add group index (ng-1)*2 to the timeGroup
-      validationGroup[testInds] <- (ng-1)*2 + timeGroup
+      validationGroup[testInds] <- max(validationGroup) + timeGroup
     }
   }
   return(validationGroup)

@@ -29,11 +29,11 @@ nCores <- 2
 nIter <- 4000
 warmup <- 1000
 # options of characteristics to fit:
-# antigen, antibody, technique, fullModel
-characteristics <- "technique"
+# antigen, antibody, technique, design, fullModel
+characteristics <- "fullModel"
 
 ############
-# Load data generated in script 06
+# Load data generated in script 03
 ############
 seroFitted <- read.csv("../data/processed_data/PCR_to_serotest_all.csv",
                        stringsAsFactors=FALSE)
@@ -55,6 +55,10 @@ seroFitted$IgM <- stringr::str_detect(seroFitted$antibodyTarget, "IgM")
 seroFitted$IgA <- stringr::str_detect(seroFitted$antibodyTarget, "IgA")
 seroFitted$IgG <- TRUE
 seroFitted$Total <- seroFitted$IgM & seroFitted$IgA
+seroFitted$sandwich <- stringr::str_detect(seroFitted$design, "sandwich")
+seroFitted$indirect <- stringr::str_detect(seroFitted$design, "indirect")
+seroFitted$competitive <- stringr::str_detect(seroFitted$design, "competitive")
+seroFitted$notSandwich <- seroFitted$indirect | seroFitted$competitive
 
 
 ############
@@ -75,9 +79,12 @@ if (characteristics=="antigen") {
   #### Fit ANTIBODY SEROTYPE characteristics
   charsName <- c("IgG", "IgM", "IgA", "Total")
   fileIdentifier <- "antibody"
+} else if (characteristics=="design") {
+  charsName <- c("sandwich", "notSandwich", "LFA")
+  fileIdentifier <- "design"
 } else if (characteristics=="fullModel") {
   #### Fit full model characteristics
-  charsName <- c("S", "N", "RBD", "LFA")
+  charsName <- c("S", "N", "RBD", "LFA", "sandwich")
   fileIdentifier <- "fullModel"
 }
 
