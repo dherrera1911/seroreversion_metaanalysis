@@ -1,3 +1,22 @@
+####################################################
+#
+# Plot the density plots of the model parameters related to
+# assay characteristics. Generates plots for figures
+# 2A, 3A, 4A, 5A, 6A.
+# 
+# Also, computes some comparisons of the posterior samples
+# that are used for significance reporting in the text.
+# E.g. the proportion of N < RBD + S.
+# 
+# The inputs for plotting and statistical analysis are
+# the posterior samples of the fitted models, which
+# are in .csv files with the names
+# '05_characteristics_XXX_posterior_samples', where
+# XXX = the model identifier. These are generated in
+# script 05_characteristics_sensitivity_analysis.R
+#
+####################################################
+
 library(dplyr)
 library(tidyr)
 library(ggplot2)
@@ -14,6 +33,7 @@ library(ggpubr)
 source("./functions_auxiliary.R")
 source("./functions_seroreversion_fit_analysis.R")
 
+# Some plotting parameters
 regLineSize=1
 ribbonAlpha=0.2
 locLineSize=0.4
@@ -23,8 +43,13 @@ sampleLineSize=0.1
 sampleLineAlpha=0.1
 dataAlpha <- 0.5
 
-
+# Vector with model identifiers
 modelNames <- c("antigen", "antibody", "technique", "design", "fullModel")
+
+########
+### Loop below loads each models posteriors, and makes/saves the density plots.
+### Makes figures 2A, 3A, 4A, 5A, 6A.
+########
 
 charPlot <- list()
 slopePosteriors <- list()
@@ -56,9 +81,17 @@ for (m in c(1:length(modelNames))) {
   ggsave(plotName, charPlot[[m]], units="cm", width=7, height=12)
 }
 
-comparisonsDf <- NULL
 
-# Get some statistics comparing parameters
+#######
+# Code below computes the frequencies at which different
+# comparisons occur in the posterior samples in the model.
+# E.g. what proportion of posterior samples have S > N.
+#
+# Before each block of code, a comment indicates the model
+# for which comparisons will be computed
+#######
+
+comparisonsDf <- NULL
 
 ### Antigen
 antigenWide <- slopePosteriors[["antigen"]] %>%
@@ -101,8 +134,6 @@ designComps <- data.frame(Model="design",
                            Frequency=c(prob_SandwichlargerNotSandwich,
                                        prob_Sandwichlarger0,
                                        prob_NotSandwichlarger0))
-
-
 
 ### Antibody
 antibodyWide <- slopePosteriors[["antibody"]] %>%

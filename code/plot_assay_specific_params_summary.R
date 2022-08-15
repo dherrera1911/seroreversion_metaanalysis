@@ -1,3 +1,21 @@
+####################################################
+#
+# Plot the whisker plot that shows the slope and
+# intercept for each assay, obtained from the basic
+# model (without test characteristics).
+# Generates the plots for figures 1A, 1B
+# 
+# The inputs for plotting and statistical analysis are
+# the posterior samples of the fitted models, which
+# are in .csv files with the names
+# '05_characteristics_XXX_posterior_samples', where
+# XXX = the model identifier. These are generated in
+# script 05_characteristics_sensitivity_analysis.R
+#
+####################################################
+
+
+
 library(dplyr)
 library(tidyr)
 library(ggplot2)
@@ -22,7 +40,7 @@ sampleLineSize=0.1
 sampleLineAlpha=0.1
 dataAlpha <- 0.5
 
-
+# Load the pre-computed summary of parameters
 assaySummaryDf <- read.csv("../data/analysis_results/04_parameter_summary.csv",
                            stringsAsFactors=FALSE)
 
@@ -65,6 +83,5 @@ paramPlot <- ggarrange(plotlist=list(slopeHist, interceptHist),
                        ncol=2)
 ggsave("../data/figures/whisker_plots_basic_model.png", paramPlot,
   units="cm", width=22, height=14)
-
 
 

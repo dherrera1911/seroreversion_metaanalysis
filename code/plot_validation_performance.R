@@ -1,3 +1,12 @@
+####################################################
+#
+# This script doesn't make plots, but computes the
+# performance at validation for the different models
+#
+####################################################
+
+
+
 library(dplyr)
 library(tidyr)
 library(ggplot2)
@@ -22,23 +31,25 @@ sampleLineSize=0.1
 sampleLineAlpha=0.1
 dataAlpha <- 0.5
 
-# Basic model
-basicValGr <- read.csv("../data/analysis_results/04_predicted_sensitivities_grouped_CV.csv",
+# Load the CV of the basic model, done with grouped validation
+basicModelGroupedCV <- read.csv("../data/analysis_results/04_predicted_sensitivities_grouped_CV.csv",
                          stringsAsFactors=FALSE) %>%
-dplyr::mutate(., inInterval=(nSeropositives>=predictedPosL) &
-              (nSeropositives<=predictedPosH))
+dplyr::mutate(., inInterval=(nSeropositives>=predictedPosL) & (nSeropositives<=predictedPosH))
 
-basicValGrPerformance <- mean(basicValGr$inInterval)
+# Compute the proportion of data points within the CrI
+basicModelGroupedCVPerformance <- mean(basicModelGroupedCV$inInterval)
 
-basicValRn <- read.csv("../data/analysis_results/04_predicted_sensitivities_random_CV.csv",
+
+# Load the CV of the basic model, done with non-grouped validation
+basicModelRandomCV <- read.csv("../data/analysis_results/04_predicted_sensitivities_random_CV.csv",
                          stringsAsFactors=FALSE) %>%
-dplyr::mutate(., inInterval=(nSeropositives>=predictedPosL) &
-              (nSeropositives<=predictedPosH))
+dplyr::mutate(., inInterval=(nSeropositives>=predictedPosL) & (nSeropositives<=predictedPosH))
 
-basicValRnPerformance <- mean(basicValGr$inInterval)
+# Compute the proportion of data points within the CrI
+basicModelRandomCVPerformance <- mean(basicModelGroupedCV$inInterval)
 
-# Basic model on tests with few data points
-testSamples <- group_by(basicValGr, testName) %>%
+# Check the validation performance in assays that have few datapoints
+testSamples <- group_by(basicModelGroupedCV, testName) %>%
   summarize(., multiTime=length(unique(testTime)) > 1,
             nTimes=length(unique(testTime)),
             meanTime=mean(testTime),
@@ -49,29 +60,30 @@ fewSampleTests <- testSamples$testName[testSamples$nSamples<=9]
 nFewSamples <- sum(testSamples$nSamples[testSamples$nSamples<=9])
 nManySamples <- sum(testSamples$nSamples[testSamples$nSamples>9])
 
-fewSampleVal_basic <- dplyr::filter(basicValGr, testName %in% fewSampleTests)
+fewSampleVal_basic <- dplyr::filter(basicModelGroupedCV, testName %in% fewSampleTests)
 
 basicFewSamplePerformance <- mean(fewSampleVal_basic$inInterval)
 
 
 
-# Full model
-fullModelValGr <- read.csv("../data/analysis_results/05_characteristics_fullModel_grouped_CV.csv",
+# Load full model, grouped CV results
+fullModelGroupedCV <- read.csv("../data/analysis_results/05_characteristics_fullModel_grouped_CV.csv",
                          stringsAsFactors=FALSE) %>%
-dplyr::mutate(., inInterval=(nSeropositives>=predictedPosL) &
-              (nSeropositives<=predictedPosH))
+dplyr::mutate(., inInterval=(nSeropositives>=predictedPosL) & (nSeropositives<=predictedPosH))
 
-fullModelValGrPerformance <- mean(fullModelValGr$inInterval)
+# Compute the proportion of data points within the CrI
+fullModelGroupedCVPerformance <- mean(fullModelGroupedCV$inInterval)
 
-fullModelValRn <- read.csv("../data/analysis_results/04_predicted_sensitivities_random_CV.csv",
+# Load full model, random CV results
+fullModelRandomCV <- read.csv("../data/analysis_results/04_predicted_sensitivities_random_CV.csv",
                          stringsAsFactors=FALSE) %>%
-dplyr::mutate(., inInterval=(nSeropositives>=predictedPosL) &
-              (nSeropositives<=predictedPosH))
+dplyr::mutate(., inInterval=(nSeropositives>=predictedPosL) & (nSeropositives<=predictedPosH))
 
-fullModelValRnPerformance <- mean(fullModelValGr$inInterval)
+# Compute the proportion of data points within the CrI
+fullModelRandomCVPerformance <- mean(fullModelGroupedCV$inInterval)
 
 # Full model on tests with few data points
-fewSampleVal_full <- dplyr::filter(fullModelValGr, testName %in% fewSampleTests)
+fewSampleVal_full <- dplyr::filter(fullModelGroupedCV, testName %in% fewSampleTests)
 fullFewSamplePerformance <- mean(fewSampleVal_full$inInterval)
 
 
@@ -96,32 +108,32 @@ antigenFewSamplePerformance <- mean(fewSampleVal_antigen$inInterval)
 
 
 # Technique
-techniqueValGr <- read.csv("../data/analysis_results/05_characteristics_technique_grouped_CV.csv",
-                         stringsAsFactors=FALSE) %>%
-dplyr::mutate(., inInterval=(nSeropositives>=predictedPosL) &
-              (nSeropositives<=predictedPosH))
+#techniqueValGr <- read.csv("../data/analysis_results/05_characteristics_technique_grouped_CV.csv",
+#                         stringsAsFactors=FALSE) %>%
+#dplyr::mutate(., inInterval=(nSeropositives>=predictedPosL) &
+#              (nSeropositives<=predictedPosH))
+#
+#techniqueValGrPerformance <- mean(techniqueValGr$inInterval)
+#
+#techniqueValRn <- read.csv("../data/analysis_results/04_predicted_sensitivities_random_CV.csv",
+#                         stringsAsFactors=FALSE) %>%
+#dplyr::mutate(., inInterval=(nSeropositives>=predictedPosL) &
+#              (nSeropositives<=predictedPosH))
+#
+#techniqueValRnPerformance <- mean(techniqueValGr$inInterval)
+#
+## Full model on tests with few data points
+#fewSampleVal_technique <- dplyr::filter(techniqueValGr, testName %in% fewSampleTests)
+#techniqueFewSamplePerformance <- mean(fewSampleVal_technique$inInterval)
+#
 
-techniqueValGrPerformance <- mean(techniqueValGr$inInterval)
 
-techniqueValRn <- read.csv("../data/analysis_results/04_predicted_sensitivities_random_CV.csv",
-                         stringsAsFactors=FALSE) %>%
-dplyr::mutate(., inInterval=(nSeropositives>=predictedPosL) &
-              (nSeropositives<=predictedPosH))
-
-techniqueValRnPerformance <- mean(techniqueValGr$inInterval)
-
-# Full model on tests with few data points
-fewSampleVal_technique <- dplyr::filter(techniqueValGr, testName %in% fewSampleTests)
-techniqueFewSamplePerformance <- mean(fewSampleVal_technique$inInterval)
-
-
-
-# Compare uncertainty sizes
-basic2 <- filter(basicValGr, testName %in% fullModelValGr$testName) %>%
+# Compare the sizes of the CrI for the basic vs full model
+basic2 <- filter(basicModelGroupedCV, testName %in% fullModelGroupedCV$testName) %>%
   dplyr::mutate(., intervalWidthBasic=(sensitivityHPred-sensitivityLPred)) %>%
   dplyr::select(., testName, citationID, testTime, intervalWidthBasic)
 
-full2 <- fullModelValGr %>%
+full2 <- fullModelGroupedCV %>%
   dplyr::mutate(., intervalWidthFull=(sensitivityHPred-sensitivityLPred)) %>%
   select(., testName, citationID, testTime, intervalWidthFull)
 

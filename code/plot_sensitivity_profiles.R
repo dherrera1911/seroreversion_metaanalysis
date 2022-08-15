@@ -1,3 +1,31 @@
+####################################################
+#
+# Plot sensitivity across time, both for the 'averages'
+# of the different types of assays, and the assay-specific
+# sensitivity profiles.
+# Generates plots for figures 2B, 3B, 4B, 5B, 6B
+# and supplementary Figure S1
+# 
+# The inputs for plotting and statistical analysis are
+# the posterior means and intervals of sensitivity
+# across time, that are computed when fitting the
+# models, the original data points (to overlay with the fits),
+# and a dataset with original data and the results of
+# cross-validation.
+#
+# Files with sensitivity profiles are in ../data/processed_data/
+# and have names 'XXX_sensitivity_curve.csv', where XXX
+# indicates the model fitted.
+# 
+# The original data points are in file
+# ../data/processed_data/PCR_to_serotest_all.csv
+#
+# The results of crossvalidation are in
+# '../data/analysis_results/XXX_grouped_CV', where
+# XXX indicates the model that was used for crossvalidation
+#
+####################################################
+
 library(dplyr)
 library(tidyr)
 library(ggplot2)
@@ -36,55 +64,58 @@ dplyr::mutate(., inInterval=(nSeropositives>=predictedPosL) &
 
 #################################
 #################################
-# Individual assays sensitivity profiles
+# Individual assays sensitivity profiles (Figure S1)
 #################################
 #################################
 
-#####################
-# Basic model
-#####################
 # Load sensitivity profile of basic model
-sensProfileDf <- read.csv("../data/analysis_results/04_assay_sensitivity_curve.csv",
+basicModelProfile <- read.csv("../data/analysis_results/04_assay_sensitivity_curve.csv",
                                stringsAsFactors=FALSE)
+fullModelProfile <- read.csv("../data/analysis_results/05_characteristics_fullModel_assay_sensitivity_curve.csv",
+                           stringsAsFactors=FALSE)
 
-# Plot the fitting results with the raw data
-nPlots <- 3
+nPlots <- 3 # Number of sheets into which to divide the assay-plots
 nTests <- length(unique(seroFitted$testName))
 testLists <- split(c(1:nTests), cut(seq_along(c(1:nTests)), nPlots,
                                     labels = FALSE)) 
-sensitivityPlot <- list()
-for (np in c(1:nPlots)) {
-  testsPlot <- unique(seroFitted$testName)[testLists[[np]]]
-  sensitivityPlot[[np]] <- dplyr::filter(validationDf, testName %in% testsPlot) %>%
-    ggplot(aes(x=testTime, y=sensitivityMean, color=citationID,
-               shape=inInterval)) +
-    geom_line(data=dplyr::filter(sensProfileDf,
-                                 !is.na(testName) & (testName %in% testsPlot)),
-              aes(x=time, y=sensitivityMean*100), color="black", linetype="solid",
-              size=regLineSize, inherit.aes=FALSE) +
-    geom_ribbon(data=dplyr::filter(sensProfileDf,
-                                   !is.na(testName) & testName %in% testsPlot),
-                aes(x=time, ymin=sensitivityL*100, ymax=sensitivityH*100),
-                alpha=ribbonAlpha, colour=NA, show.legend=FALSE,
-                inherit.aes=FALSE) +
-    geom_pointrange(aes(ymin=sensitivityL, ymax=sensitivityH),
-                    position=position_jitter(width=0.15, height=0)) +
-    facet_wrap(.~testName, ncol=3, labeller = label_wrap_gen(width=35)) +
-    theme_bw() +
-    theme(legend.position="top") +
-    guides(color=FALSE, shape=guide_legend("In validation interval")) +
-    xlim(0, 15) +
-    xlab("Diagnosis to test (months)") +
-    ylab("Sensitivity (%)")
-ggsave(paste("../data/figures/seroreversion_fit", np, ".png", sep=""),
-       sensitivityPlot[[np]], units="cm", width=24, height=30)
-}
 
 #####################
-# Full model
+# Basic model (this one is not on the paper,
+# because next block of code is more complete)
 #####################
-fullModelProfile <- read.csv("../data/analysis_results/05_characteristics_fullModel_assay_sensitivity_curve.csv",
-                           stringsAsFactors=FALSE)
+
+## Plot the fitting results with the raw data
+#sensitivityPlot <- list()
+#for (np in c(1:nPlots)) {
+#  testsPlot <- unique(seroFitted$testName)[testLists[[np]]]
+#  sensitivityPlot[[np]] <- dplyr::filter(validationDf, testName %in% testsPlot) %>%
+#    ggplot(aes(x=testTime, y=sensitivityMean, color=citationID,
+#               shape=inInterval)) +
+#    geom_line(data=dplyr::filter(basicModelProfile,
+#                                 !is.na(testName) & (testName %in% testsPlot)),
+#              aes(x=time, y=sensitivityMean*100), color="black", linetype="solid",
+#              size=regLineSize, inherit.aes=FALSE) +
+#    geom_ribbon(data=dplyr::filter(basicModelProfile,
+#                                   !is.na(testName) & testName %in% testsPlot),
+#                aes(x=time, ymin=sensitivityL*100, ymax=sensitivityH*100),
+#                alpha=ribbonAlpha, colour=NA, show.legend=FALSE,
+#                inherit.aes=FALSE) +
+#    geom_pointrange(aes(ymin=sensitivityL, ymax=sensitivityH),
+#                    position=position_jitter(width=0.15, height=0)) +
+#    facet_wrap(.~testName, ncol=3, labeller = label_wrap_gen(width=35)) +
+#    theme_bw() +
+#    theme(legend.position="top") +
+#    guides(color=FALSE, shape=guide_legend("In validation interval")) +
+#    xlim(0, 15) +
+#    xlab("Diagnosis to test (months)") +
+#    ylab("Sensitivity (%)")
+#ggsave(paste("../data/figures/seroreversion_fit", np, ".png", sep=""),
+#       sensitivityPlot[[np]], units="cm", width=24, height=30)
+#}
+
+#####################
+# Full model (This is figure S1)
+#####################
 
 sensitivityCompPlot <- list()
 for (np in c(1:nPlots)) {
@@ -92,11 +123,11 @@ for (np in c(1:nPlots)) {
   sensitivityCompPlot[[np]] <- dplyr::filter(validationDf, testName %in% testsPlot) %>%
     ggplot(aes(x=testTime, y=sensitivityMean, color=citationID,
                shape=inInterval)) +
-    geom_line(data=dplyr::filter(sensProfileDf,
+    geom_line(data=dplyr::filter(basicModelProfile,
                                  !is.na(testName) & (testName %in% testsPlot)),
               aes(x=time, y=sensitivityMean*100), color="black", linetype="solid",
               size=regLineSize, inherit.aes=FALSE) +
-    geom_ribbon(data=dplyr::filter(sensProfileDf,
+    geom_ribbon(data=dplyr::filter(basicModelProfile,
                                    !is.na(testName) & testName %in% testsPlot),
                 aes(x=time, ymin=sensitivityL*100, ymax=sensitivityH*100),
                 alpha=ribbonAlpha, colour=NA, show.legend=FALSE,
@@ -124,33 +155,40 @@ ggsave(paste("../data/figures/seroreversion_fit_characteristics", np, ".png", se
 }
 
 
-
 #################################
 #################################
-# Average assay sensitivity profiles
+# Average sensitivity profiles of assay types
+# Makes Figures 2B, 3B, 4B, 5B, 6B
 #################################
 #################################
 
 ############
-# Antigen
+# Antigen (Fig 2B) ## Comments in this block of code explain what happens in the
+# following blocks too
 ############
 
+# Load data, and add a column (averageSens) indicating if a given row of
+# the posterior sensitivity table corresponds to a specific test (indicated
+# in testName), or if it is the average of the test type (is.na(testName))
 antigenProfile <- read.csv("../data/analysis_results/05_characteristics_antigen_assay_sensitivity_curve.csv",
                            stringsAsFactors=FALSE) %>%
   dplyr::mutate(., averageSens=is.na(testName))
 
+# Make columns with names for the different combinations of parameters (kinds of tests)
 antigenProfile$antigen[with(antigenProfile, N & (!S))] <- "N"
 antigenProfile$antigen[with(antigenProfile, N & S & !(RBD))] <- "N-S"
 antigenProfile$antigen[with(antigenProfile, !(N) & S & !(RBD))] <- "S"
 antigenProfile$antigen[with(antigenProfile, !(N) & S & RBD)] <- "S-RBD"
 antigenProfile$antigen[with(antigenProfile, N & S & RBD)] <- "N-S-RBD"
 
+# Separate the dataframe into assay-specific sensitivities and average sensitivities
 antigenAverages <- filter(antigenProfile, averageSens)
 antigenAssays <- filter(antigenProfile, !averageSens)
 
+# Add a column indicating the kind of test to the original data,
+# to plot the data points
 testAntigens <- dplyr::select(antigenAssays, testName, antigen) %>%
   unique()
-
 antigenPoints <- filter(seroFitted, testName %in% antigenProfile$testName) %>%
   merge(., testAntigens) %>%
   dplyr::mutate(., time=testTime)
@@ -178,15 +216,15 @@ ggsave("../data/figures/characteristics_profiles_antigen.png", antigenProfilePlo
        units="cm", width=16, height=12)
 
 
-
 ############
-# Technique
+# Technique (Fig 3B)
 ############
 
 techniqueProfile <- read.csv("../data/analysis_results/05_characteristics_technique_assay_sensitivity_curve.csv",
                            stringsAsFactors=FALSE) %>%
   dplyr::mutate(., averageSens=is.na(testName))
 
+# Make columns with names for the different combinations of parameters (kinds of tests)
 techniqueProfile$technique[techniqueProfile$LFA] <- "LFA"
 techniqueProfile$technique[!techniqueProfile$LFA] <- "Rest"
 
@@ -200,7 +238,6 @@ techniquePoints <- filter(seroFitted, testName %in% techniqueProfile$testName) %
   dplyr::select(., -technique) %>%
   merge(., testTechniques) %>%
   dplyr::mutate(., time=testTime)
-
 
 techniqueProfilePlot <- techniqueAverages %>%
   ggplot(., aes(x=time, y=sensitivityMean*100)) +
@@ -225,13 +262,14 @@ ggsave("../data/figures/characteristics_profiles_technique.png", techniqueProfil
 
 
 ############
-# Design
+# Design (Fig 4B)
 ############
 
 designProfile <- read.csv("../data/analysis_results/05_characteristics_design_assay_sensitivity_curve.csv",
                            stringsAsFactors=FALSE) %>%
   dplyr::mutate(., averageSens=is.na(testName))
 
+# Make columns with names for the different combinations of parameters (kinds of tests)
 designProfile$design[with(designProfile, sandwich & !LFA)] <- "Sandwich & not LFA"
 designProfile$design[with(designProfile, sandwich & LFA)] <- "Sandwich & LFA"
 designProfile$design[with(designProfile, notSandwich & !LFA)] <- "Not sandwich & not LFA"
@@ -247,7 +285,6 @@ designPoints <- filter(seroFitted, testName %in% designProfile$testName) %>%
   dplyr::select(., -design) %>%
   merge(., testDesigns) %>%
   dplyr::mutate(., time=testTime)
-
 
 designProfilePlot <- designAverages %>%
   ggplot(., aes(x=time, y=sensitivityMean*100)) +
@@ -271,16 +308,15 @@ ggsave("../data/figures/characteristics_profiles_design.png", designProfilePlot,
        units="cm", width=12, height=12)
 
 
-
-
 ############
-# Antibody
+# Antibody (Fig 5B)
 ############
 
 antibodyProfile <- read.csv("../data/analysis_results/05_characteristics_antibody_assay_sensitivity_curve.csv",
                            stringsAsFactors=FALSE) %>%
   dplyr::mutate(., averageSens=is.na(testName))
 
+# Make columns with names for the different combinations of parameters (kinds of tests)
 antibodyProfile$antibody[with(antibodyProfile, (!IgM) & (!IgA))] <- "IgG"
 antibodyProfile$antibody[with(antibodyProfile, IgM & (!IgA))] <- "IgG-IgM"
 antibodyProfile$antibody[with(antibodyProfile, (!IgM) & IgA)] <- "IgG-IgA"
@@ -319,13 +355,14 @@ ggsave("../data/figures/characteristics_profiles_antibody.png", antibodyProfileP
 
 
 ############
-# Full Model
+# Full Model (Fig 6B)
 ############
 
 fullModelProfile <- read.csv("../data/analysis_results/05_characteristics_fullModel_assay_sensitivity_curve.csv",
                            stringsAsFactors=FALSE) %>%
   dplyr::mutate(., averageSens=is.na(testName))
 
+# Make columns with names for the different combinations of parameters (kinds of tests)
 fullModelProfile$fullModel[with(fullModelProfile, N & !S & !RBD & !sandwich & !LFA)] <- "N"
 fullModelProfile$fullModel[with(fullModelProfile, !N & S & RBD & !sandwich & !LFA)] <- "S-RBD"
 fullModelProfile$fullModel[with(fullModelProfile, !N & S & !RBD & sandwich & LFA)] <- "S & LFA & Sandwich"
@@ -390,6 +427,5 @@ fullModelProfilePlot <- fullModelAverages %>%
 
 ggsave("../data/figures/characteristics_profiles_fullModel.png", fullModelProfilePlot,
        units="cm", width=16, height=20)
-
 
 
