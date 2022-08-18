@@ -4,37 +4,59 @@
 
 ### Raw data files:
 
-Data files to reproduce the analysis are found in data/raw_data:
+Data files to reproduce the analysis from scratch are found
+in data/raw_data. These have to be preprocessed before
+fitting the model.
 
-**PCR_to_serotest_known.csv**: Seroreversion data on people with
-previous COVID-19 diagnosis, and where the time elapsed between
-diagnosis and serology testing is known.
+**PCR_to_serotest_known.csv**: Serology testing on PCR diagnosed
+individuals, with known test-to-serology time.
 
-**PCR_to_serotest_unknown.csv**: Seroreversion data on people with
-previous COVID-19 diagnosis, and where the time elapsed between
-diagnosis and serology testing is unknown.
+**PCR_to_serotest_unknown.csv**: Same as above, but with
+unknown test-to-serology time.
 
 **death_dynamics.csv**: Time series of reported cases and deaths
-for many locations used in the analysis. These are later used to
-estimate the delay between diagnosis and serology testing
-for the PCR_to_serotest_unknown.csv data.
+for different locations used in the analysis.
 
-**assay_characteristics.csv**: Table containing some technical
-characteristics of each test. Mainly, the antigen used,
-targeted antibody isotype, and analytic technique.
+**assay_characteristics.csv**: Technical
+characteristics of each test
 
 ### Secondary files:
 
-Before doing the statistical analysis, some data preprocessing
-is done. These are the generated files, found in data/processed_data:
+Pre-processed data files for jumping straight into fitting
+the analysis are in data/processed_data:
 
 **PCR_to_serotest_estimated_times.csv**: Same as PCR_to_serotest_unknown.csv,
 but with estimated times between COVID diagnosis and serology testing.
 
-**PCR_to_serotest_all.csv**: All seroreversion data put together into
-a file. Has both the PCR_to_serotest_known.csv data, and
-the PCR_to_serotest_estimated_times.csv data.
+**PCR_to_serotest_all.csv**: Data table putting together all the data
+to be fitted in the analysis. This is the file needed to jump straight
+into model fitting.
 
+### Results data files:
+
+Results from model fitting are in data/analysis_results/, and these
+are used for making plots and statistics in the rest of the code.
+Results are saved here automatically at the end of analysis scripts. 
+
+We include some results files that have summaries of the model fits,
+but we exclude the files with the posterior samples, due to their size.
+Some figures of the manuscript can be done with the available files.
+
+Files with 'XXX_sensitivity_curve.csv' name structure have the
+time-dependent sensitivity curves estimated from the fitted model
+specified in XXX. These files contain estimated sensitivity profiles
+for each assay, as well as for the average estimated for a given
+kind of assay.
+
+Files with 'XXX_parameter_summary.csv' have the summary statistics
+of each parameter fitted by the Bayesian models. 
+
+Files with 'XXX_posterior_samples.csv' contain the posterior samples
+of the model that were used to build the previous two files.
+These files are not included due to their size.
+
+Files with 'XXX_grouped_CV.csv', or 'XXX_random_CV.csv' have the
+cross-validation results.
 
 ### Important variables:
 
@@ -44,64 +66,81 @@ The most important variables of this dataset are:
 | Variable | Description |
 | -------- | ----------- |
 | **testName** | Indicates the identity of the assay used |
-| **testTime** | Time elapsed from diagnosis to testing |
+| **testTime** | Time elapsed from diagnosis to antibody testing |
 | **citationID** | Identifier of the study reporting the data |
 | **nSamples** | Number of people with COVID diagnosis that were tested for antibodies |
 | **nSeropositives** | Number of positive antibody tests among the nSamples tested |
+| **sensitivityMean** | Mean sensitivity for this time point |
+| **sensitivityL(H)** | Binomial 95% CI lower (higher) bound of sensitivity |
 | **timeKnown** | Indicates whether testTime is reported in the source, or estimated here |
 | **antigenTarget** | Indicates what antigens are targeted by the assay |
 | **antibodyTarget** | Indicates what antibody isotypes are targeted by the assay |
 | **technique** | Indicates what analytic technique is used by the assay |
+| **design** | Indicates the test design (direct/sandwich vs indirect mostly) |
 | **sampleType** | Indicates what kind of population was sampled |
 | **midpointDate** | Median date of sample collection |
-
 
 
 ##  Analysis code
 
 Description of the scripts in the ****code**** directory:
 
-**01_death_dynamics_table.R**: Builds the data/raw_data/death_dynamics.csv file
-by putting together different case and death data sources.
+**01_death_dynamics_table.R**: (Preprocessing) Builds the
+data/raw_data/death_dynamics.csv file by putting together different
+case and death data sources.
 
-**02_estimate_seroreversion_delays.R**: Uses the data in data/raw_data/death_dynamics.csv 
-to estimate the delays between diagnosis and serology testing for the data
-in **PCR_to_serotest_unknown.csv**. Outputs the file PCR_to_serotest_estimated_times.csv.
+**02_estimate_seroreversion_delays.R**: (Preprocessing) Uses the data in
+data/raw_data/death_dynamics.csv to estimate the delays between
+diagnosis and serology testing for the data in **PCR_to_serotest_unknown.csv**
 
-**03_organize_seroreversion_data.R**: Puts together the information from files
-**PCR_to_serotest_known.csv**, **PCR_to_serotest_estimated_tiems.csv** and
-**assay_characteristics.csv** into a single file that can be fitted in
-the statistical analyses. The output file with this combined data is 
-**PCR_to_serotest_all.csv**.
+**03_organize_seroreversion_data.R**: (Preprocessing) Tidies the
+data and does som extra pre-processing. The output file of this
+script is **PCR_to_serotest_all.csv**, the input to the
+statistical analysis.
 
-**04_average_sensitivity_analysis.R**: Fits a hierarchical Bayesian regression
-to the data in PCR_to_serotest_all.csv. It fits a model to all the data,
-and the samples of the parameter posteriors are stored as output in
-**sensitivity_decay.csv**. Also, a home-made cross-validation
-test that is done on the model, and a summary of the performance is
-stored in **data/processed_data/sensitivity_decay_validation.csv**. The model fitted is
-defined in **sensitivity_change.stan**.
+**04_average_sensitivity_analysis.R**: (Analysis) Fits a hierarchical
+Bayesian regression to the data in PCR_to_serotest_all.csv, without
+taking into account assay characteristics. Outputs files to
+data/analysis_results with descriptions of the fitted model
 
-**05_characteristics_sensitivity_analysis.R**: Fits a hierarchical Bayesian regression
-to the data in PCR_to_serotest_all.csv. Unlike script 04, it includes
-an effect for the different test characteristics. It stores the fit to all
-data in a series of files named
-**data/processed_data/assay_characteristics_XXX.csv**, where the XXX string
-indicates the characteristic analyzed. 
-Also, a home-made cross-validation
-test that is done on the model, and a summary of the performance is
-stored in **data/processed_data/assay_characteristics_XXX_validation.csv**.
+**04_average_sensitivity_analysis_bis.R**: (Analysis) Fits the
+same model as the previous file, but for doing cross-validation.
+Outputs the cross-validation results, but no model summary.
+
+**05_characteristics_sensitivity_analysis.R**: (Analysis) Fits a hierarchical
+Bayesian regression to the data in PCR_to_serotest_all.csv. Unlike script
+04, it includes an effect for the different test characteristics. 
+
+**05_characteristics_sensitivity_analysis_bis.R**: (Analysis) Fits a
+hierarchical Bayesian model like the script above, but for
+doing cross-validation. Only outputs the CV results, and not a
+model summary.
+
+**06_positive_slope_analysis.R**: (Analysis) Fits a model with
+two slopes, an early slope and a later slope. It does so on
+a small set of tests that show positive slopes in the main analysis.
+
+**07_manufacturer_comparison.R**: (Analysis) Compares the results from
+previous model fittings to manufacturer reported sensitivities.
 
 **functions_auxiliary.R**: Contains miscellaneous functions for small tasks.
 
 **functions_seroreversion_fit_analysis.R**: Contains functions related to
 the Bayesian analysis fit. For example, preparing the initialization
-values, extracting the posterior samples in a tidy format,
-convert posterior samples of the parameters into posterior samples
-of the sensitivity curve, etc.
+values, extracting the posterior samples in a tidy format, etc.
 
-**plot_seroreversion_fit.R**: Generate the plots of the data and the fitted
-models. The file is divided by numbered headings that indicate the kind
-of data to be plotted in that part of the script.
+**plot_assay_specific_params_summary.R**: Generates Figure 1 of the
+paper.
+
+**plot_characteristics_effects.R**: Generates the density plots of
+Figures 2-6.
+
+**plot_later_slope_analysis.R**: Generates Figure 7.
+
+**plot_sensitivity_profiles.R**: Generates the sensitivity profiles
+in Figures 2-6.
+
+**plot_validation_performance.R**: Computes the performance of
+the cross-validation results.
 
 

@@ -47,11 +47,11 @@ seroFitted <- read.csv("../data/processed_data/PCR_to_serotest_all.csv",
 ############
 # Add binary columns to dataframe, to work as indicator variables
 ############
-seroFitted$S <- stringr::str_detect(seroFitted$antigenTarget, "S") |
-  stringr::str_detect(seroFitted$antigenTarget, "RBD")
 seroFitted$RBD <- stringr::str_detect(seroFitted$antigenTarget, "RBD")
-seroFitted$N <- stringr::str_detect(seroFitted$antigenTarget, "N")
-seroFitted$SN <- seroFitted$S & seroFitted$N
+seroFitted$S <- stringr::str_detect(seroFitted$antigenTarget, "S") &
+  !seroFitted$RBD
+seroFitted$N <- stringr::str_detect(seroFitted$antigenTarget, "N") &
+  !(seroFitted$RBD | seroFitted$S)
 seroFitted$LFA <- stringr::str_detect(seroFitted$technique, "LFIA")
 seroFitted$Rest <- !seroFitted$LFA
 seroFitted$ELISA <- stringr::str_detect(seroFitted$technique, "ELISA")
@@ -76,7 +76,7 @@ seroFitted$notSandwich <- seroFitted$indirect | seroFitted$competitive
 
 if (characteristics=="antigen") {
   ### Fit ANTIGEN characteristics
-  charsName <- c("S", "N", "RBD", "SN")
+  charsName <- c("N", "S", "RBD")
   fileIdentifier <- "antigen"
 } else if (characteristics=="technique") {
   #### Fit ANALYTIC TECHNIQUE characteristics
@@ -86,9 +86,12 @@ if (characteristics=="antigen") {
   #### Fit ANTIBODY SEROTYPE characteristics
   charsName <- c("IgG", "IgM", "IgA", "Total")
   fileIdentifier <- "antibody"
+} else if (characteristics=="design") {
+  charsName <- c("sandwich", "notSandwich", "LFA")
+  fileIdentifier <- "design"
 } else if (characteristics=="fullModel") {
   #### Fit full model characteristics
-  charsName <- c("S", "N", "RBD", "LFA", "sandwich")
+  charsName <- c("N", "S", "RBD", "LFA", "sandwich")
   fileIdentifier <- "fullModel"
 }
 

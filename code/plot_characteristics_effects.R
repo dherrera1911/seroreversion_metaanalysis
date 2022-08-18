@@ -59,6 +59,9 @@ for (m in c(1:length(modelNames))) {
                           mN, "_posterior_samples.csv", sep="")
   slopePosteriors[[mN]] <- read.csv(posteriorsName, stringsAsFactors=FALSE) %>%
     dplyr::filter(., !is.na(parName))
+  if (mN == "antigen") {
+    slopePosteriors[[mN]]$parName <- factor(slopePosteriors[[mN]]$parName,
+                                            levels=c("N", "S", "RBD"))
   if (mN == "fullModel") {
     slopePosteriors[[mN]]$isAntigen <- slopePosteriors[[mN]]$parName %in% c("S", "N", "RBD")
     levelOrder <- c("N", "S", "RBD", "LFA", "sandwich")
@@ -98,15 +101,17 @@ antigenWide <- slopePosteriors[["antigen"]] %>%
   pivot_wider(., id_cols=.draw, names_from=parName, values_from=.value)
 
 prob_SlargerN <- mean(antigenWide$S>antigenWide$N)
-prob_RBDlarger0 <- mean((antigenWide$S+antigenWide$RBD)>0)
-prob_SNlarger0 <- mean(antigenWide$SN>0)
-comparisonsAntigen <- c("S > N", "S+RBD > 0", "SN > 0")
+prob_RBDlargerS <- mean(antigenWide$RBD>antigenWide$S)
+prob_RBDlargerN <- mean(antigenWide$RBD>antigenWide$N)
+prob_RBDlarger0 <- mean(antigenWide$RBD>0)
+comparisonsAntigen <- c("S > N", "RBD > S", "RBD > N", "RBD > 0")
 
 antigenComps <- data.frame(Model="antigen",
                            Comparison=comparisonsAntigen,
                            Frequency=c(prob_SlargerN,
-                                   prob_RBDlarger0,
-                                   prob_SNlarger0))
+                                   prob_RBDlargerS,
+                                   prob_RBDlargerN,
+                                   prob_RBDlarger0))
 
 ### Technique
 techniqueWide <- slopePosteriors[["technique"]] %>%
@@ -162,11 +167,12 @@ prob_LFAlarger0 <- mean(fullModelWide$LFA>0)
 prob_Sandwichlarger0 <- mean(fullModelWide$sandwich>0)
 prob_SlargerN <- with(fullModelWide, mean(S>N))
 prob_RBDlarger0 <- mean(fullModelWide$RBD>0)
-prob_SRBDlarger0 <- with(fullModelWide, mean(RBD+S>0))
+prob_RBDlargerS <- with(fullModelWide, mean(RBD>S))
+prob_RBDlargerN <- with(fullModelWide, mean(RBD>N))
 
 comparisonsFullModel <- c("LFA > 0", "Sandwich > 0",
                           "S > N", "RBD > 0",
-                          "S + RBD > 0")
+                          "RBD > S", "RBD > N")
 
 fullModelComps <- data.frame(Model="fullModel",
                            Comparison=comparisonsFullModel,
@@ -174,7 +180,8 @@ fullModelComps <- data.frame(Model="fullModel",
                                        prob_Sandwichlarger0,
                                        prob_SlargerN,
                                        prob_RBDlarger0,
-                                       prob_SRBDlarger0))
+                                       prob_RBDlargerS,
+                                       prob_RBDlargerN))
 
 ### Save the comparisons performed
 allComparisons <- rbind(antigenComps, techniqueComps, designComps,

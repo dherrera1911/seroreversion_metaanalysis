@@ -175,11 +175,9 @@ antigenProfile <- read.csv("../data/analysis_results/05_characteristics_antigen_
   dplyr::mutate(., averageSens=is.na(testName))
 
 # Make columns with names for the different combinations of parameters (kinds of tests)
-antigenProfile$antigen[with(antigenProfile, N & (!S))] <- "N"
-antigenProfile$antigen[with(antigenProfile, N & S & !(RBD))] <- "N-S"
-antigenProfile$antigen[with(antigenProfile, !(N) & S & !(RBD))] <- "S"
-antigenProfile$antigen[with(antigenProfile, !(N) & S & RBD)] <- "S-RBD"
-antigenProfile$antigen[with(antigenProfile, N & S & RBD)] <- "N-S-RBD"
+antigenProfile$antigen[with(antigenProfile, N)] <- "N"
+antigenProfile$antigen[with(antigenProfile, S)] <- "S"
+antigenProfile$antigen[with(antigenProfile, RBD)] <- "RBD"
 
 # Separate the dataframe into assay-specific sensitivities and average sensitivities
 antigenAverages <- filter(antigenProfile, averageSens)
@@ -213,7 +211,7 @@ antigenProfilePlot <- antigenAverages %>%
   ylab("Sensitivity (%)")
 
 ggsave("../data/figures/characteristics_profiles_antigen.png", antigenProfilePlot,
-       units="cm", width=16, height=12)
+       units="cm", width=16, height=11)
 
 
 ############
@@ -363,28 +361,22 @@ fullModelProfile <- read.csv("../data/analysis_results/05_characteristics_fullMo
   dplyr::mutate(., averageSens=is.na(testName))
 
 # Make columns with names for the different combinations of parameters (kinds of tests)
-fullModelProfile$fullModel[with(fullModelProfile, N & !S & !RBD & !sandwich & !LFA)] <- "N"
-fullModelProfile$fullModel[with(fullModelProfile, !N & S & RBD & !sandwich & !LFA)] <- "S-RBD"
-fullModelProfile$fullModel[with(fullModelProfile, !N & S & !RBD & sandwich & LFA)] <- "S & LFA & Sandwich"
-fullModelProfile$fullModel[with(fullModelProfile, N & !S & !RBD & !sandwich & LFA)] <- "N & LFA"
-fullModelProfile$fullModel[with(fullModelProfile, N & !S & !RBD & sandwich & !LFA)] <- "N & Sandwich"
-fullModelProfile$fullModel[with(fullModelProfile, N & S & RBD & !sandwich & LFA)] <- "N-S-RBD & LFA"
-fullModelProfile$fullModel[with(fullModelProfile, N & S & RBD & !sandwich & !LFA)] <- "N-S-RBD"
-fullModelProfile$fullModel[with(fullModelProfile, !N & S & !RBD & !sandwich & !LFA)] <- "S"
-fullModelProfile$fullModel[with(fullModelProfile, !N & S & RBD & sandwich & !LFA)] <- "S-RBD & Sandwich"
-fullModelProfile$fullModel[with(fullModelProfile, N & S & !RBD & !sandwich & !LFA)] <- "S-N"
-fullModelProfile$fullModel[with(fullModelProfile, !N & S & !RBD & !sandwich & LFA)] <- "S & LFA"
-fullModelProfile$fullModel[with(fullModelProfile, N & S & !RBD & !sandwich & LFA)] <- "S-N & LFA"
-fullModelProfile$fullModel[with(fullModelProfile, !N & S & RBD & !sandwich & LFA)] <- "S-RBD & LFA"
+fullModelProfile$fullModel[with(fullModelProfile, N & !sandwich & !LFA)] <- "N"
+fullModelProfile$fullModel[with(fullModelProfile, RBD & !sandwich & !LFA)] <- "RBD"
+fullModelProfile$fullModel[with(fullModelProfile, S & sandwich & LFA)] <- "S & LFA & Sandwich"
+fullModelProfile$fullModel[with(fullModelProfile, N & !sandwich & LFA)] <- "N & LFA"
+fullModelProfile$fullModel[with(fullModelProfile, N & & sandwich & !LFA)] <- "N & Sandwich"
+fullModelProfile$fullModel[with(fullModelProfile, RBD & !sandwich & LFA)] <- "RBD & LFA"
+fullModelProfile$fullModel[with(fullModelProfile, S & !sandwich & !LFA)] <- "S"
+fullModelProfile$fullModel[with(fullModelProfile, RBD & sandwich & !LFA)] <- "RBD & Sandwich"
+fullModelProfile$fullModel[with(fullModelProfile, S & !sandwich & LFA)] <- "S & LFA"
 
 # additional column to organize plots
-fullModelProfile$antigen[with(fullModelProfile, N & (!S))] <- "N"
-fullModelProfile$antigen[with(fullModelProfile, N & S & !(RBD))] <- "N-S"
-fullModelProfile$antigen[with(fullModelProfile, !(N) & S & !(RBD))] <- "S"
-fullModelProfile$antigen[with(fullModelProfile, !(N) & S & RBD)] <- "S-RBD"
-fullModelProfile$antigen[with(fullModelProfile, N & S & RBD)] <- "N-S-RBD"
+fullModelProfile$antigen[with(fullModelProfile, N)] <- "N"
+fullModelProfile$antigen[with(fullModelProfile, S)] <- "S"
+fullModelProfile$antigen[with(fullModelProfile, RBD)] <- "RBD"
 
-levelOrder <- c("N", "N-S", "S", "S-RBD", "N-S-RBD")
+levelOrder <- c("N", "S", "RBD")
 fullModelProfile$antigen <- factor(fullModelProfile$antigen, levels=levelOrder)
 
 fullModelProfile$design[with(fullModelProfile, !LFA & !sandwich)] <- "Not LFA"
@@ -426,6 +418,6 @@ fullModelProfilePlot <- fullModelAverages %>%
   ylab("Sensitivity (%)")
 
 ggsave("../data/figures/characteristics_profiles_fullModel.png", fullModelProfilePlot,
-       units="cm", width=16, height=20)
+       units="cm", width=18, height=15)
 
 
