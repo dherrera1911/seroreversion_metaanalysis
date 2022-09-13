@@ -1,4 +1,3 @@
-####################################################
 #
 # Plot sensitivity across time, both for the 'averages'
 # of the different types of assays, and the assay-specific
@@ -55,11 +54,38 @@ dataAlpha <- 0.5
 seroFitted <- read.csv("../data/processed_data/PCR_to_serotest_all.csv",
                     stringsAsFactors=FALSE)
 
+# Put characteristics columns to raw data
+seroFitted$LFA <- stringr::str_detect(seroFitted$technique, "LFIA")
+seroFitted$Sandwich <- stringr::str_detect(seroFitted$design, "sandwich")
+binaryString <- c("No", "Yes")
+seroFitted$LFA <- binaryString[as.integer(seroFitted$LFA)+1]
+seroFitted$Sandwich <- binaryString[as.integer(seroFitted$Sandwich)+1]
+seroFitted$Sandwich[is.na(seroFitted$Sandwich)] <- "Unknown"
+seroFitted$RBD <- stringr::str_detect(seroFitted$antigenTarget, "RBD")
+seroFitted$S <- stringr::str_detect(seroFitted$antigenTarget, "S") &
+  !seroFitted$RBD
+seroFitted$N <- stringr::str_detect(seroFitted$antigenTarget, "N") &
+  !(seroFitted$RBD | seroFitted$S)
+
 # Load validation results
-validationDf <- read.csv("../data/analysis_results/04_predicted_sensitivities_grouped_CV.csv",
+validationDfBasic <- read.csv("../data/analysis_results/04_predicted_sensitivities_grouped_CV.csv",
                          stringsAsFactors=FALSE) %>%
 dplyr::mutate(., inInterval=(nSeropositives>=predictedPosL) &
               (nSeropositives<=predictedPosH))
+
+validationDf <- read.csv("../data/analysis_results/05_characteristics_fullModel_grouped_CV.csv",
+                         stringsAsFactors=FALSE) %>%
+dplyr::mutate(., inInterval=(nSeropositives>=predictedPosL) &
+              (nSeropositives<=predictedPosH))
+
+
+# For tests not in the validation Df of the full model, use the
+# validation result of the basic model
+missingTestsFull <- validationDfBasic[!validationDfBasic$testName %in% validationDf$testName,]
+
+columns2remove <- names(validationDf)[!names(validationDf) %in% names(validationDfBasic)]
+validationDf <- select(validationDf, -columns2remove)
+validationDf <- rbind(validationDf, missingTestsFull)
 
 
 #################################
@@ -80,41 +106,7 @@ testLists <- split(c(1:nTests), cut(seq_along(c(1:nTests)), nPlots,
                                     labels = FALSE)) 
 
 #####################
-# Basic model (this one is not on the paper,
-# because next block of code is more complete)
-#####################
-
-## Plot the fitting results with the raw data
-#sensitivityPlot <- list()
-#for (np in c(1:nPlots)) {
-#  testsPlot <- unique(seroFitted$testName)[testLists[[np]]]
-#  sensitivityPlot[[np]] <- dplyr::filter(validationDf, testName %in% testsPlot) %>%
-#    ggplot(aes(x=testTime, y=sensitivityMean, color=citationID,
-#               shape=inInterval)) +
-#    geom_line(data=dplyr::filter(basicModelProfile,
-#                                 !is.na(testName) & (testName %in% testsPlot)),
-#              aes(x=time, y=sensitivityMean*100), color="black", linetype="solid",
-#              size=regLineSize, inherit.aes=FALSE) +
-#    geom_ribbon(data=dplyr::filter(basicModelProfile,
-#                                   !is.na(testName) & testName %in% testsPlot),
-#                aes(x=time, ymin=sensitivityL*100, ymax=sensitivityH*100),
-#                alpha=ribbonAlpha, colour=NA, show.legend=FALSE,
-#                inherit.aes=FALSE) +
-#    geom_pointrange(aes(ymin=sensitivityL, ymax=sensitivityH),
-#                    position=position_jitter(width=0.15, height=0)) +
-#    facet_wrap(.~testName, ncol=3, labeller = label_wrap_gen(width=35)) +
-#    theme_bw() +
-#    theme(legend.position="top") +
-#    guides(color=FALSE, shape=guide_legend("In validation interval")) +
-#    xlim(0, 15) +
-#    xlab("Diagnosis to test (months)") +
-#    ylab("Sensitivity (%)")
-#ggsave(paste("../data/figures/seroreversion_fit", np, ".png", sep=""),
-#       sensitivityPlot[[np]], units="cm", width=24, height=30)
-#}
-
-#####################
-# Full model (This is figure S1)
+# Assay sensitivity dynamics (Figure S1)
 #####################
 
 sensitivityCompPlot <- list()
@@ -158,9 +150,114 @@ ggsave(paste("../data/figures/seroreversion_fit_characteristics", np, ".png", se
 #################################
 #################################
 # Average sensitivity profiles of assay types
-# Makes Figures 2B, 3B, 4B, 5B, 6B
+# Makes Figures 2, S3B, S4B, S5B, S6B
 #################################
 #################################
+
+
+############
+# Full Model (Fig 2)
+############
+
+fullModelProfile <- read.csv("../data/analysis_results/05_characteristics_fullModel_assay_sensitivity_curve.csv",
+                           stringsAsFactors=FALSE) %>%
+  dplyr::mutate(., averageSens=is.na(testName))
+
+# Make columns with names for the different combinations of parameters (kinds of tests)
+#fullModelProfile$fullModel[with(fullModelProfile, N & !sandwich & !LFA)] <- "N"
+#fullModelProfile$fullModel[with(fullModelProfile, RBD & !sandwich & !LFA)] <- "RBD"
+#fullModelProfile$fullModel[with(fullModelProfile, S & sandwich & LFA)] <- "S & LFA & Sandwich"
+#fullModelProfile$fullModel[with(fullModelProfile, N & !sandwich & LFA)] <- "N & LFA"
+#fullModelProfile$fullModel[with(fullModelProfile, N & & sandwich & !LFA)] <- "N & Sandwich"
+#fullModelProfile$fullModel[with(fullModelProfile, RBD & !sandwich & LFA)] <- "RBD & LFA"
+#fullModelProfile$fullModel[with(fullModelProfile, S & !sandwich & !LFA)] <- "S"
+#fullModelProfile$fullModel[with(fullModelProfile, RBD & sandwich & !LFA)] <- "RBD & Sandwich"
+#fullModelProfile$fullModel[with(fullModelProfile, S & !sandwich & LFA)] <- "S & LFA"
+
+# additional column to organize plots
+fullModelProfile$Antigen[with(fullModelProfile, N)] <- "Nucleocapsid"
+fullModelProfile$Antigen[with(fullModelProfile, S)] <- "Spike"
+fullModelProfile$Antigen[with(fullModelProfile, RBD)] <- "Receptor-binding domain"
+
+levelOrder <- c("Nucleocapsid", "Spike", "Receptor-binding domain")
+fullModelProfile$Antigen <- factor(fullModelProfile$Antigen, levels=levelOrder)
+
+binaryString <- c("No", "Yes")
+fullModelProfile$LFA <- binaryString[as.integer(fullModelProfile$LFA)+1]
+fullModelProfile$Sandwich <- binaryString[as.integer(fullModelProfile$sandwich)+1]
+
+fullModelProfile$Design[with(fullModelProfile, LFA=="No" & Sandwich=="No")] <- "Not LFA, Not Sandwich"
+fullModelProfile$Design[with(fullModelProfile, LFA=="Yes" & Sandwich=="No")] <- "LFA, Not Sandwich"
+fullModelProfile$Design[with(fullModelProfile, LFA=="No" & Sandwich=="Yes")] <- "Not LFA, Sandwich"
+fullModelProfile$Design[with(fullModelProfile, LFA=="Yes" & Sandwich=="Yes")] <- "LFA & Sandwich"
+
+levelOrder2 <- c("LFA, Not Sandwich", "Not LFA, Not Sandwich", "Not LFA, Sandwich", "LFA & Sandwich")
+fullModelProfile$Design <- factor(fullModelProfile$Design, levels=levelOrder2)
+
+fullModelAverages <- filter(fullModelProfile, averageSens)
+fullModelAssays <- filter(fullModelProfile, !averageSens)
+
+#testfullModel <- dplyr::select(fullModelAssays, testName, fullModel, antigen, design) %>%
+#  unique()
+testfullModel <- dplyr::select(fullModelAssays, testName, Antigen, LFA, Sandwich, Design) %>%
+  unique()
+
+
+fullModelPoints <- seroFitted %>%
+  filter(., testName %in% fullModelProfile$testName) %>%
+  merge(., testfullModel) %>%
+  dplyr::mutate(., time=testTime)
+
+nonLFApoints <- dplyr::filter(fullModelPoints, LFA=="No")
+nonLFAassays <- dplyr::filter(fullModelAssays, LFA=="No")
+
+#
+#fullModelProfilePlot <- fullModelAverages %>%
+#  dplyr::filter(., LFA=="No") %>%
+#  ggplot(., aes(x=time, y=sensitivityMean*100)) +
+#  geom_line(size=regLineSize, color="red") +
+#  geom_ribbon(aes(ymin=sensitivityL*100, ymax=sensitivityH*100),
+#              alpha=ribbonAlpha, color=NA, fill="red") +
+#  geom_point(data=nonLFApoints,
+#             aes(x=time, y=sensitivityMean, size=sqrt(nSamples)/10),
+#             color="black", alpha=0.2) +
+#  geom_line(data=nonLFAassays, aes(x=time, y=sensitivityMean*100, group=testName),
+#            color="black", alpha=0.7) +
+#  #facet_grid(~Sandwich+Antigen, labeller=label_wrap_gen(width=35)) +
+#  facet_grid(~Sandwich+LFA+Antigen, labeller=label_both) +
+#  theme_bw() +
+#  theme(legend.position="top") +
+#  guides(color=FALSE, size=FALSE, fill=FALSE) +
+#  xlim(0, 15) +
+#  xlab("Diagnosis to test (months)") +
+#  ylab("Sensitivity (%)")
+#
+
+
+fullModelProfilePlot <- fullModelAverages %>%
+  ggplot(., aes(x=time, y=sensitivityMean*100)) +
+  geom_line(size=regLineSize, color="red") +
+  geom_ribbon(aes(ymin=sensitivityL*100, ymax=sensitivityH*100),
+              alpha=ribbonAlpha, color=NA, fill="red") +
+  geom_point(data=fullModelPoints,
+             aes(x=time, y=sensitivityMean, size=sqrt(nSamples)/10),
+             color="black", alpha=0.2) +
+  geom_line(data=fullModelAssays, aes(x=time, y=sensitivityMean*100, group=testName),
+            color="black", alpha=0.7) +
+  #facet_wrap(~Antigen+Design, labeller=label_both) +
+  facet_grid(Antigen~Design, switch="y") +
+  theme_bw() +
+  #theme(legend.position="top", strip. background = element_blank()) +
+  theme(legend.position="top", strip.placement = "outside") +
+  guides(color=FALSE, size=FALSE, fill=FALSE) +
+  xlim(0, 15) +
+  xlab("Diagnosis to test (months)") +
+  ylab("Sensitivity (%)")
+
+
+ggsave("../data/figures/characteristics_profiles_fullModel.png", fullModelProfilePlot,
+       units="cm", width=18, height=15)
+
 
 ############
 # Antigen (Fig 2B) ## Comments in this block of code explain what happens in the
@@ -350,74 +447,4 @@ antibodyProfilePlot <- antibodyAverages %>%
 
 ggsave("../data/figures/characteristics_profiles_antibody.png", antibodyProfilePlot,
        units="cm", width=12, height=12)
-
-
-############
-# Full Model (Fig 6B)
-############
-
-fullModelProfile <- read.csv("../data/analysis_results/05_characteristics_fullModel_assay_sensitivity_curve.csv",
-                           stringsAsFactors=FALSE) %>%
-  dplyr::mutate(., averageSens=is.na(testName))
-
-# Make columns with names for the different combinations of parameters (kinds of tests)
-fullModelProfile$fullModel[with(fullModelProfile, N & !sandwich & !LFA)] <- "N"
-fullModelProfile$fullModel[with(fullModelProfile, RBD & !sandwich & !LFA)] <- "RBD"
-fullModelProfile$fullModel[with(fullModelProfile, S & sandwich & LFA)] <- "S & LFA & Sandwich"
-fullModelProfile$fullModel[with(fullModelProfile, N & !sandwich & LFA)] <- "N & LFA"
-fullModelProfile$fullModel[with(fullModelProfile, N & & sandwich & !LFA)] <- "N & Sandwich"
-fullModelProfile$fullModel[with(fullModelProfile, RBD & !sandwich & LFA)] <- "RBD & LFA"
-fullModelProfile$fullModel[with(fullModelProfile, S & !sandwich & !LFA)] <- "S"
-fullModelProfile$fullModel[with(fullModelProfile, RBD & sandwich & !LFA)] <- "RBD & Sandwich"
-fullModelProfile$fullModel[with(fullModelProfile, S & !sandwich & LFA)] <- "S & LFA"
-
-# additional column to organize plots
-fullModelProfile$antigen[with(fullModelProfile, N)] <- "N"
-fullModelProfile$antigen[with(fullModelProfile, S)] <- "S"
-fullModelProfile$antigen[with(fullModelProfile, RBD)] <- "RBD"
-
-levelOrder <- c("N", "S", "RBD")
-fullModelProfile$antigen <- factor(fullModelProfile$antigen, levels=levelOrder)
-
-fullModelProfile$design[with(fullModelProfile, !LFA & !sandwich)] <- "Not LFA"
-fullModelProfile$design[with(fullModelProfile, LFA & !sandwich)] <- "LFA"
-fullModelProfile$design[with(fullModelProfile, !LFA & sandwich)] <- "Sandwich"
-fullModelProfile$design[with(fullModelProfile, LFA & sandwich)] <- "LFA & Sandwich"
-
-levelOrder2 <- c("LFA", "Not LFA", "Sandwich", "LFA & Sandwich")
-fullModelProfile$design <- factor(fullModelProfile$design, levels=levelOrder2)
-
-fullModelAverages <- filter(fullModelProfile, averageSens)
-fullModelAssays <- filter(fullModelProfile, !averageSens)
-
-testfullModel <- dplyr::select(fullModelAssays, testName, fullModel, antigen, design) %>%
-  unique()
-
-fullModelPoints <- dplyr::select(seroFitted, -design) %>%
-  filter(., testName %in% fullModelProfile$testName) %>%
-  merge(., testfullModel) %>%
-  dplyr::mutate(., time=testTime)
-
-
-fullModelProfilePlot <- fullModelAverages %>%
-  ggplot(., aes(x=time, y=sensitivityMean*100)) +
-  geom_line(size=regLineSize, color="red") +
-  geom_ribbon(aes(ymin=sensitivityL*100, ymax=sensitivityH*100),
-              alpha=ribbonAlpha, color=NA, fill="red") +
-  geom_point(data=fullModelPoints,
-             aes(x=time, y=sensitivityMean, size=sqrt(nSamples)/10),
-             color="black", alpha=0.2) +
-  geom_line(data=fullModelAssays, aes(x=time, y=sensitivityMean*100, group=testName),
-            color="black", alpha=0.7) +
-  facet_grid(antigen~design, labeller=label_wrap_gen(width=35)) +
-  theme_bw() +
-  theme(legend.position="top") +
-  guides(color=FALSE, size=FALSE, fill=FALSE) +
-  xlim(0, 15) +
-  xlab("Diagnosis to test (months)") +
-  ylab("Sensitivity (%)")
-
-ggsave("../data/figures/characteristics_profiles_fullModel.png", fullModelProfilePlot,
-       units="cm", width=18, height=15)
-
 

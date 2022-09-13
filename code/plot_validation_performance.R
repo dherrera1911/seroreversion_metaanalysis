@@ -6,7 +6,6 @@
 ####################################################
 
 
-
 library(dplyr)
 library(tidyr)
 library(ggplot2)
@@ -39,22 +38,6 @@ dplyr::mutate(., inInterval=(nSeropositives>=predictedPosL) & (nSeropositives<=p
 # Compute the proportion of data points within the CrI
 basicModelGroupedCVPerformance <- mean(basicModelGroupedCV$inInterval)
 
-
-# Load the CV of the basic model, done with non-grouped validation
-basicModelRandomCV <- read.csv("../data/analysis_results/04_predicted_sensitivities_random_CV.csv",
-                         stringsAsFactors=FALSE) %>%
-dplyr::mutate(., inInterval=(nSeropositives>=predictedPosL) & (nSeropositives<=predictedPosH))
-
-# Compute the proportion of data points within the CrI
-basicModelRandomCVPerformance <- mean(basicModelGroupedCV$inInterval)
-
-# Check the validation performance in assays that have few datapoints
-testSamples <- group_by(basicModelGroupedCV, testName) %>%
-  summarize(., multiTime=length(unique(testTime)) > 1,
-            nTimes=length(unique(testTime)),
-            meanTime=mean(testTime),
-            nSamples=n())
-
 testSamples <- arrange(testSamples, nSamples)
 fewSampleTests <- testSamples$testName[testSamples$nSamples<=9]
 nFewSamples <- sum(testSamples$nSamples[testSamples$nSamples<=9])
@@ -64,6 +47,22 @@ fewSampleVal_basic <- dplyr::filter(basicModelGroupedCV, testName %in% fewSample
 
 basicFewSamplePerformance <- mean(fewSampleVal_basic$inInterval)
 
+
+## Load the CV of the basic model, done with non-grouped validation
+#basicModelRandomCV <- read.csv("../data/analysis_results/04_predicted_sensitivities_random_CV.csv",
+#                         stringsAsFactors=FALSE) %>%
+#dplyr::mutate(., inInterval=(nSeropositives>=predictedPosL) & (nSeropositives<=predictedPosH))
+#
+## Compute the proportion of data points within the CrI
+#basicModelRandomCVPerformance <- mean(basicModelGroupedCV$inInterval)
+#
+## Check the validation performance in assays that have few datapoints
+#testSamples <- group_by(basicModelGroupedCV, testName) %>%
+#  summarize(., multiTime=length(unique(testTime)) > 1,
+#            nTimes=length(unique(testTime)),
+#            meanTime=mean(testTime),
+#            nSamples=n())
+#
 
 
 # Load full model, grouped CV results
@@ -80,7 +79,7 @@ fullModelRandomCV <- read.csv("../data/analysis_results/04_predicted_sensitiviti
 dplyr::mutate(., inInterval=(nSeropositives>=predictedPosL) & (nSeropositives<=predictedPosH))
 
 # Compute the proportion of data points within the CrI
-fullModelRandomCVPerformance <- mean(fullModelGroupedCV$inInterval)
+#fullModelRandomCVPerformance <- mean(fullModelGroupedCV$inInterval)
 
 # Full model on tests with few data points
 fewSampleVal_full <- dplyr::filter(fullModelGroupedCV, testName %in% fewSampleTests)

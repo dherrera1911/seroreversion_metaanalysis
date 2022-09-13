@@ -1,0 +1,233 @@
+phase_id,global region,country / entity,location,type of sample drawn from,start date,end date,midpoint date,months between prior diagnosis (or symptoms) and serology,test name,citation id,number of seropositives among prior-positives,number of prior-positives,sensitivity estimate,"sensitivity, lower 95% CI",sensitivity upper 95% CI,included in sensitivity overtime tabulation,notes
+--,Europe,Ireland,{ Dublin },hospitalized + non-hospitalized patients,3/26/2020,7/10/2020,5/18/2020,1,Abbott Alinity i SARS-CoV-2 IgG nucleocapsid,n-225,149,185,80.5,,,Yes,table 3
+--,Europe,Germany,{ Cologne },hospitalized + non-hospitalized patients,*August 2020,*September 2020,--,5,Abbott Alinity i SARS-CoV-2 IgG nucleocapsid,n-222,195,363,53.7,,,Yes,supplementary table S2
+--,Europe,Germany,{ Cologne },hospitalized + non-hospitalized patients,*August 2020,*September 2020,--,5,"Abbott Alinity i SARS-CoV-2 IgG nucleocapsid, OR Diasorin Liaison S1/S2 spike IgG",n-222,303,363,83.5,,,Yes,supplementary table S2
+--,Europe,Germany,{ Cologne },hospitalized + non-hospitalized patients,*August 2020,*September 2020,--,5,"Abbott Alinity i SARS-CoV-2 IgG nucleocapsid, OR Euroimmun anti-spike",n-222,292,363,80.4,,,Yes,supplementary table S2
+--,Europe,Germany,{ Cologne },hospitalized + non-hospitalized patients,*August 2020,*September 2020,--,5,"Abbott Alinity i SARS-CoV-2 IgG nucleocapsid, OR IDK (Immundiagnostik) anti-spike IgG",n-222,326,363,89.8,,,Yes,supplementary table S2
+--,Oceania,New Zealand,{ Southern District Health Board region },hospitalized + non-hospitalized patients,3/11/2020,4/5/2020,--,10,Abbott Alinity SARS-CoV-2 IgG II Quant,n-198,36,37,97.3,,,Yes,
+3,South Asia,India,National,representative,--,--,12/27/2020,0.5 - 2,Abbott Architect IgG,n-96,19,38,50.0,,,Yes,supplementary table (page 8 of appendix)
+--,Europe,Ireland,{ Dublin },hospitalized + non-hospitalized patients,3/26/2020,7/10/2020,5/18/2020,1,Abbott Architect IgG,n-225,149,185,80.5,,,Yes,table 3
+--,Oceania,Australia,{ Victoria },hospitalized + non-hospitalized patients,--,--,--,1,Abbott Architect IgG,n-240,40,42,95.2,,,Yes,table 1
+--,North America,USA,{ San Francisco },non-hospitalized patients,*April 2020,*July 2020,--,1,Abbott Architect IgG,n-132,--,--,91.4,86.4,94.9,Not yet,supplementary table 8
+--,South Asia,India,{ Delhi },hospitalized + non-hospitalized patients,--,--,12/18/2020,2,Abbott Architect IgG,n-162,527,673,78.3,,,Yes,table 2
+--,Oceania,Australia,{ Sydney },hospitalized + non-hospitalized patients,*March 2020,*August 2020,--,2,Abbott Architect IgG,n-215,116,166,69.9,,,Yes,table 2
+1,Europe,Italy,Vo',representative,5/1/2020,5/3/2020,5/2/2020,2,Abbott Architect IgG,n-108,60,62,96.8,,,Yes,supplementary table 2
+--,Oceania,Australia,{ Victoria },hospitalized + non-hospitalized patients,--,--,--,1 - 3,Abbott Architect IgG,n-240,36,39,92.3,,,Yes,table 1
+--,North America,USA,{ San Francisco },non-hospitalized patients,--,--,--,3,Abbott Architect IgG,n-132,--,--,77.7,70.7,83.7,Not yet,supplementary table 8
+--,North America,USA,{ ? },non-hospitalized patients,--,--,--,3,Abbott Architect IgG,n-134,29,41,70.7,,,Yes,figure 1
+3,South Asia,India,National,representative,--,--,12/27/2020,2 - 4,Abbott Architect IgG,n-96,51,96,53.1,,,Yes,supplementary table (page 8 of appendix)
+--,Oceania,Australia,{ Victoria },hospitalized + non-hospitalized patients,--,--,--,4 - 5,Abbott Architect IgG,n-240,11,11,100.0,,,Yes,table 1
+--,Europe,Germany,Dresden,hospitalized + non-hospitalized patients,*August 2020,*October 2020,*September 2020,5,Abbott Architect IgG,n-133,64,109,58.7,,,Yes,table 2
+--,North America,USA,{ San Francisco },non-hospitalized patients,--,--,--,5,Abbott Architect IgG,n-132,--,--,56.2,48.2,64.7,Not yet,supplementary table 8
+3,South Asia,India,National,representative,--,--,12/27/2020,4 - 6,Abbott Architect IgG,n-96,26,74,35.1,,,Yes,supplementary table (page 8 of appendix)
+--,Oceania,Australia,{ Victoria },hospitalized + non-hospitalized patients,--,--,--,5 - 7,Abbott Architect IgG,n-240,30,44,68.2,,,Yes,table 1
+--,Europe,Germany,{ Saarland },non-hospitalized patients,--,*October 2020,*October 2020,6,Abbott Architect IgG,n-289,15,30,50.0,,,Yes,figure 2g
+--,North America,USA,{ San Francisco },non-hospitalized patients,--,--,--,7,Abbott Architect IgG,n-132,--,--,32.8,24.2,42.3,Not yet,supplementary table 8
+3,South Asia,India,National,representative,--,--,12/27/2020,>6,Abbott Architect IgG,n-96,6,23,26.1,,,N,supplementary table (page 8 of appendix)
+--,Europe,Germany,Dresden,hospitalized + non-hospitalized patients,*January 2021,*March 2021,*February 2021,10,Abbott Architect IgG,n-133,26,109,23.9,,,Yes,table 2
+--,Oceania,New Zealand,{ Southern District Health Board region },hospitalized + non-hospitalized patients,3/11/2020,4/5/2020,--,10,Abbott Architect IgG,n-198,10,37,27.0,,,Yes,
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,1,Abbott Architect IgG,n-290,33,39,84.6,,,,table 1
+"1,2",South Asia,India,Tamil Nadu: Chennai,representative,7/17/2020,10/15/2020,8/31/2020,1 - 2,Abbott Architect IgG,n-89,22,24,91.7,,,,appendix table 8 (not yet included in seroreversion paper)
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,2,Abbott Architect IgG,n-290,186,194,95.9,,,,table 1
+"1,2",South Asia,India,Tamil Nadu: Chennai,representative,7/17/2020,10/15/2020,8/31/2020,2 - 3,Abbott Architect IgG,n-89,26,29,89.7,,,,appendix table 8 (not yet included in seroreversion paper)
+"1,2",South Asia,India,Tamil Nadu: Chennai,representative,7/17/2020,10/15/2020,8/31/2020,3 - 4,Abbott Architect IgG,n-89,16,22,72.7,,,,appendix table 8 (not yet included in seroreversion paper)
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,4,Abbott Architect IgG,n-290,106,123,86.2,,,,table 1
+"1,2",South Asia,India,Tamil Nadu: Chennai,representative,7/17/2020,10/15/2020,8/31/2020,4 - 5,Abbott Architect IgG,n-89,10,14,71.4,,,,appendix table 8 (not yet included in seroreversion paper)
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,6,Abbott Architect IgG,n-290,101,162,62.3,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,8,Abbott Architect IgG,n-290,41,95,43.2,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,10,Abbott Architect IgG,n-290,22,89,24.7,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,12,Abbott Architect IgG,n-290,18,91,19.8,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,14,Abbott Architect IgG,n-290,5,35,14.3,,,,table 1
+--,Europe,Scotland,{ ? },hospitalized + non-hospitalized patients,*September 2020,*November 2020,--,2,Abingdon AbC-19 IgG anti-spike,n-213,122,152,80.3,,,Yes,table 3
+--,Europe,Scotland,{ ? },hospitalized + non-hospitalized patients,*September 2020,*November 2020,--,4,Abingdon AbC-19 IgG anti-spike,n-213,35,43,81.4,,,Yes,table 3
+--,Europe,Scotland,{ ? },hospitalized + non-hospitalized patients,*September 2020,*November 2020,--,6,Abingdon AbC-19 IgG anti-spike,n-213,50,73,68.5,,,Yes,table 3
+--,Europe,Scotland,{ ? },hospitalized + non-hospitalized patients,*September 2020,*November 2020,--,1,Biomerica anti-nucleocapsid IgG IgM rapid test,n-213,53,57,93.0,,,Yes,table 2
+--,Europe,Scotland,{ ? },hospitalized + non-hospitalized patients,*September 2020,*November 2020,--,2,Biomerica anti-nucleocapsid IgG IgM rapid test,n-213,143,157,91.1,,,Yes,table 3
+--,Europe,Scotland,{ ? },hospitalized + non-hospitalized patients,*September 2020,*November 2020,--,4,Biomerica anti-nucleocapsid IgG IgM rapid test,n-213,39,44,88.6,,,Yes,table 3
+--,Europe,Scotland,{ ? },hospitalized + non-hospitalized patients,*September 2020,*November 2020,--,6,Biomerica anti-nucleocapsid IgG IgM rapid test,n-213,43,79,54.4,,,Yes,table 3
+--,Europe,Scotland,{ ? },hospitalized + non-hospitalized patients,*September 2020,*November 2020,--,1,Biozek COVID-19 IgG/IgM rapid test,n-213,65,68,95.6,,,Yes,table 2
+--,Europe,Scotland,{ ? },hospitalized + non-hospitalized patients,*September 2020,*November 2020,--,2,Biozek COVID-19 IgG/IgM rapid test,n-213,47,49,95.9,,,Yes,table 2
+--,Latin America,Argentina,{ ? },hospitalized + non-hospitalized patients,--,*September 2020,--,1,COVIDAR anti-spike anti-RBD,n-224,335,453,74.0,,,Yes,table 1
+--,Latin America,Argentina,{ ? },hospitalized + non-hospitalized patients,--,--,--,1,COVIDAR anti-spike anti-RBD,n-227,252,289,87.2,,,Yes,figure 1A
+--,Latin America,Argentina,{ ? },hospitalized + non-hospitalized patients,--,*September 2020,--,3,COVIDAR anti-spike anti-RBD,n-224,113,137,82.5,,,Yes,table 1
+--,North America,USA,{ San Francisco },non-hospitalized patients,*April 2020,*July 2020,--,1,Diasorin Liaison S1/S2 spike IgG ,n-132,--,--,86.5,80.0,91.5,Not yet,supplementary table 8
+--,Oceania,Australia,{ Victoria },hospitalized + non-hospitalized patients,--,--,--,1,Diasorin Liaison S1/S2 spike IgG ,n-240,37,42,88.1,,,Yes,table 1
+--,Oceania,Australia,{ Sydney },hospitalized + non-hospitalized patients,*March 2020,*August 2020,--,2,Diasorin Liaison S1/S2 spike IgG ,n-215,134,166,80.7,,,Yes,table 2
+1,Europe,Italy,Vo',representative,5/1/2020,5/3/2020,5/2/2020,2,Diasorin Liaison S1/S2 spike IgG ,n-108,53,62,85.5,,,Yes,supplementary table 2
+--,Oceania,Australia,{ Victoria },hospitalized + non-hospitalized patients,--,--,--,1 - 3,Diasorin Liaison S1/S2 spike IgG ,n-240,36,39,92.3,,,Yes,table 1
+--,North America,USA,{ ? },non-hospitalized patients,--,--,--,3,Diasorin Liaison S1/S2 spike IgG ,n-134,38,41,92.7,,,Yes,
+--,North America,USA,{ San Francisco },non-hospitalized patients,--,--,--,3,Diasorin Liaison S1/S2 spike IgG ,n-132,--,--,81.6,75.0,87.0,Not yet,supplementary table 8
+--,Oceania,Australia,{ Victoria },hospitalized + non-hospitalized patients,--,--,--,4 - 5,Diasorin Liaison S1/S2 spike IgG ,n-240,11,11,100.0,,,Yes,table 1
+--,Europe,Germany,Dresden,hospitalized + non-hospitalized patients,*August 2020,*October 2020,*September 2020,5,Diasorin Liaison S1/S2 spike IgG ,n-133,88,109,80.7,,,Yes,table 2
+--,Europe,Germany,{ Cologne },hospitalized + non-hospitalized patients,*August 2020,*September 2020,--,5,Diasorin Liaison S1/S2 spike IgG ,n-222,295,363,81.3,,,Yes,supplementary table S2
+--,North America,USA,{ San Francisco },non-hospitalized patients,--,--,--,5,Diasorin Liaison S1/S2 spike IgG ,n-132,--,--,75.7,67.5,82.8,Not yet,supplementary table 8
+--,Oceania,Australia,{ Victoria },hospitalized + non-hospitalized patients,--,--,--,5 - 7,Diasorin Liaison S1/S2 spike IgG ,n-240,39,44,88.6,,,Yes,table 1
+--,North America,USA,{ San Francisco },non-hospitalized patients,--,--,--,7,Diasorin Liaison S1/S2 spike IgG ,n-132,--,--,68.7,57.2,79.1,Not yet,supplementary table 8
+--,Europe,Germany,Dresden,hospitalized + non-hospitalized patients,*January 2021,*March 2021,*February 2021,10,Diasorin Liaison S1/S2 spike IgG ,n-133,91,109,83.5,,,Yes,table 2
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,1,Diasorin Liaison S1/S2 spike IgG ,n-290,31,39,79.5,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,2,Diasorin Liaison S1/S2 spike IgG ,n-290,172,194,88.7,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,4,Diasorin Liaison S1/S2 spike IgG ,n-290,112,123,91.1,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,6,Diasorin Liaison S1/S2 spike IgG ,n-290,137,162,84.6,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,8,Diasorin Liaison S1/S2 spike IgG ,n-290,84,95,88.4,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,10,Diasorin Liaison S1/S2 spike IgG ,n-290,78,89,87.6,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,12,Diasorin Liaison S1/S2 spike IgG ,n-290,72,91,79.1,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,14,Diasorin Liaison S1/S2 spike IgG ,n-290,30,35,85.7,,,,table 1
+--,Europe,Germany,{ Cologne },hospitalized + non-hospitalized patients,*August 2020,*September 2020,--,5,"Diasorin Liaison S1/S2 spike IgG, OR Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ",n-222,339,363,93.4,,,Yes,supplementary table S2
+--,East Asia,South Korea,{ ? },non-hospitalized patients,--,--,--,8,EDI Novel coronavirus COVID19 IgG anti-nucleocapsid,n-165,15,58,25.9,,,Yes,
+1,South Asia,India,"Odisha: Bhubaneswar (phase 2), Berhampur, Rourkela",representative,8/6/2020,8/31/2020,8/18/2020,1,Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ,n-93,23,29,79.3,,,Yes,table 2
+2,South Asia,India,Odisha: Bhubaneswar,representative,--,--,8/26/2020,1,Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ,n-94,2,3,,,,Yes,table 3
+3,South Asia,India,Odisha: Bhubaneswar,representative,--,--,9/18/2020,1,Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ,n-94,124,132,93.9,,,Yes,table 3
+--,Europe,Ireland,{ Dublin },hospitalized + non-hospitalized patients,3/26/2020,7/10/2020,5/18/2020,1,Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ,n-225,153,185,82.7,,,Yes,table 3
+--,North America,USA,{ San Francisco },non-hospitalized patients,*April 2020,*July 2020,--,1,Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ,n-132,--,--,89.6,84.2,93.7,Not yet,supplementary table 8
+--,Oceania,Australia,{ Victoria },hospitalized + non-hospitalized patients,--,--,--,1,Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ,n-240,39,42,92.9,,,Yes,table 1
+1,Europe,Italy,Vo',representative,5/1/2020,5/3/2020,5/2/2020,2,Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ,n-108,62,62,100.0,,,Yes,supplementary table 2
+--,Oceania,Australia,{ Victoria },hospitalized + non-hospitalized patients,--,--,--,1 - 3,Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ,n-240,39,39,100.0,,,Yes,table 1
+1,Europe,Iceland,National,convenience (general population),4/3/2020,7/8/2020,5/21/2020,3,Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ,n-157,1120,1215,92.2,,,Yes,"tables S1 and S4, page 8 of appendix 1"
+--,North America,USA,{ ? },non-hospitalized patients,--,--,--,3,Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ,n-134,40,41,97.6,,,Yes,
+--,North America,USA,{ San Francisco },non-hospitalized patients,--,--,--,3,Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ,n-132,--,--,90.2,85.0,94.2,Not yet,supplementary table 8
+--,Oceania,Australia,{ Victoria },hospitalized + non-hospitalized patients,--,--,--,4 - 5,Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ,n-240,11,11,100.0,,,Yes,table 1
+--,Europe,Germany,{ Cologne },hospitalized + non-hospitalized patients,*August 2020,*September 2020,--,5,Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ,n-222,338,363,93.1,,,Yes,supplementary table S2
+--,North America,USA,{ San Francisco },non-hospitalized patients,--,--,--,5,Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ,n-132,--,--,90.7,85.4,94.6,Not yet,supplementary table 8
+--,Oceania,Australia,{ Victoria },hospitalized + non-hospitalized patients,--,--,--,5 - 7,Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ,n-240,43,44,97.7,,,Yes,table 1
+--,East Asia,Japan,{ ? },convenience (general population),9/2/2020,10/26/2020,9/29/2020,6,Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ,n-167,367,376,97.6,,,Yes,
+--,Europe,Germany,{ Saarland },non-hospitalized patients,--,*October 2020,*October 2020,6,Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ,n-289,30,30,100.0,,,Yes,figure 2g
+--,North America,USA,{ San Francisco },non-hospitalized patients,--,--,--,7,Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ,n-132,--,--,91.1,85.7,95.1,Not yet,supplementary table 8
+--,East Asia,South Korea,{ ? },non-hospitalized patients,--,--,--,8,Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ,n-165,53,58,91.4,,,Yes,
+--,Europe,Sweden,{ Stockholm },hospitalized + non-hospitalized patients,--,late 2020,--,9,Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ,n-223,31,32,96.9,,,Yes,tables 2 and 3
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,1,Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ,n-290,32,39,82.1,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,2,Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ,n-290,193,194,99.5,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,4,Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ,n-290,123,123,100.0,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,6,Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ,n-290,160,162,98.8,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,8,Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ,n-290,93,95,97.9,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,10,Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ,n-290,86,89,96.6,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,12,Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ,n-290,84,91,92.3,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,14,Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ,n-290,34,35,97.1,,,,table 1
+1,Europe,Iceland,National,convenience (general population),4/3/2020,7/8/2020,5/21/2020,3,"Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM, AND Wantai ELISA SARS-CoV-2 Total Antibody, IgG IgM anti-RBD",n-157,1107,1215,91.1,,,N,"tables S1 and S4, page 8 of appendix 1"
+--,Europe,Germany,{ Cologne },hospitalized + non-hospitalized patients,*August 2020,*September 2020,--,5,"Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM, OR Euroimmun anti-spike",n-222,338,363,93.1,,,Yes,supplementary table S2
+--,Europe,Germany,{ Cologne },hospitalized + non-hospitalized patients,*August 2020,*September 2020,--,5,"Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM, OR IDK (Immundiagnostik) anti-spike IgG",n-222,341,363,93.9,,,Yes,supplementary table S2
+--,North America,USA,{ National },hospitalized + non-hospitalized patients,--,--,--,3,"Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM, OR LabCorp SARS-CoV-2 semi-quantitative IgG anti-spike",n-218,25,28,89.3,,,Yes,supporting figure S4
+1,Europe,Iceland,National,convenience (general population),4/3/2020,7/8/2020,5/21/2020,3,"Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM, OR Wantai ELISA SARS-CoV-2 Total Antibody, IgG IgM anti-RBD",n-157,1156,1215,95.1,,,Yes,"tables S1 and S4, page 8 of appendix 1"
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,1,Elecsys Anti-SARS-CoV-2 Roche spike,n-290,35,39,89.7,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,2,Elecsys Anti-SARS-CoV-2 Roche spike,n-290,192,194,99.0,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,4,Elecsys Anti-SARS-CoV-2 Roche spike,n-290,123,123,100.0,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,6,Elecsys Anti-SARS-CoV-2 Roche spike,n-290,162,162,100.0,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,8,Elecsys Anti-SARS-CoV-2 Roche spike,n-290,95,95,100.0,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,10,Elecsys Anti-SARS-CoV-2 Roche spike,n-290,88,89,98.9,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,12,Elecsys Anti-SARS-CoV-2 Roche spike,n-290,91,91,100.0,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,14,Elecsys Anti-SARS-CoV-2 Roche spike,n-290,35,35,100.0,,,,table 1
+1,South Asia,India,West Bengal: Paschim Medinipur,representative,7/27/2020,8/7/2020,8/1/2020,2,ERBALISA COVID-19 IgG,n-95,11,30,36.7,,,Yes,
+--,Europe,Netherlands,{ ? },convenience (general population),4/14/2020,--,--,2,Euroimmun anti-nucleocapsid IgG IgM,n-226,77,85,90.6,,,Yes,
+--,Europe,Netherlands,{ ? },convenience (general population),--,8/15/2020,--,4,Euroimmun anti-nucleocapsid IgG IgM,n-226,71,85,83.5,,,Yes,
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,1,Euroimmun anti-nucleocapsid IgG IgM,n-290,31,39,79.5,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,2,Euroimmun anti-nucleocapsid IgG IgM,n-290,180,194,92.8,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,4,Euroimmun anti-nucleocapsid IgG IgM,n-290,105,123,85.4,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,6,Euroimmun anti-nucleocapsid IgG IgM,n-290,108,162,66.7,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,8,Euroimmun anti-nucleocapsid IgG IgM,n-290,49,95,51.6,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,10,Euroimmun anti-nucleocapsid IgG IgM,n-290,31,89,34.8,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,12,Euroimmun anti-nucleocapsid IgG IgM,n-290,23,91,25.3,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,14,Euroimmun anti-nucleocapsid IgG IgM,n-290,6,35,17.1,,,,table 1
+--,Latin America,Brazil,{ Rio de Janeiro city },hospitalized + non-hospitalized patients,--,--,--,1,Euroimmun anti-spike,n-170,53,54,98.1,,,,table 1 (not yet included in seroreversion paper)
+--,Latin America,Brazil,{ Rio de Janeiro city },hospitalized + non-hospitalized patients,--,--,--,1 - 3,Euroimmun anti-spike,n-170,104,104,100.0,,,Yes,table 1
+--,Europe,Netherlands,{ ? },convenience (general population),4/14/2020,--,--,2,Euroimmun anti-spike,n-226,83,85,97.6,,,Yes,
+--,Europe,Germany,{ Cologne },hospitalized + non-hospitalized patients,4/6/2020,--,--,2,Euroimmun anti-spike,n-243,113,131,86,,,Yes,"figure 5c, seropositives back-calculated from seroprevalence"
+--,Oceania,Australia,{ Sydney },hospitalized + non-hospitalized patients,*March 2020,*August 2020,--,2,Euroimmun anti-spike,n-215,121,166,72.9,,,Yes,table 2
+1,Europe,Germany,National (SOEP),representative,--,--,11/11/2020,2,Euroimmun anti-spike,"n-68 , n-70",82,133,61.7,,,Yes,pages 8 and 9
+--,Europe,Germany,{ Cologne },hospitalized + non-hospitalized patients,--,--,--,4,Euroimmun anti-spike,n-243,113,131,86,,,Yes,"figure 5c, seropositives back-calculated from seroprevalence"
+--,Europe,Netherlands,{ ? },convenience (general population),--,8/15/2020,--,4,Euroimmun anti-spike,n-226,73,85,85.9,,,Yes,
+--,Europe,Germany,Dresden,hospitalized + non-hospitalized patients,*August 2020,*October 2020,*September 2020,5,Euroimmun anti-spike,n-133,90,109,82.6,,,Yes,table 2
+--,Europe,Germany,{ Cologne },hospitalized + non-hospitalized patients,*August 2020,*September 2020,--,5,Euroimmun anti-spike,n-222,280,363,77.1,,,Yes,supplementary table S2
+--,Europe,Germany,{ Saarland },non-hospitalized patients,--,*October 2020,*October 2020,6,Euroimmun anti-spike,n-289,23,30,76.7,,,Yes,figure 2g
+--,Europe,Germany,{ Cologne },hospitalized + non-hospitalized patients,--,--,--,7,Euroimmun anti-spike,n-243,103,131,79,,,Yes,"figure 5c, seropositives back-calculated from seroprevalence"
+--,East Asia,South Korea,{ ? },non-hospitalized patients,--,--,--,8,Euroimmun anti-spike,n-165,40,58,69.0,,,Yes,
+--,Europe,Germany,{ Cologne },hospitalized + non-hospitalized patients,--,12/17/2020,--,9,Euroimmun anti-spike,n-243,96,131,73,,,Yes,"figure 5c, seropositives back-calculated from seroprevalence"
+--,Europe,Germany,Dresden,hospitalized + non-hospitalized patients,*January 2021,*March 2021,*February 2021,10,Euroimmun anti-spike,n-133,85,109,78.0,,,Yes,table 2
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,1,Euroimmun anti-spike,n-290,33,39,84.6,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,2,Euroimmun anti-spike,n-290,176,194,90.7,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,4,Euroimmun anti-spike,n-290,108,123,87.8,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,6,Euroimmun anti-spike,n-290,131,162,80.9,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,8,Euroimmun anti-spike,n-290,75,95,78.9,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,10,Euroimmun anti-spike,n-290,71,89,79.8,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,12,Euroimmun anti-spike,n-290,66,91,72.5,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,14,Euroimmun anti-spike,n-290,27,35,77.1,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,1,GenScript cPass neutralization kit,n-290,35,39,89.7,,,,table 1
+--,Europe,Netherlands,{ ? },convenience (general population),4/14/2020,--,--,2,GenScript cPass neutralization kit,n-226,85,85,100.0,,,Yes,
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,2,GenScript cPass neutralization kit,n-290,180,194,92.8,,,,table 1
+--,Europe,Netherlands,{ ? },convenience (general population),--,8/15/2020,--,4,GenScript cPass neutralization kit,n-226,83,85,97.6,,,Yes,
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,4,GenScript cPass neutralization kit,n-290,114,123,92.7,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,6,GenScript cPass neutralization kit,n-290,139,162,85.8,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,8,GenScript cPass neutralization kit,n-290,90,95,94.7,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,10,GenScript cPass neutralization kit,n-290,86,89,96.6,,,,table 1
+--,Oceania,New Zealand,{ Southern District Health Board region },hospitalized + non-hospitalized patients,3/11/2020,4/5/2020,--,10,GenScript cPass neutralization kit,n-198,35,37,94.6,,,Yes,
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,12,GenScript cPass neutralization kit,n-290,82,91,90.1,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,14,GenScript cPass neutralization kit,n-290,33,35,94.3,,,,table 1
+--,Europe,Germany,{ Cologne },hospitalized + non-hospitalized patients,*August 2020,*September 2020,--,5,IDK (Immundiagnostik) anti-spike IgG,n-222,323,363,89.0,,,Yes,supplementary table S2
+--,South Asia,India,{ Delhi },hospitalized + non-hospitalized patients,--,--,12/18/2020,2,in-house RBD ELISA (Mehdi et al.),n-162,568,672,84.5,,,"N (excluded, non-commercial assay not used in a seroprevalence study)",
+--,Europe,Finland,{ 5 hospital districts },convenience (general population),--,--,*October 2020,8,in-house THL Finland FMIA anti-spike assay,n-184,360,367,98.1,,,Yes,"5 districts listed in n-181 and are:  Uusimaa [contains Helsinki], Pirkanmaa, Pohjois-Pohjanmaa [a.k.a. North Ostrobothnia], Pohjois-Savo, Varsinais-Suomi"
+--,Europe,Finland,{ 5 hospital districts },convenience (general population),--,--,*May 2021,13,in-house THL Finland FMIA anti-spike assay,n-184,356,367,97.0,,,Yes,"5 districts listed in n-181 and are:  Uusimaa [contains Helsinki], Pirkanmaa, Pohjois-Pohjanmaa [a.k.a. North Ostrobothnia], Pohjois-Savo, Varsinais-Suomi"
+--,Europe,Finland,{ Helsinki },convenience (general population),--,--,--,4,in-house THL Finland neutralization assay,n-183,63,64,98.4,,,Yes,
+--,Europe,Finland,{ 5 hospital districts },convenience (general population),*early November 2020,December 2020,--,>6,in-house THL Finland neutralization assay,n-184,792,867,91.3,,,N,"5 districts listed in n-181 and are:  Uusimaa [contains Helsinki], Pirkanmaa, Pohjois-Pohjanmaa [a.k.a. North Ostrobothnia], Pohjois-Savo, Varsinais-Suomi"
+--,Europe,Finland,{ 5 hospital districts },convenience (general population),--,--,*October 2020,8,in-house THL Finland neutralization assay,,335,367,91.3,,,Yes,"5 districts listed in n-181 and are:  Uusimaa [contains Helsinki], Pirkanmaa, Pohjois-Pohjanmaa [a.k.a. North Ostrobothnia], Pohjois-Savo, Varsinais-Suomi"
+--,Europe,Finland,{ 5 hospital districts },convenience (general population),--,--,*May 2021,13,in-house THL Finland neutralization assay,n-184,320,367,87.2,,,Yes,"5 districts listed in n-181 and are:  Uusimaa [contains Helsinki], Pirkanmaa, Pohjois-Pohjanmaa [a.k.a. North Ostrobothnia], Pohjois-Savo, Varsinais-Suomi"
+--,East Asia,South Korea,{ ? },non-hospitalized patients,--,--,--,8,InBios SCoV-2 Detect IgG anti-spike ELISA,n-165,50,58,86.2,,,Yes,
+1,Europe,Denmark,National (We test),representative,10/2/2020,10/11/2020,10/6/2020,1,Livzon COVID-19 IgG IgM lateral flow,n-105,77,216,35.6,,,Yes,supplementary figure 7
+1,Europe,Denmark,National (We test),representative,10/2/2020,10/11/2020,10/6/2020,2,Livzon COVID-19 IgG IgM lateral flow,n-105,51,188,27.1,,,Yes,supplementary figure 7
+1,Europe,Denmark,National (We test),representative,10/2/2020,10/11/2020,10/6/2020,4,Livzon COVID-19 IgG IgM lateral flow,n-105,9,41,22.0,,,Yes,supplementary figure 7
+1,Europe,Denmark,National (We test),representative,10/2/2020,10/11/2020,10/6/2020,6,Livzon COVID-19 IgG IgM lateral flow,n-105,51,261,19.5,,,Yes,supplementary figure 7
+1,Europe,Denmark,National (We test),representative,10/2/2020,10/11/2020,10/6/2020,7,Livzon COVID-19 IgG IgM lateral flow,n-105,8,41,19.5,,,Yes,supplementary figure 7
+--,Europe,Scotland,{ ? },hospitalized + non-hospitalized patients,*September 2020,*November 2020,--,1,LumiraDx SARS-CoV-2 anti-spike antibody test,n-213,52,56,92.9,,,Yes,table 2
+--,Europe,Scotland,{ ? },hospitalized + non-hospitalized patients,*September 2020,*November 2020,--,2,LumiraDx SARS-CoV-2 anti-spike antibody test,n-213,150,153,98.0,,,Yes,table 3
+--,Europe,Scotland,{ ? },hospitalized + non-hospitalized patients,*September 2020,*November 2020,--,4,LumiraDx SARS-CoV-2 anti-spike antibody test,n-213,42,43,97.7,,,Yes,table 3
+--,Europe,Scotland,{ ? },hospitalized + non-hospitalized patients,*September 2020,*November 2020,--,6,LumiraDx SARS-CoV-2 anti-spike antibody test,n-213,56,57,98.2,,,Yes,table 3
+1,North America,USA,"Hillsborough County, unvaccinated population",representative,*October 2020,*March 2021,,>6,"New York, Mount Sinai RBD ELISA",n-178,25,26,96.2,,,N,
+--,Europe,Scotland,{ ? },hospitalized + non-hospitalized patients,*September 2020,*November 2020,--,1,Roche SARS-CoV-2 rapid antibody test anti-spike anti-nucleocapsid IgG IgM,n-213,30,32,93.8,,,Yes,table 2
+--,Europe,Scotland,{ ? },hospitalized + non-hospitalized patients,*September 2020,*November 2020,--,2,Roche SARS-CoV-2 rapid antibody test anti-spike anti-nucleocapsid IgG IgM,n-213,151,154,98.1,,,Yes,table 3
+--,Europe,Scotland,{ ? },hospitalized + non-hospitalized patients,*September 2020,*November 2020,--,4,Roche SARS-CoV-2 rapid antibody test anti-spike anti-nucleocapsid IgG IgM,n-213,41,44,93.2,,,Yes,table 3
+--,Europe,Scotland,{ ? },hospitalized + non-hospitalized patients,*September 2020,*November 2020,--,6,Roche SARS-CoV-2 rapid antibody test anti-spike anti-nucleocapsid IgG IgM,n-213,65,79,82.3,,,Yes,table 3
+1,Europe,Switzerland,{ Vaud },convenience (general population),5/4/2020,6/27/2020,5/31/2020,2 - 3,SenASTrIS test (Sensitive Anti-SARS-CoV-2 Spike Trimer Immunoglobulin Serological),n-301,215,219,98.2,,,,table 1 (not yet included in seroreversion paper)
+3,South Asia,India,National,representative,--,--,12/27/2020,0.5 - 2,Siemens Advia SARS-CoV-2 IgG anti-RBD,n-96,25,38,65.8,,,Yes,supplementary table (page 8)
+3,South Asia,India,National,representative,--,--,12/27/2020,2 - 4,Siemens Advia SARS-CoV-2 IgG anti-RBD,n-96,60,96,62.5,,,Yes,supplementary table (page 8)
+3,South Asia,India,National,representative,--,--,12/27/2020,4 - 6,Siemens Advia SARS-CoV-2 IgG anti-RBD,n-96,44,74,59.5,,,Yes,supplementary table (page 8)
+3,South Asia,India,National,representative,--,--,12/27/2020,>6,Siemens Advia SARS-CoV-2 IgG anti-RBD,n-96,12,23,52.2,,,N,supplementary table (page 8)
+--,North America,USA,{ ? },non-hospitalized patients,--,--,--,3,Siemens SARS-CoV-2 Total Advia Centaur,n-134,40,41,97.6,,,Yes,
+--,North America,Canada,{ Toronto and Peel },hospitalized + non-hospitalized patients,--,--,--,2 - 3,Sinai Health (Toronto) anti-spike ELISA,n-169,22,22,100.0,,,Yes,figure 3
+--,East Asia,Japan,{ ? },convenience (general population),9/2/2020,10/26/2020,9/29/2020,6,Tosoh anti-nucleocapsid IgG with AIA-CL1200 ,n-167,314,376,83.5,,,Yes,
+--,East Asia,Japan,{ ? },convenience (general population),9/2/2020,10/26/2020,9/29/2020,6,Tosoh anti-nucleocapsid total Ig with AIA-CL1200 ,n-167,365,376,97.1,,,Yes,
+--,East Asia,Japan,{ ? },convenience (general population),9/2/2020,10/26/2020,9/29/2020,6,Tosoh anti-spike IgG with AIA-CL1200 ,n-167,344,376,91.5,,,Yes,
+--,East Asia,Japan,{ ? },convenience (general population),9/2/2020,10/26/2020,9/29/2020,6,Tosoh anti-spike total Ig with AIA-CL1200 ,n-167,369,376,98.1,,,Yes,
+--,Latin America,Brazil,{ Pelotas },hospitalized + non-hospitalized patients,--,--,*November 2020,1,University of Rio de Janeiro (UFRJ) anti-spike ELISA,n-171,23,26,88.5,,,Yes,
+--,Latin America,Brazil,{ Rio de Janeiro city },hospitalized + non-hospitalized patients,--,--,--,1,University of Rio de Janeiro (UFRJ) anti-spike ELISA,n-170,54,54,100.0,,,Yes,table 1 (not yet included in seroreversion paper)
+--,Latin America,Brazil,{ Rio de Janeiro city },hospitalized + non-hospitalized patients,--,--,--,1 - 3,University of Rio de Janeiro (UFRJ) anti-spike ELISA,n-170,107,107,100.0,,,Yes,table 1
+--,Latin America,Brazil,{ Pelotas },hospitalized + non-hospitalized patients,--,--,*November 2020,2,University of Rio de Janeiro (UFRJ) anti-spike ELISA,n-171,24,26,92.3,,,Yes,
+--,Latin America,Brazil,{ Pelotas },hospitalized + non-hospitalized patients,--,--,*November 2020,3,University of Rio de Janeiro (UFRJ) anti-spike ELISA,n-171,23,25,92.0,,,Yes,
+--,Latin America,Brazil,{ Pelotas },hospitalized + non-hospitalized patients,--,--,*November 2020,4,University of Rio de Janeiro (UFRJ) anti-spike ELISA,n-171,26,26,100.0,,,Yes,
+--,Latin America,Brazil,{ Pelotas },hospitalized + non-hospitalized patients,--,--,*November 2020,5,University of Rio de Janeiro (UFRJ) anti-spike ELISA,n-171,27,31,87.1,,,Yes,
+--,North America,USA,{ San Francisco },non-hospitalized patients,*April 2020,*July 2020,--,1,Vitros Ortho (not total) IgG anti-spike,n-132,--,--,91.0,86.3,95.0,Not yet,supplementary table 8
+--,North America,USA,{ San Francisco },non-hospitalized patients,--,--,--,3,Vitros Ortho (not total) IgG anti-spike,n-132,--,--,84.3,78.5,89.8,Not yet,supplementary table 8
+1,South Asia,Maldives,greater Male’ area,representative,10/15/2020,11/16/2020,10/31/2020,4,Vitros Ortho (not total) IgG anti-spike,n-151,77,133,57.9,,,Yes,table 1
+--,North America,USA,{ San Francisco },non-hospitalized patients,--,--,--,5,Vitros Ortho (not total) IgG anti-spike,n-132,--,--,75.1,67.8,82.0,Not yet,supplementary table 8
+--,North America,USA,{ San Francisco },non-hospitalized patients,--,--,--,7,Vitros Ortho (not total) IgG anti-spike,n-132,--,--,63.5,54.4,72.4,Not yet,supplementary table 8
+--,North America,USA,{ San Francisco },non-hospitalized patients,*April 2020,*July 2020,--,1,Vitros Ortho total Ig anti-spike,n-132,--,--,68.5,60,76.5,Not yet,supplementary table 8
+--,North America,USA,{ San Francisco },non-hospitalized patients,--,--,--,3,Vitros Ortho total Ig anti-spike,n-132,--,--,83.9,77.5,89.2,Not yet,supplementary table 8
+--,North America,USA,{ San Francisco },non-hospitalized patients,--,--,--,5,Vitros Ortho total Ig anti-spike,n-132,--,--,93.4,88.6,96.7,Not yet,supplementary table 8
+--,North America,USA,{ San Francisco },non-hospitalized patients,--,--,--,7,Vitros Ortho total Ig anti-spike,n-132,--,--,97.8,94.7,99.3,Not yet,supplementary table 8
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,1,Vitros Ortho total Ig anti-spike,n-290,33,39,84.6,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,2,Vitros Ortho total Ig anti-spike,n-290,180,194,92.8,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,4,Vitros Ortho total Ig anti-spike,n-290,118,123,95.9,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,6,Vitros Ortho total Ig anti-spike,n-290,158,162,97.5,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,8,Vitros Ortho total Ig anti-spike,n-290,90,95,94.7,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,10,Vitros Ortho total Ig anti-spike,n-290,86,89,96.6,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,12,Vitros Ortho total Ig anti-spike,n-290,88,91,96.7,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,14,Vitros Ortho total Ig anti-spike,n-290,35,35,100.0,,,,table 1
+1,Europe,Italy,Caldari Ortona (Villa Caldari),representative,4/18/2020,4/19/2020,4/18/2020,1,"Wantai ELISA SARS-CoV-2 Total Antibody, IgG IgM anti-RBD",n-107,7,7,,,,Yes,
+1 - 4,Europe,Denmark,National (SSI) + 30 municipalities subset,representative,5/18/2020,12/16/2020,9/1/2020,2,"Wantai ELISA SARS-CoV-2 Total Antibody, IgG IgM anti-RBD",n-22,217,232,93.5,,,Yes,page 719
+1,Europe,Iceland,{ National },convenience (general population),4/3/2020,7/8/2020,5/21/2020,3,"Wantai ELISA SARS-CoV-2 Total Antibody, IgG IgM anti-RBD",n-157,1143,1215,94.1,,,Yes,"tables S1 and S4, page 8 of appendix 1"
+5,Europe,Denmark,"National (SSI), unvaccinated population",representative,2/27/2021,4/20/2021,*3/17/2021,4,"Wantai ELISA SARS-CoV-2 Total Antibody, IgG IgM anti-RBD",n-194,484,514,94.2,,,Yes,page 4
+6,Europe,Denmark,"National (SSI), unvaccinated population",representative,5/14/2021,7/11/2021,*6/10/2021,5,"Wantai ELISA SARS-CoV-2 Total Antibody, IgG IgM anti-RBD",n-195,282,310,91.0,,,Yes,page 4
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,1,"Wantai ELISA SARS-CoV-2 Total Antibody, IgG IgM anti-RBD",n-290,36,39,92.3,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,2,"Wantai ELISA SARS-CoV-2 Total Antibody, IgG IgM anti-RBD",n-290,190,194,97.9,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,4,"Wantai ELISA SARS-CoV-2 Total Antibody, IgG IgM anti-RBD",n-290,123,123,100.0,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,6,"Wantai ELISA SARS-CoV-2 Total Antibody, IgG IgM anti-RBD",n-290,160,162,98.8,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,8,"Wantai ELISA SARS-CoV-2 Total Antibody, IgG IgM anti-RBD",n-290,95,95,100.0,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,10,"Wantai ELISA SARS-CoV-2 Total Antibody, IgG IgM anti-RBD",n-290,88,89,98.9,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,12,"Wantai ELISA SARS-CoV-2 Total Antibody, IgG IgM anti-RBD",n-290,91,91,100.0,,,,table 1
+--,Europe,Germany,--,hospitalized + non-hospitalized patients,--,--,*2020,14,"Wantai ELISA SARS-CoV-2 Total Antibody, IgG IgM anti-RBD",n-290,35,35,100.0,,,,table 1

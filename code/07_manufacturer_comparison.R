@@ -38,7 +38,6 @@ techniqueProfile <- read.csv("../data/analysis_results/05_characteristics_techni
 antigenProfile <- read.csv("../data/analysis_results/05_characteristics_technique_assay_sensitivity_curve.csv",
                            stringsAsFactors=FALSE)
 
-
 # Load the manufacturer reported data
 reportedSens <- read.csv("../data/raw_data/assay_performance_manufacturer.csv",
                        stringsAsFactors=FALSE, na.strings=c("", "--")) %>%
@@ -65,7 +64,7 @@ for (r in c(1:nrow(reportedSens))) {
 
 
 # compare baseline to seroreversion
-sensitivityFractions <- c(0.7, 0.5)
+sensitivityFractions <- c(0.75, 0.5)
 baselineDf <- NULL
 
 for (t in c(1:length(testNames))) {
@@ -123,10 +122,11 @@ for (t in c(1:length(testNames))) {
   dfRow <- data.frame(testName=tN, baselineMean=testBaselineMean,
                       baselineSource=testSource,
                       baselineL=testBaselineL, baselineH=testBaselineH,
-                      time70=cutoff1, time50=cutoff2, month2Frac=month2Frac)
+                      time75=cutoff1, time50=cutoff2, month2Frac=month2Frac)
   baselineDf <- rbind(baselineDf, dfRow)
 }
 
-write.csv(baselineDf, "../data/analysis_results/07_manufacturer_comparison.csv", row.names=FALSE)
+write.csv(baselineDf, "../data/analysis_results/07_manufacturer_comparison.csv",
+          row.names=FALSE)
 
 

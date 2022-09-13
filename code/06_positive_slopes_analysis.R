@@ -52,8 +52,15 @@ for (fc in filterCols) {
   seroFitted <- seroFitted[which(seroFitted[[fc]]),]
 }
 
-# Filter times
-#seroFitted <- seroFitted[which(seroFitted$testTime>2),]
+remainingTests <- unique(seroFitted$testName)
+
+# Filter those that don't have times at both sides of the cutoff
+for (t in c(1:length(remainingTests))) {
+  testTimes <- seroFitted$testTime[seroFitted$testName == remainingTests[t]]
+  if (!(any(testTimes<=3) & any(testTimes>3))) {
+    seroFitted <- dplyr::filter(seroFitted, !(testName==remainingTests[t]))
+  }
+}
 
 # Same slope shared by all assays
 nChar <- 1

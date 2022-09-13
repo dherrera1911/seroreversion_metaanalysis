@@ -22,8 +22,8 @@ phase_id,global region,country / entity,location,type of sample drawn from,start
 3,South Asia,India,Puducherry: Puducherry district,representative,10/12/2020,10/16/2020,10/14/2020,Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ,n-87,25,29,86.2,,,
 1,Oceania,Indonesia,Tanjung Priok sub-district,convenience (general population),11/23/2020,2/19/2021,1/6/2021,Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ,n-152,27,32,84.4,,,table 2 (excluded 17 samples for taken within 14 days)
 1,South Asia,India,Hyderabad,representative,1/8/2021,1/24/2021,1/16/2021,Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ,n-101,260,298,87.2,,,table 2
-"2,3",East Asia,Japan,"Miyagi + Osaka + Tokyo (phase 3), Aichi + Fukuoka (phase 2)",representative,12/3/2021,12/27/2021,12/15/2021,Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ,n-280,105,132,79.5,,,table 4 on page 6
-"3,4",East Asia,Japan,"Miyagi + Osaka + Tokyo (phase 4), Aichi + Fukuoka (phase 3)",representative,2/2/2022,3/6/2022,2/18/2022,Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ,n-280,178,230,77.4,,,table 4 on page 6
+2.3,East Asia,Japan,"Miyagi + Osaka + Tokyo (phase 3), Aichi + Fukuoka (phase 2)",representative,12/3/2021,12/27/2021,12/15/2021,Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ,n-280,105,132,79.5,,,table 4 on page 6
+3.4,East Asia,Japan,"Miyagi + Osaka + Tokyo (phase 4), Aichi + Fukuoka (phase 3)",representative,2/2/2022,3/6/2022,2/18/2022,Elecsys Anti-SARS-CoV-2 Roche nucleocapsid IgG IgM ,n-280,178,230,77.4,,,table 4 on page 6
 3,South Asia,India,Delhi,representative,9/1/2020,9/7/2020,9/4/2020,ERBALISA COVID-19 IgG,n-83,148,226,65.5,,,
 4,South Asia,India,Delhi,representative,10/15/2020,10/21/2020,10/18/2020,ERBALISA COVID-19 IgG,n-83,147,260,56.5,,,
 1,Europe,Austria,Ischgl,representative,4/21/2020,4/27/2020,4/24/2020,Euroimmun anti-spike,n-109,98,105,93.3,,,table 2
@@ -44,7 +44,7 @@ phase_id,global region,country / entity,location,type of sample drawn from,start
 2,Europe,Germany,"Aachen region, unvaccinated population",representative,1/25/2021,2/27/2021,2/10/2021,Euroimmun anti-spike,"n-26 , n-173",61,70,87.1,,,"n-26 (page 20), n-173 (eSupplement-Table 3)"
 2,Europe,Germany,"Osnabrück district + Osnabrück city, unvaccinated population",representative,3/1/2021,3/31/2021,3/16/2021,Euroimmun anti-spike,"n-26 , n-173",34,37,91.9,,,"n-26 (page 20), n-173 (eSupplement-Table 3)"
 2,Europe,Germany,"Magdeburg, unvaccinated population",representative,4/7/2021,5/5/2021,4/21/2021,Euroimmun anti-spike,"n-26 , n-173",33,40,82.5,,,"n-26 (page 20), n-173 (eSupplement-Table 3)"
-"1,2",Europe,Germany,"Chemnitz, unvaccinated population",representative,3/3/2021,8/17/2021,5/25/2021,Euroimmun anti-spike,n-173,220,257,85.6,,,eSupplement-Table 3
+1.2,Europe,Germany,"Chemnitz, unvaccinated population",representative,3/3/2021,8/17/2021,5/25/2021,Euroimmun anti-spike,n-173,220,257,85.6,,,eSupplement-Table 3
 1,Europe,Germany,"Vorpommern-Greifswald, unvaccinated population",representative,5/12/2021,6/8/2021,5/25/2021,Euroimmun anti-spike,n-173,70,86,81.4,,,eSupplement-Table 3
 1,Europe,England,National (REACT-2),representative,6/20/2020,7/13/2020,7/1/2020,"Fortress Diagnostics LFIA COVID-19 total, Northern Ireland (recognizes spike)",n-14,277,341,81.2,,,supplemental table 3
 2,Europe,England,National (REACT-2),representative,7/31/2020,8/13/2020,8/6/2020,"Fortress Diagnostics LFIA COVID-19 total, Northern Ireland (recognizes spike)",n-102,274,360,76.1,,,supplemental table S3 in file 7
@@ -58,7 +58,7 @@ phase_id,global region,country / entity,location,type of sample drawn from,start
 1,Africa,Tunisia,El Omrane + La Goulette,representative,*March 2021,*April 2021,,in-house ELISA for N protein and S protein from IPT (Institut Pasteur in Tunis),n-196,56,73,76.7,,,table 3
 2,South Asia,India,Delhi,representative,8/1/2020,8/7/2020,8/4/2020,Kavach-AntiSARS-CoV-2 IgG ELISA (Zydus),n-83,232,356,65.2,,,
 1,Europe,Andorra,National,representative,5/4/2020,5/13/2020,5/8/2020,Livzon COVID-19 IgG IgM lateral flow ,n-43,305,378,80.7,,,
-1,Latin America,Chile,"Coquimbo-La Serena, Greater Santiago, Talca ",representative,9/25/2020,11/25/2020,10/25/2020,"Livzon COVID-19 IgG IgM lateral flow , with Elecsys Anti-SARS-CoV-2- ROCHE",n-100,98,120,81.7,,,
+1,Latin America,Chile,"Coquimbo-La Serena, Greater Santiago, Talca ",representative,9/25/2020,11/25/2020,10/25/2020,"Livzon COVID-19 IgG IgM lateral flow, AND Elecsys Anti-SARS-CoV-2- ROCHE",n-100,98,120,81.7,,,
 2,Europe,USA,"Los Angeles County, unvaccinated population",representative,4/9/2021,4/25/2021,4/17/2021,Luminex xMAP for spike and nucleocaspid (Los Angeles study used RBD portion),n-174,,,97.0,90.3,99.1,table 2
 1,Europe,USA,Holyoke,representative,11/5/2020,12/31/2020,12/3/2020,"Massachusetts General Hospital, anti-spike ELISA",n-78,12,18,66.7,,,figure 2C
 1,Europe,USA,"Hillsborough County, unvaccinated population",representative,*October 2020,*March 2021,,"New York, Mount Sinai RBD ELISA",n-178,122,126,96.8,,,appendix table

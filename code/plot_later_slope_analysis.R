@@ -67,7 +67,7 @@ slopeEarlyHist <- slopesEarlyDf %>%
   theme_bw() +
   theme(axis.title.y=element_blank()) +
   xlab("Early slope") +
-  xlim(-0.6, 1.7)
+  geom_vline(xintercept=0)
 
 
 # Whisker plot of the LATE slopes (Figure 7B)
@@ -83,7 +83,8 @@ slopeLateHist <- slopesLateDf %>%
   theme_bw() +
   theme(axis.title.y=element_blank()) +
   xlab("Late slope") +
-  xlim(-0.6, 1.7)
+  geom_vline(xintercept=0)
+
 
 # Put together both whisker plots in a figure and save
 paramPlot <- ggarrange(plotlist=list(slopeEarlyHist, slopeLateHist),

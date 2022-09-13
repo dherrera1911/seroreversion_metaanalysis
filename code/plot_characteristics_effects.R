@@ -62,8 +62,10 @@ for (m in c(1:length(modelNames))) {
   if (mN == "antigen") {
     slopePosteriors[[mN]]$parName <- factor(slopePosteriors[[mN]]$parName,
                                             levels=c("N", "S", "RBD"))
+  }
   if (mN == "fullModel") {
-    slopePosteriors[[mN]]$isAntigen <- slopePosteriors[[mN]]$parName %in% c("S", "N", "RBD")
+    slopePosteriors[[mN]]$isAntigen <- slopePosteriors[[mN]]$parName %in%
+      c("S", "N", "RBD")
     levelOrder <- c("N", "S", "RBD", "LFA", "sandwich")
     slopePosteriors[[mN]]$parName <- factor(slopePosteriors[[mN]]$parName,
                                             levels=levelOrder)

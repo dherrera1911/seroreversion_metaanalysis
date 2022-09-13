@@ -57,7 +57,7 @@ seroAll <- rbind(seroKnown, seroEstimated)
 # Select which dataset to fit
 seroFitted <- seroAll
 # Remove mixed assays
-removedWords <- c("OR", "re-test", "\\+", "AND", "after", "with")
+removedWords <- c("OR", "re-test", "\\+", "AND", "after")
 for (w in c(1:length(removedWords))) {
   seroFitted <- dplyr::filter(seroFitted,
                               !stringr::str_detect(testName, removedWords[w]))

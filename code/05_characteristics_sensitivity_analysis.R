@@ -29,7 +29,7 @@ nCores <- 2
 nIter <- 4000
 warmup <- 1000
 # options of characteristics to fit:
-# antigen, antibody, technique, design, fullModel
+# antigen, antibody, technique, design, fullModel, antigen_technique
 characteristics <- "fullModel"
 
 ############
@@ -86,6 +86,10 @@ if (characteristics=="antigen") {
   #### Fit full model characteristics
   charsName <- c("N", "S", "RBD", "LFA", "sandwich")
   fileIdentifier <- "fullModel"
+} else if (characteristics=="antigen_technique") {
+  #### Fit model with all but design
+  charsName <- c("N", "S", "RBD", "LFA")
+  fileIdentifier <- "antigen_technique"
 }
 
 # Make characteristics matrix from selected columns
