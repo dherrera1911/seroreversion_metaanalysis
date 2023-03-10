@@ -1,4 +1,9 @@
-# Seroreversion meta-analysis project
+# Dynamics of SARS-CoV-2 seroassay sensitivity: a systematic review and modeling study
+
+This is the code associated with the paper
+*Dynamics of SARS-CoV-2 seroassay sensitivity: a systematic review and modeling study*,
+(https://www.medrxiv.org/content/10.1101/2022.09.08.22279731v3),
+currently in press at Eurosurveillance.
 
 ## Data files
 
@@ -9,10 +14,10 @@ in data/raw_data. These have to be preprocessed before
 fitting the model.
 
 **PCR_to_serotest_known.csv**: Serology testing on PCR diagnosed
-individuals, with known test-to-serology time.
+individuals, with known diagnosis-to-serology time.
 
 **PCR_to_serotest_unknown.csv**: Same as above, but with
-unknown test-to-serology time.
+unknown diagnosis-to-serology time.
 
 **death_dynamics.csv**: Time series of reported cases and deaths
 for different locations used in the analysis.
@@ -31,6 +36,9 @@ but with estimated times between COVID diagnosis and serology testing.
 **PCR_to_serotest_all.csv**: Data table putting together all the data
 to be fitted in the analysis. This is the file needed to jump straight
 into model fitting.
+
+**assay_specificity.csv**: Data table with reported specificities
+for each assay
 
 ### Results data files:
 
@@ -55,8 +63,15 @@ Files with 'XXX_posterior_samples.csv' contain the posterior samples
 of the model that were used to build the previous two files.
 These files are not included due to their size.
 
-Files with 'XXX_grouped_CV.csv', or 'XXX_random_CV.csv' have the
+Files with 'XXX_predicted_sensitivities_grouped_CV.csv', have the
 cross-validation results.
+
+Files 'XXX_statistical_significance.csv' contain statistical tests
+as proportions of posterior samples that show a result of interest.
+
+Files 'sensitivity_profile_table*.csv' contain the resulting
+time-varying sensitivities for different assays and
+types of assays.
 
 ### Important variables:
 
@@ -75,13 +90,18 @@ The most important variables of this dataset are:
 | **timeKnown** | Indicates whether testTime is reported in the source, or estimated here |
 | **antigenTarget** | Indicates what antigens are targeted by the assay |
 | **antibodyTarget** | Indicates what antibody isotypes are targeted by the assay |
-| **technique** | Indicates what analytic technique is used by the assay |
-| **design** | Indicates the test design (direct/sandwich vs indirect mostly) |
+| **technique** | Indicates analytic technique (i.e. LFIA or which type of Quantitative detection) |
+| **design** | Indicates the test design (indirect/direct/competitive) |
 | **sampleType** | Indicates what kind of population was sampled |
 | **midpointDate** | Median date of sample collection |
 
 
 ##  Analysis code
+
+Each script includes a description at the beggining.
+The scripts are numbered so as to be run in order.
+Paths are built so as to be ran from the directory where
+a script file is located.
 
 Description of the scripts in the ****code**** directory:
 
@@ -103,7 +123,7 @@ Bayesian regression to the data in PCR_to_serotest_all.csv, without
 taking into account assay characteristics. Outputs files to
 data/analysis_results with descriptions of the fitted model
 
-**04_average_sensitivity_analysis_bis.R**: (Analysis) Fits the
+**04_bis_average_sensitivity_analysis_CV.R**: (Analysis) Fits the
 same model as the previous file, but for doing cross-validation.
 Outputs the cross-validation results, but no model summary.
 
@@ -111,7 +131,7 @@ Outputs the cross-validation results, but no model summary.
 Bayesian regression to the data in PCR_to_serotest_all.csv. Unlike script
 04, it includes an effect for the different test characteristics. 
 
-**05_characteristics_sensitivity_analysis_bis.R**: (Analysis) Fits a
+**05_bis_characteristics_sensitivity_analysis_CV.R**: (Analysis) Fits a
 hierarchical Bayesian model like the script above, but for
 doing cross-validation. Only outputs the CV results, and not a
 model summary.
@@ -123,24 +143,47 @@ a small set of tests that show positive slopes in the main analysis.
 **07_manufacturer_comparison.R**: (Analysis) Compares the results from
 previous model fittings to manufacturer reported sensitivities.
 
+**08_characteristics_analysis_known_times.R**: (Analysis) Does the
+same as script 05, but for excluding data points where we
+estimated the time from diagnosis to testing.
+
+**09_organize_specificity_data.R**: (Preprocessing) Prepare the
+specificity data to analyze how it changes across assays.
+
+**10_analyze_specificity_data.R**: (Analysis) Fit a Bayesian
+model to the specificity data, to find effects of assay
+characteristics on specificity.
+
+**11_serotracker_analysis.R**: (Analysis) Computes how many
+data points in SeroTracker, that are Unity-aligned, use
+assays at high-risk of seroreversion.
+
 **functions_auxiliary.R**: Contains miscellaneous functions for small tasks.
 
 **functions_seroreversion_fit_analysis.R**: Contains functions related to
 the Bayesian analysis fit. For example, preparing the initialization
 values, extracting the posterior samples in a tidy format, etc.
 
-**plot_assay_specific_params_summary.R**: Generates Figure 1 of the
-paper.
+Directory **plotting_tabulating_scripts** has scripts
+that generate the figures for the paper. Each script includes
+a description of what Figures it generates. Like the analysis
+scripts, paths are made so as to have these scripts ran
+from the directory where they are located.
 
-**plot_characteristics_effects.R**: Generates the density plots of
-Figures 2-6.
+Directory **stan_models** has the .stan files that implement
+the Bayesian models that are fit in the main analysis scripts
+described above.
 
-**plot_later_slope_analysis.R**: Generates Figure 7.
+##  Meta-analysis summary
 
-**plot_sensitivity_profiles.R**: Generates the sensitivity profiles
-in Figures 2-6.
+In directory **data/systematic_review_summary/**, several
+.csv files with notes on the systematic review procedure, data
+on the analyzed cohorts, a list of the PRISMA systematic review
+procedure, and tables with assay characteristics are found.
 
-**plot_validation_performance.R**: Computes the performance of
-the cross-validation results.
+
+## Contact
+
+For questions, contact dherrera1911\[at\]gmail.com
 
 
