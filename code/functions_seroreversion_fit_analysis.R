@@ -1,3 +1,20 @@
+##################################
+#
+# This file contains some functions that process, tidy, and analyze
+# the results obtained from the Bayesian models fit to the data
+# of the associated paper
+# "Dynamics of SARS-CoV-2 seroassay sensitivity: a systematic
+# review and modeling study"
+#
+# Script authored by Daniel Herrera-Esposito.
+# For questions, contact me at dherrera1911[at]gmail.com
+# 
+# Final version revised 10/03/2023
+# 
+##################################
+
+
+
 library(dplyr)
 library(lubridate)
 library(stringr)
@@ -100,8 +117,8 @@ seroreversion_samples <- function(posteriorDf, timeVec,
 #   tidybayes::gather_draws()
 # charCombs: List where each element has the names of the effects
 #   that are to be combined.
-#   E.g. charCombs <- list(c("S"), c("N"), c("S", "N"))
-#   returns 3 slopes: assays targeting S alone, N alone, and S and N. 
+#   E.g. charCombs <- list(c("S"), c("N"), c("S", "indirect"))
+#   returns 3 slopes: assays targeting S alone, N alone, S and using "indirect" technique
 get_combination_slopes <- function(posteriorDf, charCombs) {
   parDf <- dplyr::select(posteriorDf, .draw, parName, .value) %>%
     dplyr::filter(., !is.na(parName)) %>%
@@ -169,60 +186,6 @@ mean_param_seroreversion <- function(posteriorDf, timeVec,
   }
   return(sensitivityDf)
 }
-
-
-# Put together the assay-specific effect on slope with the
-# effects of assay parameters, to get the overall slope
-# for each assay at each posterior sample. Return a dataframe
-# with overall assay slopes and intercepts
-#assay_char_slope <- function(posteriorDf, charCombs, assayRefDf) {
-#  # Get the slopes of relevant combinations of parameters
-#  charSlopes <- get_combination_slopes(posteriorDf, charCombs)
-#  # Get info on what assays to return
-#  assayVec <- unique(posteriorDf$assay)
-#  assayVec <- assayVec[!is.na(assayVec)]
-#  assayN <- length(assayVec)
-#  assayCharSlopesDf <- NULL
-#  for (a in c(1:assayN)) {
-#    assayName <- assayVec[a]
-#    # Extract assay characteristic from reference
-#    assayChar <- with(assayRefDf, chars[testName==assayName])
-#    assayDf <- dplyr::filter(posteriorDf, assay==assayName)
-#    assayDf$.value[assayDf$.variable=="assaySlope"] <-
-#      assayDf$.value[assayDf$.variable=="assaySlope"] + 
-#      charSlopes[[assayChar]]
-#    assayCharSlopesDf <- rbind(assayCharSlopesDf, assayDf)
-#  }
-#  return(assayCharSlopesDf)
-#}
-#
-#
-#assay_char_sensitivity_posterior <- function(posteriorDf, timeVec,
-#                                             charCombs,
-#                                             assayRefDf,
-#                                             timeNormalization=4) {
-#  # Put together assay slopes with characteristic effects
-#  assaysPosterior <- assay_char_slope(posteriorDf, charCombs, assayRefDf)
-#  # make some variables to fill/use
-#  assayVec <- sort(unique(assaysPosterior$assay))
-#  assayFitDf <- NULL
-#  for (n in c(1:length(assayVec))) {
-#    singleAssayPosterior <- dplyr::filter(assaysPosterior, assay==assayVec[n])
-#    sensitivityPosterior <- seroreversion_samples(singleAssayPosterior, timeVec,
-#                                                  slopeName="assaySlope",
-#                                                  interceptName="assayIntercept",
-#                                                  timeNormalization=4)
-#    assayChar <- assayRefDf$chars[assayRefDf$testName==assayVec[n]]
-#    testDf <- data.frame(time=timeVec,
-#                         sensitivity=sensitivityPosterior$prop_mean,
-#                         sensitivityL=sensitivityPosterior$prop_L,
-#                         sensitivityH=sensitivityPosterior$prop_H,
-#                         testName=assayVec[n],
-#                         chars=assayChar)
-#    assayFitDf <- rbind(assayFitDf, testDf)
-#  }
-#  return(assayFitDf)
-#}
 
 
 # Take the posterior samples fitted on a subset of the data, and
@@ -339,5 +302,47 @@ sensitivity_prediction_validation <- function(posteriorTraces,
     }
   }
   return(validationDf)
+}
+
+
+# Get the average specificity for different combinations
+# of effects in a fit.
+# E.g. the specificities for tests that
+# target N antigen, S antigen, or the combination of the two.
+#
+# posteriorDf: Dataframe of posterior samples, obtained with function
+#   tidybayes::gather_draws()
+# charCombs: List where each element has the names of the effects
+#   that are to be combined.
+#   E.g. charCombs <- list(c("S"), c("N"), c("S", "N"))
+#   returns 3 slopes: assays targeting S alone, N alone, and S and N. 
+mean_param_specificity <- function(posteriorDf, 
+                               charCombs=NA) {
+  chars <- unique(posteriorDf$parName)
+  chars <- chars[!is.na(chars)]
+  if (is.na(charCombs)) {charCombs <- chars}
+  specificityDf <- NULL
+  # Get the intercepts of combinations of parameters
+  combinationIntercepts <- get_combination_slopes(posteriorDf, charCombs)
+  for (n in c(1:length(charCombs))) {
+    combName <- paste(charCombs[[n]], collapse="-")
+    # compute the slope samples of this particular combination
+    charIntercept <- combinationIntercepts[[combName]]
+    # fill a matrix with the sensitivities(time) samples as each column
+    expMat <- exp(charIntercept)
+    fitProp <- expMat / (1+expMat)
+    # get the mean and 95% CI sensitivities
+    meanProp <- mean(fitProp) 
+    ciProp <- quantile(fitProp, probs=c(0.025, 0.25, 0.5, 0.75, 0.975))
+    tempDf <- data.frame(chars=paste(charCombs[[n]], collapse="-"),
+                         specificityMean=meanProp,
+                         specificityMedian=ciProp[3],
+                         specificityL=ciProp[1],
+                         specificityQL=ciProp[2],
+                         specificityQH=ciProp[4],
+                         specificityH=ciProp[5])
+    specificityDf <- rbind(specificityDf, tempDf)
+  }
+  return(specificityDf)
 }
 

@@ -1,0 +1,7 @@
+"Model","Comparison","Frequency"
+"fullModel","LFA > 0",0.00375
+"fullModel","Sandwich > 0",NA
+"fullModel","S > N",0.996916666666667
+"fullModel","RBD > 0",0.4955
+"fullModel","RBD > S",0.872666666666667
+"fullModel","RBD > N",0.999916666666667

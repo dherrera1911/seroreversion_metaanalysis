@@ -1,15 +1,37 @@
 ##################################
-##################################
 # 
 # This script fits a model to data on time-varying
-# sensitivity of different serology assays. Only data
-# of serology testing on previously diagnosed individuals
-# is used.
+# sensitivity of different serology assays.
 #
 # The model is fitted without accounting for the assays technical
 # characteristics.
+#
+# The results of the fit obtained in this script are
+# the results shown in Figure 2, and the first Results section
+# in the associated paper:
+# "Dynamics of SARS-CoV-2 seroassay sensitivity: a systematic review and modeling study"
+# https://www.medrxiv.org/content/10.1101/2022.09.08.22279731v3
+# Currently in press, at Eurosurveillance
+#
+# The script generates the following files:
+# * "../data/analysis_results/04_model_posteriors_samples": All the draws
+# obtained from MCMC with the model. Full generated analysis, but untidy.
+# * "../data/analysis_results/04_assay_sensitivity_curve": The
+# sensitivity vs time estimate for each individual assay. These results
+# are the black lines in Fig S1
+# * "../data/analysis_results/04_parameter_summary": The summary of all the
+# parameters obtained in the model. The slope parameters for each assay
+# obtained here are used to generate Fig2 in the paper.
 # 
-##################################
+# The posterior samples file is not included in the GitHub because of
+# its large size, but the other two files can be found online at the
+# associated github
+# 
+# Script authored by Daniel Herrera-Esposito.
+# For questions, contact me at dherrera1911[at]gmail.com
+# 
+# Final version revised 10/03/2023
+# 
 ##################################
 
 library(dplyr)
@@ -27,12 +49,20 @@ nChains <- 4
 nCores <- 2
 nIter <- 4000
 warmup <- 1000
+knownTimesOnly <- TRUE
 
 ############
 # Load data generated in script 06
 ############
 seroFitted <- read.csv("../data/processed_data/PCR_to_serotest_all.csv",
                        stringsAsFactors=FALSE)
+
+if (knownTimesOnly) {
+  seroFitted <- dplyr::filter(seroFitted, timeKnown)
+  knownTimesStr <- '_known_times'
+} else {
+  knownTimesStr <- ''
+}
 
 # Same slope shared by all assays
 nChar <- 1
@@ -73,11 +103,12 @@ initList <- sample_initial_values(nChains=nChains, paramListName=paramListName,
 ###################
 
 # compile model
-#regression_model <- rstan::stan_model("./sensitivity_change_chars.stan",
-#                                 model_name="time_change_sensitivity",
-#                                 warn_pedantic=TRUE)
-# load model if available
-regression_model <- readRDS("./sensitivity_change_chars.RDS")
+regression_model <- rstan::stan_model("./stan_models/sensitivity_change_chars.stan",
+                                 model_name="time_change_sensitivity",
+                                 warn_pedantic=TRUE)
+# For faster use, you can compile the model outside of this cript,
+# and load it with the line below, to avoid recompiling each call
+#regression_model <- readRDS("./stan_models/sensitivity_change_chars.RDS")
 
 # Make a list with the input we pass to STAN
 assayVec <- as.factor(seroFitted$testName)
@@ -122,8 +153,9 @@ for (i in c(1:length(studyList))) {
 posteriorTraces$studyAssay <- studyAssayVec[posteriorTraces$stu]
 posteriorTraces$studyCitation <- studyVec[posteriorTraces$stu]
 
-write.csv(posteriorTraces, "../data/analysis_results/04_model_posteriors_samples.csv",
-          row.names=FALSE)
+fileName <- paste("../data/analysis_results/04_model_posteriors_samples",
+                  knownTimesStr, ".csv", sep="")
+write.csv(posteriorTraces, fileName, row.names=FALSE)
 
 
 ###################
@@ -155,8 +187,9 @@ averageDf <- seroreversion_samples(averagePosterior, timeVec,
 averageDf$testName <- NA
 assayFitDf <- rbind(averageDf, assayFitDf)
 # Export sensitivity profiles
-write.csv(assayFitDf, "../data/analysis_results/04_assay_sensitivity_curve.csv",
-          row.names=FALSE)
+fileName <- paste("../data/analysis_results/04_assay_sensitivity_curve",
+                  knownTimesStr, ".csv", sep="")
+write.csv(assayFitDf, fileName, row.names=FALSE)
 
 # Get summary statistics of the fitted parameters
 parameterSummary <- ungroup(posteriorTraces) %>%
@@ -168,6 +201,7 @@ parameterSummary <- ungroup(posteriorTraces) %>%
             paramQuartileH=quantile(.value, probs=0.75),
             paramH=quantile(.value, probs=0.975))
 
-write.csv(parameterSummary, "../data/analysis_results/04_parameter_summary.csv",
-          row.names=FALSE)
+fileName <- paste("../data/analysis_results/04_parameter_summary",
+                  knownTimesStr, ".csv", sep="")
+write.csv(parameterSummary, fileName, row.names=FALSE)
 

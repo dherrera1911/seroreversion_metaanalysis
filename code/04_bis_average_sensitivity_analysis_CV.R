@@ -1,17 +1,29 @@
 ###################################
-##################################
 # 
 # This script fits a model to data on time-varying
-# sensitivity of different serology assays. Only data
-# of serology testing on previously diagnosed individuals
-# is used.
-#
-# Model is fitted on subsets of data and tested on
-# left out data, to provide cross-validated performance test
+# sensitivity of different serology assays.
 #
 # The model is fitted without accounting for test characteristics
+#
+# This script does the same analysis as
+# script 04_average_sensitivity_analysis.R, but separating the
+# dataset into groups, and performing cross-validation.
+# The results of this script are the reported percentages
+# of the cross-validation performance in the associated paper,
+# for section 1 of the Results. They are also shown in Fig S1.
+#
+# The output is a csv file
+# "../data/analysis_results/04_predicted_sensitivities_grouped_CV.csv"
+# with a similar structure to the # input data file "PCR_to_serotest_all.csv",
+# but with additional columns that contain the predicted sensitivities,
+# as well as the predicted experimental outcomes (nPositives, which take
+# into account the binomial sampling error too).
+#
+# Script authored by Daniel Herrera-Esposito.
+# For questions, contact me at dherrera1911[at]gmail.com
 # 
-##################################
+# Final version revised 10/03/2023
+# 
 ##################################
 
 library(dplyr)
@@ -30,22 +42,23 @@ nCores <- 2
 nIter <- 4000
 warmup <- 1000
 nChar <- 1
-
-crossValidationType <- "grouped"
-testsPerGroup <- 1 # for grouped CV only
+# "grouped" is the cross-validation procedure described in the associated paper
+crossValidationType <- "grouped" 
+testsPerGroup <- 1 # Don't mind this parameter. When it's larger than 1 it
+# saves time in the cross validation, but gives less precise results. It was
+# used during debugging.
 
 #crossValidationType <- "random"
 #pointsPerGroup <- 7
 
 seroFitted <- read.csv("../data/processed_data/PCR_to_serotest_all.csv",
                        stringsAsFactors=FALSE)
-
 ### Compile model
-#outcome_reg <- rstan::stan_model("./sensitivity_change_chars.stan",
-#                                 model_name="time_change_sensitivity",
-#                                 warn_pedantic=TRUE)
+outcome_reg <- rstan::stan_model("./sensitivity_change_chars.stan",
+                                 model_name="time_change_sensitivity",
+                                 warn_pedantic=TRUE)
 # load model if available
-outcome_reg <- readRDS("./sensitivity_change_chars.RDS")
+#outcome_reg <- readRDS("./sensitivity_change_chars.RDS")
 
 
 ### Make the cross validation batch groups

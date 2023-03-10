@@ -1,0 +1,291 @@
+phase_id,global region,country / entity,location,reference # in supplement,reference by author name,type of sample drawn from,serology sampling start date,serology sampling end,serology sampling midpoint,months between prior diagnosis (or symptoms) and serology,test name,infection variant known,re-infections known not to occur,severity of infection,median age,sex ratio,notes
+--,Europe,Germany,{ Saarland },2,Lohse,non-hospitalized patients,--,*October 2020,*October 2020,6,Abbott Architect,--,--,0% hospitalized,--,--,
+--,Europe,Germany,{ Saarland },2,Lohse,non-hospitalized patients,--,*October 2020,*October 2020,6,Elecsys anti-N,--,--,0% hospitalized,--,--,
+--,Europe,Germany,{ Saarland },2,Lohse,non-hospitalized patients,--,*October 2020,*October 2020,6,Euroimmun anti-S,--,--,0% hospitalized,--,--,
+--,Europe,Scotland,{ ? },4,McCance,hospitalized + non-hospitalized patients,*September 2020,*November 2020,--,2,Abingdon AbC-19,--,--,2.6% hospitalized,--,--,
+--,Europe,Scotland,{ ? },4,McCance,hospitalized + non-hospitalized patients,*September 2020,*November 2020,--,4,Abingdon AbC-19,--,--,2.6% hospitalized,--,--,
+--,Europe,Scotland,{ ? },4,McCance,hospitalized + non-hospitalized patients,*September 2020,*November 2020,--,6,Abingdon AbC-19,--,--,2.6% hospitalized,--,--,
+--,Europe,Scotland,{ ? },4,McCance,hospitalized + non-hospitalized patients,*September 2020,*November 2020,--,1,Biomerica rapid test ,--,--,2.6% hospitalized,--,--,
+--,Europe,Scotland,{ ? },4,McCance,hospitalized + non-hospitalized patients,*September 2020,*November 2020,--,2,Biomerica rapid test ,--,--,2.6% hospitalized,--,--,
+--,Europe,Scotland,{ ? },4,McCance,hospitalized + non-hospitalized patients,*September 2020,*November 2020,--,4,Biomerica rapid test ,--,--,2.6% hospitalized,--,--,
+--,Europe,Scotland,{ ? },4,McCance,hospitalized + non-hospitalized patients,*September 2020,*November 2020,--,6,Biomerica rapid test ,--,--,2.6% hospitalized,--,--,
+--,Europe,Scotland,{ ? },4,McCance,hospitalized + non-hospitalized patients,*September 2020,*November 2020,--,1,Biozek rapid test,--,--,2.6% hospitalized,--,--,
+--,Europe,Scotland,{ ? },4,McCance,hospitalized + non-hospitalized patients,*September 2020,*November 2020,--,2,Biozek rapid test,--,--,2.6% hospitalized,--,--,
+--,Europe,Scotland,{ ? },4,McCance,hospitalized + non-hospitalized patients,*September 2020,*November 2020,--,1,LumiraDx,--,--,2.6% hospitalized,--,--,
+--,Europe,Scotland,{ ? },4,McCance,hospitalized + non-hospitalized patients,*September 2020,*November 2020,--,2,LumiraDx,--,--,2.6% hospitalized,--,--,
+--,Europe,Scotland,{ ? },4,McCance,hospitalized + non-hospitalized patients,*September 2020,*November 2020,--,4,LumiraDx,--,--,2.6% hospitalized,--,--,
+--,Europe,Scotland,{ ? },4,McCance,hospitalized + non-hospitalized patients,*September 2020,*November 2020,--,6,LumiraDx,--,--,2.6% hospitalized,--,--,
+--,Europe,Scotland,{ ? },4,McCance,hospitalized + non-hospitalized patients,*September 2020,*November 2020,--,1,Roche rapid test,--,--,2.6% hospitalized,--,--,
+--,Europe,Scotland,{ ? },4,McCance,hospitalized + non-hospitalized patients,*September 2020,*November 2020,--,2,Roche rapid test,--,--,2.6% hospitalized,--,--,
+--,Europe,Scotland,{ ? },4,McCance,hospitalized + non-hospitalized patients,*September 2020,*November 2020,--,4,Roche rapid test,--,--,2.6% hospitalized,--,--,
+--,Europe,Scotland,{ ? },4,McCance,hospitalized + non-hospitalized patients,*September 2020,*November 2020,--,6,Roche rapid test,--,--,2.6% hospitalized,--,--,
+--,Latin America,Brazil,{ Pelotas },3,Silveira,hospitalized + non-hospitalized patients,--,--,*November 2020,1,University of Rio de Janeiro,--,--,--,30 - 50,"58% female , 42% male",table 2
+--,Latin America,Brazil,{ Pelotas },3,Silveira,hospitalized + non-hospitalized patients,--,--,*November 2020,2,University of Rio de Janeiro,--,--,--,30 - 50,"58% female , 42% male",table 2
+--,Latin America,Brazil,{ Pelotas },3,Silveira,hospitalized + non-hospitalized patients,--,--,*November 2020,3,University of Rio de Janeiro,--,--,--,30 - 50,"58% female , 42% male",table 2
+--,Latin America,Brazil,{ Pelotas },3,Silveira,hospitalized + non-hospitalized patients,--,--,*November 2020,4,University of Rio de Janeiro,--,--,--,30 - 50,"58% female , 42% male",table 2
+--,Latin America,Brazil,{ Pelotas },3,Silveira,hospitalized + non-hospitalized patients,--,--,*November 2020,5,University of Rio de Janeiro,--,--,--,30 - 50,"58% female , 42% male",table 2
+--,Europe,Ireland,{ Dublin },6,Mallon,hospitalized + non-hospitalized patients,3/26/2020,7/10/2020,5/18/2020,1,Abbott Alinity,--,--,72% hospitalized,57,"46% female , 54% male",table 1
+--,Europe,Ireland,{ Dublin },6,Mallon,hospitalized + non-hospitalized patients,3/26/2020,7/10/2020,5/18/2020,1,Abbott Architect,--,--,72% hospitalized,57,"46% female , 54% male",table 1
+--,Europe,Ireland,{ Dublin },6,Mallon,hospitalized + non-hospitalized patients,3/26/2020,7/10/2020,5/18/2020,1,Elecsys anti-N,--,--,72% hospitalized,57,"46% female , 54% male",table 1
+--,Europe,Germany,{ Cologne },7,Eberhardt,hospitalized + non-hospitalized patients,*August 2020,*September 2020,--,5,Abbott Alinity,--,--,4% severe,44,"55% female , 45% male",table 2
+--,Europe,Germany,{ Cologne },7,Eberhardt,hospitalized + non-hospitalized patients,*August 2020,*September 2020,--,5,Diasorin Liaison,--,--,4% severe,44,"55% female , 45% male",table 2
+--,Europe,Germany,{ Cologne },7,Eberhardt,hospitalized + non-hospitalized patients,*August 2020,*September 2020,--,5,Elecsys anti-N,--,--,4% severe,44,"55% female , 45% male",table 2
+--,Europe,Germany,{ Cologne },7,Eberhardt,hospitalized + non-hospitalized patients,*August 2020,*September 2020,--,5,Euroimmun anti-S,--,--,4% severe,44,"55% female , 45% male",table 2
+--,Europe,Germany,{ Cologne },7,Eberhardt,hospitalized + non-hospitalized patients,*August 2020,*September 2020,--,5,IDK (Immundiagnostik),--,--,4% severe,44,"55% female , 45% male",table 2
+--,Oceania,New Zealand,{ Southern District Health Board region },8,McGregor,hospitalized + non-hospitalized patients,3/11/2020,4/5/2020,--,10,Abbott Alinity II Quant,--,--,--,52,"70% female , 30% male",table 1
+--,Oceania,New Zealand,{ Southern District Health Board region },8,McGregor,hospitalized + non-hospitalized patients,3/11/2020,4/5/2020,--,10,Abbott Architect,--,--,--,52,"70% female , 30% male",table 1
+--,Oceania,New Zealand,{ Southern District Health Board region },8,McGregor,hospitalized + non-hospitalized patients,3/11/2020,4/5/2020,--,10,GenScript cPass,--,--,--,52,"70% female , 30% male",table 1
+--,North America,USA,{ San Francisco },9,Peluso,non-hospitalized patients,*April 2020,*July 2020,--,1,Abbott Architect,--,--,0% hospitalized,30 - 45,"48% female , 52% male",supplementary table 1
+--,North America,USA,{ San Francisco },9,Peluso,non-hospitalized patients,--,--,--,3,Abbott Architect,--,--,0% hospitalized,30 - 45,"48% female , 52% male",supplementary table 1
+--,North America,USA,{ San Francisco },9,Peluso,non-hospitalized patients,--,--,--,5,Abbott Architect,--,--,0% hospitalized,30 - 45,"48% female , 52% male",supplementary table 1
+--,North America,USA,{ San Francisco },9,Peluso,non-hospitalized patients,--,--,--,7,Abbott Architect,--,--,0% hospitalized,30 - 45,"48% female , 52% male",supplementary table 1
+--,North America,USA,{ San Francisco },9,Peluso,non-hospitalized patients,*April 2020,*July 2020,--,1,Diasorin Liaison,--,--,0% hospitalized,30 - 45,"48% female , 52% male",supplementary table 1
+--,North America,USA,{ San Francisco },9,Peluso,non-hospitalized patients,--,--,--,3,Diasorin Liaison,--,--,0% hospitalized,30 - 45,"48% female , 52% male",supplementary table 1
+--,North America,USA,{ San Francisco },9,Peluso,non-hospitalized patients,--,--,--,5,Diasorin Liaison,--,--,0% hospitalized,30 - 45,"48% female , 52% male",supplementary table 1
+--,North America,USA,{ San Francisco },9,Peluso,non-hospitalized patients,--,--,--,7,Diasorin Liaison,--,--,0% hospitalized,30 - 45,"48% female , 52% male",supplementary table 1
+--,North America,USA,{ San Francisco },9,Peluso,non-hospitalized patients,*April 2020,*July 2020,--,1,Elecsys anti-N,--,--,0% hospitalized,30 - 45,"48% female , 52% male",supplementary table 1
+--,North America,USA,{ San Francisco },9,Peluso,non-hospitalized patients,--,--,--,3,Elecsys anti-N,--,--,0% hospitalized,30 - 45,"48% female , 52% male",supplementary table 1
+--,North America,USA,{ San Francisco },9,Peluso,non-hospitalized patients,--,--,--,5,Elecsys anti-N,--,--,0% hospitalized,30 - 45,"48% female , 52% male",supplementary table 1
+--,North America,USA,{ San Francisco },9,Peluso,non-hospitalized patients,--,--,--,7,Elecsys anti-N,--,--,0% hospitalized,30 - 45,"48% female , 52% male",supplementary table 1
+--,North America,USA,{ San Francisco },9,Peluso,non-hospitalized patients,*April 2020,*July 2020,--,1,Vitros Ortho (not total antibodies),--,--,0% hospitalized,30 - 45,"48% female , 52% male",supplementary table 1
+--,North America,USA,{ San Francisco },9,Peluso,non-hospitalized patients,--,--,--,3,Vitros Ortho (not total antibodies),--,--,0% hospitalized,30 - 45,"48% female , 52% male",supplementary table 1
+--,North America,USA,{ San Francisco },9,Peluso,non-hospitalized patients,--,--,--,5,Vitros Ortho (not total antibodies),--,--,0% hospitalized,30 - 45,"48% female , 52% male",supplementary table 1
+--,North America,USA,{ San Francisco },9,Peluso,non-hospitalized patients,--,--,--,7,Vitros Ortho (not total antibodies),--,--,0% hospitalized,30 - 45,"48% female , 52% male",supplementary table 1
+--,North America,USA,{ San Francisco },9,Peluso,non-hospitalized patients,*April 2020,*July 2020,--,1,Vitros Ortho (total antibodies),--,--,0% hospitalized,30 - 45,"48% female , 52% male",supplementary table 1
+--,North America,USA,{ San Francisco },9,Peluso,non-hospitalized patients,--,--,--,3,Vitros Ortho (total antibodies),--,--,0% hospitalized,30 - 45,"48% female , 52% male",supplementary table 1
+--,North America,USA,{ San Francisco },9,Peluso,non-hospitalized patients,--,--,--,5,Vitros Ortho (total antibodies),--,--,0% hospitalized,30 - 45,"48% female , 52% male",supplementary table 1
+--,North America,USA,{ San Francisco },9,Peluso,non-hospitalized patients,--,--,--,7,Vitros Ortho (total antibodies),--,--,0% hospitalized,30 - 45,"48% female , 52% male",supplementary table 1
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,1,Abbott Architect,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,2,Abbott Architect,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,4,Abbott Architect,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,6,Abbott Architect,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,8,Abbott Architect,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,10,Abbott Architect,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,12,Abbott Architect,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,14,Abbott Architect,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,1,Diasorin Liaison,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,2,Diasorin Liaison,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,4,Diasorin Liaison,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,6,Diasorin Liaison,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,8,Diasorin Liaison,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,10,Diasorin Liaison,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,12,Diasorin Liaison,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,14,Diasorin Liaison,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,1,Elecsys anti-N,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,2,Elecsys anti-N,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,4,Elecsys anti-N,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,6,Elecsys anti-N,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,8,Elecsys anti-N,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,10,Elecsys anti-N,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,12,Elecsys anti-N,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,14,Elecsys anti-N,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,1,Elecsys anti-S,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,2,Elecsys anti-S,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,4,Elecsys anti-S,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,6,Elecsys anti-S,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,8,Elecsys anti-S,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,10,Elecsys anti-S,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,12,Elecsys anti-S,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,14,Elecsys anti-S,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,1,Euroimmun anti-N,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,2,Euroimmun anti-N,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,4,Euroimmun anti-N,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,6,Euroimmun anti-N,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,8,Euroimmun anti-N,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,10,Euroimmun anti-N,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,12,Euroimmun anti-N,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,14,Euroimmun anti-N,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,1,Euroimmun anti-S,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,2,Euroimmun anti-S,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,4,Euroimmun anti-S,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,6,Euroimmun anti-S,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,8,Euroimmun anti-S,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,10,Euroimmun anti-S,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,12,Euroimmun anti-S,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,14,Euroimmun anti-S,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,1,GenScript cPass,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,2,GenScript cPass,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,4,GenScript cPass,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,6,GenScript cPass,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,8,GenScript cPass,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,10,GenScript cPass,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,12,GenScript cPass,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,14,GenScript cPass,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,1,Vitros Ortho (total antibodies),--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,2,Vitros Ortho (total antibodies),--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,4,Vitros Ortho (total antibodies),--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,6,Vitros Ortho (total antibodies),--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,8,Vitros Ortho (total antibodies),--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,10,Vitros Ortho (total antibodies),--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,12,Vitros Ortho (total antibodies),--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,14,Vitros Ortho (total antibodies),--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,1,Wantai,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,2,Wantai,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,4,Wantai,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,6,Wantai,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,8,Wantai,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,10,Wantai,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,12,Wantai,--,--,15.8% hospitalized,--,--,
+--,Europe,Germany,--,10,Scheiblauer,hospitalized + non-hospitalized patients,--,--,*2020,14,Wantai,--,--,15.8% hospitalized,--,--,
+--,Oceania,Australia,{ Victoria },11,Bond,hospitalized + non-hospitalized patients,--,--,--,1,Abbott Architect,--,--,~26% hospitalized,40 - 45,"~42% female , ~58% male",supplementary data #2
+--,Oceania,Australia,{ Victoria },11,Bond,hospitalized + non-hospitalized patients,--,--,--,1 - 3,Abbott Architect,--,--,~26% hospitalized,40 - 45,"~42% female , ~58% male",supplementary data #2
+--,Oceania,Australia,{ Victoria },11,Bond,hospitalized + non-hospitalized patients,--,--,--,4 - 5,Abbott Architect,--,--,~26% hospitalized,40 - 45,"~42% female , ~58% male",supplementary data #2
+--,Oceania,Australia,{ Victoria },11,Bond,hospitalized + non-hospitalized patients,--,--,--,5 - 7,Abbott Architect,--,--,~26% hospitalized,40 - 45,"~42% female , ~58% male",supplementary data #2
+--,Oceania,Australia,{ Victoria },11,Bond,hospitalized + non-hospitalized patients,--,--,--,1,Diasorin Liaison,--,--,~26% hospitalized,40 - 45,"~42% female , ~58% male",supplementary data #2
+--,Oceania,Australia,{ Victoria },11,Bond,hospitalized + non-hospitalized patients,--,--,--,1 - 3,Diasorin Liaison,--,--,~26% hospitalized,40 - 45,"~42% female , ~58% male",supplementary data #2
+--,Oceania,Australia,{ Victoria },11,Bond,hospitalized + non-hospitalized patients,--,--,--,4 - 5,Diasorin Liaison,--,--,~26% hospitalized,40 - 45,"~42% female , ~58% male",supplementary data #2
+--,Oceania,Australia,{ Victoria },11,Bond,hospitalized + non-hospitalized patients,--,--,--,5 - 7,Diasorin Liaison,--,--,~26% hospitalized,40 - 45,"~42% female , ~58% male",supplementary data #2
+--,Oceania,Australia,{ Victoria },11,Bond,hospitalized + non-hospitalized patients,--,--,--,1,Elecsys anti-N,--,--,~26% hospitalized,40 - 45,"~42% female , ~58% male",supplementary data #2
+--,Oceania,Australia,{ Victoria },11,Bond,hospitalized + non-hospitalized patients,--,--,--,1 - 3,Elecsys anti-N,--,--,~26% hospitalized,40 - 45,"~42% female , ~58% male",supplementary data #2
+--,Oceania,Australia,{ Victoria },11,Bond,hospitalized + non-hospitalized patients,--,--,--,4 - 5,Elecsys anti-N,--,--,~26% hospitalized,40 - 45,"~42% female , ~58% male",supplementary data #2
+--,Oceania,Australia,{ Victoria },11,Bond,hospitalized + non-hospitalized patients,--,--,--,5 - 7,Elecsys anti-N,--,--,~26% hospitalized,40 - 45,"~42% female , ~58% male",supplementary data #2
+1,Europe,Austria,Ischgl,12,Knabl,representative,4/21/2020,4/27/2020,4/24/2020,--,Abbott Architect,--,--,< 9% hospitalized,30 - 50,~50%,supplementary figure 5B
+1,Europe,Austria,Ischgl,12,Knabl,representative,4/21/2020,4/27/2020,4/24/2020,--,Euroimmun anti-S,--,--,< 9% hospitalized,30 - 50,~50%,supplementary figure 5B
+1,Europe,Spain,National,13,Pollán,representative,4/27/2020,5/11/2020,5/4/2020,--,Abbott Architect,--,--,--,--,--,
+1,Europe,Spain,National,13,Pollán,representative,4/27/2020,5/11/2020,5/4/2020,--,Orient Gene Biotech,--,--,--,--,--,
+1,North America,USA,"Davis, Salt Lake, Summit, and Utah counties",14,Samore,representative,5/1/2020,6/30/2020,5/31/2020,--,Abbott Architect,--,--,--,--,--,
+1,Africa,Ethiopia,14 towns (including Addis Ababa #2),15,Tadesse,representative,6/24/2020,7/8/2020,7/1/2020,--,Abbott Architect,--,--,--,--,--,
+2,South Asia,India,National,16,Murhekar (Lancet Global Health),representative,8/17/2020,9/22/2020,9/4/2020,--,Abbott Architect,--,--,--,--,--,
+1,South Asia,India,Kashmir: Srinagar district,17,Ayub,representative,10/17/2020,10/20/2020,10/18/2020,--,Abbott Architect,--,--,--,--,--,
+1,South Asia,India,Kashmir (whole region),18,Khan,representative,10/17/2020,11/4/2020,10/26/2020,--,Abbott Architect,--,--,~49% symptomatic,--,--,figure 3
+4,South Asia,India,National,19,Murhekar (PLOS Med),representative,6/14/2021,7/6/2021,6/25/2021,--,Abbott Architect,--,--,--,--,--,
+3,South Asia,India,National,20,Murhekar (IJID),representative,--,--,12/27/2020,0.5 - 2,Abbott Architect,--,--,--,--,--,
+3,South Asia,India,National,20,Murhekar (IJID),representative,--,--,12/27/2020,2 - 4,Abbott Architect,--,--,--,--,--,
+3,South Asia,India,National,20,Murhekar (IJID),representative,--,--,12/27/2020,4 - 6,Abbott Architect,--,--,--,--,--,
+3,South Asia,India,National,20,Murhekar (IJID),representative,--,--,12/27/2020,>6,Abbott Architect,--,--,--,--,--,
+3,South Asia,India,National,20,Murhekar (IJID),representative,--,--,12/27/2020,0.5 - 2,Siemens Advia anti-RBD,--,--,--,--,--,
+3,South Asia,India,National,20,Murhekar (IJID),representative,--,--,12/27/2020,2 - 4,Siemens Advia anti-RBD,--,--,--,--,--,
+3,South Asia,India,National,20,Murhekar (IJID),representative,--,--,12/27/2020,4 - 6,Siemens Advia anti-RBD,--,--,--,--,--,
+3,South Asia,India,National,20,Murhekar (IJID),representative,--,--,12/27/2020,>6,Siemens Advia anti-RBD,--,--,--,--,--,
+--,South Asia,India,{ Delhi },21,Thiruvengadam,hospitalized + non-hospitalized patients,--,--,12/18/2020,2,Abbott Architect,--,--,18% require oxygen,40,"30% female , 70% male",table 1
+--,South Asia,India,{ Delhi },21,Thiruvengadam,hospitalized + non-hospitalized patients,--,--,12/18/2020,2,"Mehdi, in-house",--,--,18% require oxygen,40,"30% female , 70% male",table 1
+--,Oceania,Australia,{ Sydney },22,Tea,hospitalized + non-hospitalized patients,*March 2020,*August 2020,--,2,Abbott Architect,--,Yes,12% hospitalized,48,"58% female , 42% male",table 1
+--,Oceania,Australia,{ Sydney },22,Tea,hospitalized + non-hospitalized patients,*March 2020,*August 2020,--,2,Diasorin Liaison,--,Yes,12% hospitalized,48,"58% female , 42% male",table 1
+--,Oceania,Australia,{ Sydney },22,Tea,hospitalized + non-hospitalized patients,*March 2020,*August 2020,--,2,Euroimmun anti-S,--,Yes,12% hospitalized,48,"58% female , 42% male",table 1
+--,Europe,Netherlands,{ ? },23,Garritsen,convenience (general population),4/14/2020,--,--,2,Euroimmun anti-N,--,--,--,--,--,
+--,Europe,Netherlands,{ ? },23,Garritsen,convenience (general population),--,8/15/2020,--,4,Euroimmun anti-N,--,--,--,--,--,
+--,Europe,Netherlands,{ ? },23,Garritsen,convenience (general population),4/14/2020,--,--,2,Euroimmun anti-S,--,--,--,--,--,
+--,Europe,Netherlands,{ ? },23,Garritsen,convenience (general population),--,8/15/2020,--,4,Euroimmun anti-S,--,--,--,--,--,
+--,Europe,Netherlands,{ ? },23,Garritsen,convenience (general population),4/14/2020,--,--,2,GenScript cPass,--,--,--,--,--,
+--,Europe,Netherlands,{ ? },23,Garritsen,convenience (general population),--,8/15/2020,--,4,GenScript cPass,--,--,--,--,--,
+--,North America,USA,{ ? },24,Muecksch,non-hospitalized patients,--,--,--,3,Abbott Architect,--,--,0% hospitalized,44,"72% female , 28% male",
+--,North America,USA,{ ? },24,Muecksch,non-hospitalized patients,--,--,--,3,Diasorin Liaison,--,--,0% hospitalized,44,"72% female , 28% male",
+--,North America,USA,{ ? },24,Muecksch,non-hospitalized patients,--,--,--,3,Elecsys anti-N,--,--,0% hospitalized,44,"72% female , 28% male",
+--,North America,USA,{ ? },24,Muecksch,non-hospitalized patients,--,--,--,3,Siemens Advia Centaur,--,--,0% hospitalized,44,"72% female , 28% male",
+--,Europe,Germany,Dresden,25,Kahre,hospitalized + non-hospitalized patients,*August 2020,*October 2020,*September 2020,5,Abbott Architect,--,--,7% hospitalized,46,"52% female , 48% male",table 1
+--,Europe,Germany,Dresden,25,Kahre,hospitalized + non-hospitalized patients,*January 2021,*March 2021,*February 2021,10,Abbott Architect,--,--,7% hospitalized,46,"52% female , 48% male",table 1
+--,Europe,Germany,Dresden,25,Kahre,hospitalized + non-hospitalized patients,*August 2020,*October 2020,*September 2020,5,Diasorin Liaison,--,--,7% hospitalized,46,"52% female , 48% male",table 1
+--,Europe,Germany,Dresden,25,Kahre,hospitalized + non-hospitalized patients,*January 2021,*March 2021,*February 2021,10,Diasorin Liaison,--,--,7% hospitalized,46,"52% female , 48% male",table 1
+--,Europe,Germany,Dresden,25,Kahre,hospitalized + non-hospitalized patients,*August 2020,*October 2020,*September 2020,5,Euroimmun anti-S,--,--,7% hospitalized,46,"52% female , 48% male",table 1
+--,Europe,Germany,Dresden,25,Kahre,hospitalized + non-hospitalized patients,*January 2021,*March 2021,*February 2021,10,Euroimmun anti-S,--,--,7% hospitalized,46,"52% female , 48% male",table 1
+"1,2",South Asia,India,Tamil Nadu: Chennai,26,Kumar,representative,7/17/2020,10/15/2020,8/31/2020,1 - 2,Abbott Architect,--,--,--,--,--,
+"1,2",South Asia,India,Tamil Nadu: Chennai,26,Kumar,representative,7/17/2020,10/15/2020,8/31/2020,2 - 3,Abbott Architect,--,--,--,--,--,
+"1,2",South Asia,India,Tamil Nadu: Chennai,26,Kumar,representative,7/17/2020,10/15/2020,8/31/2020,3 - 4,Abbott Architect,--,--,--,--,--,
+"1,2",South Asia,India,Tamil Nadu: Chennai,26,Kumar,representative,7/17/2020,10/15/2020,8/31/2020,4 - 5,Abbott Architect,--,--,--,--,--,
+1,Europe,Lithuania,6 cities and municipalities,27,Šmigelskas,representative,8/10/2020,9/10/2020,8/25/2020,--,AMP rapid test,--,--,--,--,--,email from study authors
+--,North America,USA,{ Arkansas },28,Kennedy,non-hospitalized patients,8/15/2020,9/5/2020,8/25/2020,--,Beckman ACCESS,--,--,0% hospitalized,--,--,
+--,North America,USA,{ Arkansas },28,Kennedy,non-hospitalized patients,9/12/2020,10/24/2020,10/3/2020,--,Beckman ACCESS,--,--,0% hospitalized,--,--,
+--,North America,USA,{ Arkansas },28,Kennedy,non-hospitalized patients,11/7/2020,12/19/2020,11/28/2020,--,Beckman ACCESS,--,--,0% hospitalized,--,--,
+1,North America,USA,National (COVIDVu),29,Sullivan,representative,--,--,10/30/2020,--,BioRad Platelia,--,--,--,--,--,
+2,North America,Canada,"National (CCAHS), unvaccinated population",30,Bushnik,representative,11/2/2020,4/30/2021,1/30/2021,--,CCAHS,--,--,--,--,--,
+1,Latin America,Argentina,Puerto Madryn,31,Schonfeld,representative,03/03/2021,4/17/2021,03/25/2021,--,COVIDAR,--,--,~4% hospitalized,39,"61% female , 39% male",positive on nasal swab (supplemental S2 data)
+--,Latin America,Argentina,{ ? },32,Ojeda,hospitalized + non-hospitalized patients,--,--,--,1,COVIDAR,--,--,--,--,--,
+--,Latin America,Argentina,{ ? },33,Longueira,hospitalized + non-hospitalized patients,--,*September 2020,--,1,COVIDAR,--,--,10% severe,37 - 45,"60% female , 40% male",table 1
+--,Latin America,Argentina,{ ? },33,Longueira,hospitalized + non-hospitalized patients,--,*September 2020,--,3,COVIDAR,--,--,12% severe,36 - 50,"65% female , 35% male",table 1
+1,Europe,Italy,Vo',34,Dorigatti,representative,5/1/2020,5/3/2020,5/2/2020,2,Abbott Architect,--,--,--,--,--,
+1,Europe,Italy,Vo',34,Dorigatti,representative,5/1/2020,5/3/2020,5/2/2020,2,Diasorin Liaison,--,--,--,--,--,
+1,Europe,Italy,Vo',34,Dorigatti,representative,5/1/2020,5/3/2020,5/2/2020,2,Elecsys anti-N,--,--,--,--,--,
+--,East Asia,South Korea,{ ? },35,Choe,non-hospitalized patients,--,--,--,8,EDI Novel Coronavirus,--,--,0% hospitalized,26,"60% female , 40% male",tables 1 and 2
+--,East Asia,South Korea,{ ? },35,Choe,non-hospitalized patients,--,--,--,8,Elecsys anti-N,--,--,0% hospitalized,26,"60% female , 40% male",tables 1 and 2
+--,East Asia,South Korea,{ ? },35,Choe,non-hospitalized patients,--,--,--,8,Euroimmun anti-S,--,--,0% hospitalized,26,"60% female , 40% male",tables 1 and 2
+--,East Asia,South Korea,{ ? },35,Choe,non-hospitalized patients,--,--,--,8,InBios,--,--,0% hospitalized,26,"60% female , 40% male",tables 1 and 2
+1,South Asia,India,Puducherry: Puducherry district,36,Kar,representative,8/11/2020,8/16/2020,8/13/2020,--,Elecsys anti-N,--,--,--,--,--,
+2,South Asia,India,Puducherry: Puducherry district,36,Kar,representative,9/10/2020,9/16/2020,9/13/2020,--,Elecsys anti-N,--,--,--,--,--,
+3,South Asia,India,Puducherry: Puducherry district,36,Kar,representative,10/12/2020,10/16/2020,10/14/2020,--,Elecsys anti-N,--,--,--,--,--,
+1,Oceania,Indonesia,Tanjung Priok sub-district,37,Herlinda,convenience (general population),11/23/2020,2/19/2021,1/6/2021,--,Elecsys anti-N,--,--,--,--,--,
+1,South Asia,India,Hyderabad,38,Laxmaiah,representative,1/8/2021,1/24/2021,1/16/2021,--,Elecsys anti-N,--,--,--,--,--,
+"2,3",East Asia,Japan,"Miyagi + Osaka + Tokyo (phase 3), Aichi + Fukuoka (phase 2)",39,National (NIID),representative,12/3/2021,12/27/2021,12/15/2021,--,Elecsys anti-N,--,--,--,--,--,
+"3,4",East Asia,Japan,"Miyagi + Osaka + Tokyo (phase 4), Aichi + Fukuoka (phase 3)",39,National (NIID),representative,2/2/2022,3/6/2022,2/18/2022,--,Elecsys anti-N,--,--,--,--,--,
+1,South Asia,India,"Odisha: Bhubaneswar (phase 2), Berhampur, Rourkela",40,Kshatri (SR),representative,8/6/2020,8/31/2020,8/18/2020,1,Elecsys anti-N,--,--,--,--,--,
+2,South Asia,India,Odisha: Bhubaneswar,41,Kshatri (EI),representative,--,--,8/26/2020,1,Elecsys anti-N,--,--,--,--,--,
+3,South Asia,India,Odisha: Bhubaneswar,41,Kshatri (EI),representative,--,--,9/18/2020,1,Elecsys anti-N,--,--,--,--,--,
+1,Europe,Iceland,National,42,Gudbjartsson,convenience (general population),4/3/2020,7/8/2020,5/21/2020,3,Elecsys anti-N,--,--,3% hospitalized,43,"52% female , 48% male","table S1 in appendix 1, appendix 2"
+1,Europe,Iceland,{ National },42,Gudbjartsson,convenience (general population),4/3/2020,7/8/2020,5/21/2020,3,Wantai,--,--,3% hospitalized,43,"52% female , 48% male","table S1 in appendix 1, appendix 2"
+--,East Asia,Japan,{ ? },43,Goto,convenience (general population),9/2/2020,10/26/2020,9/29/2020,6,Elecsys anti-N,--,--,73% hospitalized,50,"50% female , 50% male",table 1
+--,East Asia,Japan,{ ? },43,Goto,convenience (general population),9/2/2020,10/26/2020,9/29/2020,6,Tosoh N indirect,--,--,73% hospitalized,50,"50% female , 50% male",table 1
+--,East Asia,Japan,{ ? },43,Goto,convenience (general population),9/2/2020,10/26/2020,9/29/2020,6,Tosoh N sandwich,--,--,73% hospitalized,50,"50% female , 50% male",table 1
+--,East Asia,Japan,{ ? },43,Goto,convenience (general population),9/2/2020,10/26/2020,9/29/2020,6,Tosoh S indirect,--,--,73% hospitalized,50,"50% female , 50% male",table 1
+--,East Asia,Japan,{ ? },43,Goto,convenience (general population),9/2/2020,10/26/2020,9/29/2020,6,Tosoh S sandwich,--,--,73% hospitalized,50,"50% female , 50% male",table 1
+--,Europe,Sweden,{ Stockholm },44,Alkharaan,hospitalized + non-hospitalized patients,--,late 2020,--,9,Elecsys anti-N,--,--,3% hospitalized,57,"19% female , 81% male",table 2
+3,South Asia,India,Delhi,45,Sharma (TRTMH),representative,9/1/2020,9/7/2020,9/4/2020,--,ERBALISA,--,--,--,--,--,
+4,South Asia,India,Delhi,45,Sharma (TRTMH),representative,10/15/2020,10/21/2020,10/18/2020,--,ERBALISA,--,--,--,--,--,
+2,South Asia,India,Delhi,45,Sharma (TRTMH),representative,8/1/2020,8/7/2020,8/4/2020,--,Kavach ELISA IgG (Zydus),--,--,--,--,--,
+1,South Asia,India,West Bengal: Paschim Medinipur,46,Satpati,representative,7/27/2020,8/7/2020,8/1/2020,2,ERBALISA,--,--,--,--,--,
+1,Europe,France,National,47,Warszawski,representative,--,--,5/21/2020,--,Euroimmun anti-S,--,--,--,--,--,
+1,Europe,France,"Grand Est, Île-de-France, Nouvelle-Aquitaine",48,Carrat,representative,5/4/2020,6/23/2020,5/29/2020,--,Euroimmun anti-S,--,--,--,--,--,
+1,Europe,Germany,Kupferzell,49,Santos-Hövener,representative,5/20/2020,6/9/2020,5/30/2020,--,Euroimmun anti-S,--,--,34% moderate or severe,52,--,table 3
+1,South Asia,India,Pune (five prabhags/subwards),50,Ghose,representative,7/20/2020,8/5/2020,7/28/2020,--,Euroimmun anti-S,--,--,--,--,--,
+1,Europe,Germany,Reutlingen district,51,Gornyk,representative,7/1/2020,7/28/2020,7/14/2020,--,Euroimmun anti-S,--,--,--,46 - 65,"57% female, 43% male",supplement tables 1 + 2
+1,Europe,Germany,Freiburg + Breisgau-Hochschwarzwald,51,Gornyk,representative,8/5/2020,9/1/2020,8/18/2020,--,Euroimmun anti-S,--,--,--,46 - 65,"57% female, 43% male",supplement tables 1 + 2
+1,Europe,Germany,Aachen,51,Gornyk,representative,9/9/2020,10/9/2020,9/24/2020,--,Euroimmun anti-S,--,--,--,46 - 65,"57% female, 43% male",supplement tables 1 + 2
+1,Europe,Germany,Osnabrück district + Osnabrück city,51,Gornyk,representative,10/15/2020,11/15/2020,10/30/2020,--,Euroimmun anti-S,--,--,--,46 - 65,"57% female, 43% male",supplement tables 1 + 2
+1,Europe,Germany,Magdeburg,51,Gornyk,representative,11/18/2020,12/15/2020,12/1/2020,--,Euroimmun anti-S,--,--,--,46 - 65,"57% female, 43% male",supplement tables 1 + 2
+--,Latin America,Brazil,{ Rio de Janeiro city },53,Alvim,hospitalized + non-hospitalized patients,--,--,--,1,Euroimmun anti-S,--,--,--,--,--,
+--,Latin America,Brazil,{ Rio de Janeiro city },53,Alvim,hospitalized + non-hospitalized patients,--,--,--,1 - 3,Euroimmun anti-S,--,--,--,--,--,
+--,Latin America,Brazil,{ Rio de Janeiro city },53,Alvim,hospitalized + non-hospitalized patients,--,--,--,1,University of Rio de Janeiro,--,--,--,--,--,
+--,Latin America,Brazil,{ Rio de Janeiro city },53,Alvim,hospitalized + non-hospitalized patients,--,--,--,1 - 3,University of Rio de Janeiro,--,--,--,--,--,
+--,Europe,Germany,{ Cologne },54,Vanshylla,hospitalized + non-hospitalized patients,4/6/2020,--,--,2,Euroimmun anti-S,--,--,2.9% hospitalized,44,"54% female , 46% male",figure 1
+--,Europe,Germany,{ Cologne },54,Vanshylla,hospitalized + non-hospitalized patients,--,--,--,4,Euroimmun anti-S,--,--,2.9% hospitalized,44,"54% female , 46% male",figure 1
+--,Europe,Germany,{ Cologne },54,Vanshylla,hospitalized + non-hospitalized patients,--,--,--,7,Euroimmun anti-S,--,--,2.9% hospitalized,44,"54% female , 46% male",figure 1
+--,Europe,Germany,{ Cologne },54,Vanshylla,hospitalized + non-hospitalized patients,--,12/17/2020,--,9,Euroimmun anti-S,--,--,2.9% hospitalized,44,"54% female , 46% male",figure 1
+1,Europe,England,National (REACT-2),59,Ward (Nature),representative,6/20/2020,7/13/2020,7/1/2020,--,Fortress Diagnostics,--,--,--,--,--,
+2,Europe,England,National (REACT-2),60,Ward (Lancet R),representative,7/31/2020,8/13/2020,8/6/2020,--,Fortress Diagnostics,--,--,--,--,--,
+3,Europe,England,National (REACT-2),60,Ward (Lancet R),representative,9/15/2020,9/28/2020,9/21/2020,--,Fortress Diagnostics,--,--,--,--,--,
+4,Europe,England,National (REACT-2),61,Ward (MedRxiv),representative,10/27/2020,11/10/2020,11/3/2020,--,Fortress Diagnostics,--,--,--,--,--,
+1,Europe,Spain,Cantabria,62,Iruzubieta,representative,4/27/2020,5/29/2020,5/13/2020,--,Hangzhou Clongene,--,--,--,--,--,
+--,Europe,Finland,{ 5 hospital districts },63,Haveri,convenience (general population),--,--,*October 2020,8,"THL Finland, in-house FMIA",--,--,13% hospitalized,49,"57% female , 43% male",tables 1 and 2
+--,Europe,Finland,{ 5 hospital districts },63,Haveri,convenience (general population),--,--,*May 2021,13,"THL Finland, in-house FMIA",--,--,13% hospitalized,49,"57% female , 43% male",tables 1 and 2
+--,Europe,Finland,{ 5 hospital districts },63,Haveri,convenience (general population),--,--,*October 2020,8,"THL Finland, in-house neutralisation assay",--,--,13% hospitalized,49,"57% female , 43% male",tables 1 and 2
+--,Europe,Finland,{ 5 hospital districts },63,Haveri,convenience (general population),--,--,*May 2021,13,"THL Finland, in-house neutralisation assay",--,--,13% hospitalized,49,"57% female , 43% male",tables 1 and 2
+--,Europe,Finland,{ Helsinki },64,Study by THL,convenience (general population),--,--,--,4,"THL Finland, in-house neutralisation assay",--,--,--,--,--,
+--,Europe,Finland,{ 5 hospital districts },65,THL's study,convenience (general population),*early November 2020,December 2020,--,>6,"THL Finland, in-house neutralisation assay",--,--,--,--,--,
+1,Africa,South Africa,Gauteng,66,Mutevedzi,representative,11/4/2020,1/22/2021,12/13/2020,--,"Gauteng, in-house Luminex",--,--,--,--,--,
+1,Africa,Tunisia,El Omrane + La Goulette,67,Cherif,representative,*March 2021,*April 2021,,--,"Tunis, in-house",--,--,--,--,--,
+1,Europe,Andorra,National,68,Royo-Cebrecos,representative,5/4/2020,5/13/2020,5/8/2020,--,Livzon lateral flow,--,--,--,--,--,
+1,Europe,Denmark,National (We test),69,Fogh,representative,10/2/2020,10/11/2020,10/6/2020,1,Livzon lateral flow,--,--,--,49 [34 - 59],"61% female, 39% male",table 2
+1,Europe,Denmark,National (We test),69,Fogh,representative,10/2/2020,10/11/2020,10/6/2020,2,Livzon lateral flow,--,--,--,49 [34 - 59],"61% female, 39% male",table 2
+1,Europe,Denmark,National (We test),69,Fogh,representative,10/2/2020,10/11/2020,10/6/2020,4,Livzon lateral flow,--,--,--,49 [34 - 59],"61% female, 39% male",table 2
+1,Europe,Denmark,National (We test),69,Fogh,representative,10/2/2020,10/11/2020,10/6/2020,6,Livzon lateral flow,--,--,--,49 [34 - 59],"61% female, 39% male",table 2
+1,Europe,Denmark,National (We test),69,Fogh,representative,10/2/2020,10/11/2020,10/6/2020,7,Livzon lateral flow,--,--,--,49 [34 - 59],"61% female, 39% male",table 2
+2,Europe,USA,"Los Angeles County, unvaccinated population",70,Sood,representative,4/9/2021,4/25/2021,4/17/2021,--,Luminex xMAP (RBD portion),--,--,--,--,--,
+1,Europe,USA,Holyoke,71,Matias,representative,11/5/2020,12/31/2020,12/3/2020,--,Massachusetts General Hospital,--,--,--,--,--,
+1,Europe,USA,"Hillsborough County, unvaccinated population",72,Giuliano,representative,*October 2020,*March 2021,,--,Mount Sinai (New York),--,--,≤ 6% hospitalized,--,--,
+1,North America,USA,"Hillsborough County, unvaccinated population",72,Giuliano,representative,*October 2020,*March 2021,,>6,Mount Sinai (New York),--,--,≤ 27% hospitalized,--,--,
+1,Europe,Switzerland,11 cantons,75,Blankenberger,representative,*October 2020,*February 2021,*December 2020,--,SenASTrIS test,--,--,--,--,--,
+1,Europe,Switzerland,{ Vaud },76,Dupraz,convenience (general population),5/4/2020,6/27/2020,5/31/2020,2 - 3,SenASTrIS test,--,--,15% hospitalized,49,"56% female , 44% male",table 1
+1,Europe,Portugal,National (Castro et al.),77,Castro,convenience (general population),9/8/2020,10/14/2020,9/26/2020,--,Siemens Advia Centaur,--,--,--,--,--,
+1,Latin America,Peru,Lima Metropolitana (provinces of Lima + Callao),78,Reyes-Vega,representative,6/28/2020,7/9/2020,7/3/2020,--,Standard Q,--,--,--,--,--,
+--,North America,Canada,{ Toronto and Peel },79,Isho,hospitalized + non-hospitalized patients,--,--,--,2 - 3,Sinai Health (Toronto),--,--,~26% hospitalized,58,"48% female , 52% male","table 1, figure 1 legend"
+1,Middle East,Lebanon,National,80,Hoballah,representative,12/7/2020,1/15/2021,12/26/2020,--,Techno Genetics,--,--,--,--,--,
+1,North America,USA,Connecticut,81,Mahajan,representative,6/10/2020,7/29/2020,7/4/2020,--,Vitros Ortho (not total antibodies),--,--,--,--,--,
+5,South Asia,India,"Delhi, unvaccinated population",82,Sharma (Cureus),representative,1/11/2021,1/22/2021,1/16/2021,--,Vitros Ortho (not total antibodies),--,--,--,--,--,
+6,South Asia,India,"Delhi, unvaccinated population",83,Sharma (MedRxiv),representative,9/24/2021,10/14/2021,10/4/2021,--,Vitros Ortho (not total antibodies),--,--,--,--,--,
+1,South Asia,Maldives,greater Male’ area,84,Abdul-Raheem,representative,10/15/2020,11/16/2020,10/31/2020,4,Vitros Ortho (not total antibodies),--,--,--,--,--,
+1,Europe,Italy,Caldari Ortona (Villa Caldari),84,Cito,representative,4/18/2020,4/19/2020,4/18/2020,1,Wantai,--,--,--,--,--,
+1 - 4,Europe,Denmark,National (SSI) + 30 municipalities subset,86,Espenhain,representative,5/18/2020,12/16/2020,9/1/2020,2,Wantai,--,--,--,--,--,
+2,Europe,Spain,National,73,INFORME FINAL,representative,5/18/2020,6/1/2020,5/25/2020,--,Orient Gene Biotech,--,--,--,--,"58% female , 42% male",tabla 2 on page 10
+3,Europe,Spain,National,73,INFORME FINAL,representative,6/8/2020,6/22/2020,6/15/2020,--,Orient Gene Biotech,--,--,--,--,"58% female , 42% male",tabla 2 on page 10
+4,Europe,Spain,National,74,CUARTA RONDA,representative,11/16/2020,11/29/2020,11/22/2020,--,Orient Gene Biotech,--,--,--,--,"54% female , 46% male",tabla 2 on page 11
+1,Europe,Germany,Bad Feilnbach,57,Seroepidemiologische,representative,6/23/2020,7/4/2020,6/28/2020,--,Euroimmun anti-S,--,--,--,--,--,
+1,Europe,Germany,Mitte (in Berlin),57,Seroepidemiologische,representative,11/17/2020,12/5/2020,11/26/2020,--,Euroimmun anti-S,--,--,--,--,--,
+2,Europe,Germany,Reutlingen district,51,Gornyk,representative,10/14/2020,11/10/2020,10/27/2020,--,Euroimmun anti-S,--,--,--,46 - 65,"57% female, 43% male",supplement tables 1 + 2
+2,Europe,Germany,Freiburg + Breisgau-Hochschwarzwald,51,Gornyk,representative,11/18/2020,12/15/2020,12/1/2020,--,Euroimmun anti-S,--,--,--,46 - 65,"57% female, 43% male",supplement tables 1 + 2
+2,Europe,Germany,"Aachen region, unvaccinated population",51,Gornyk,representative,1/25/2021,2/27/2021,2/10/2021,--,Euroimmun anti-S,--,--,--,46 - 65,"57% female, 43% male",supplement tables 1 + 2
+2,Europe,Germany,"Osnabrück district + Osnabrück city, unvaccinated population",51,Gornyk,representative,3/1/2021,3/31/2021,3/16/2021,--,Euroimmun anti-S,--,--,--,46 - 65,"57% female, 43% male",supplement tables 1 + 2
+2,Europe,Germany,"Magdeburg, unvaccinated population",51,Gornyk,representative,4/7/2021,5/5/2021,4/21/2021,--,Euroimmun anti-S,--,--,--,46 - 65,"57% female, 43% male",supplement tables 1 + 2
+"1,2",Europe,Germany,"Chemnitz, unvaccinated population",51,Gornyk,representative,3/3/2021,8/17/2021,5/25/2021,--,Euroimmun anti-S,--,--,--,46 - 65,"57% female, 43% male",supplement tables 1 + 2
+1,Europe,Germany,"Vorpommern-Greifswald, unvaccinated population",51,Gornyk,representative,5/12/2021,6/8/2021,5/25/2021,--,Euroimmun anti-S,--,--,--,46 - 65,"57% female, 43% male",supplement tables 1 + 2
+1,Europe,Germany,Straubing,"52 , 57","RKI , Seroepidemiologische",representative,9/8/2020,9/26/2020,9/17/2020,--,Euroimmun anti-S,--,--,--,--,--,
+5,Europe,Denmark,"National (SSI), unvaccinated population",87,fra 4,representative,2/27/2021,4/20/2021,*3/17/2021,4,Wantai,--,--,--,--,--,
+6,Europe,Denmark,"National (SSI), unvaccinated population",88,fra 5,representative,5/14/2021,7/11/2021,*6/10/2021,5,Wantai,--,--,--,--,--,
+1,Europe,Germany,National (SOEP),58,Neuhauser,representative,--,--,11/11/2020,2,Euroimmun anti-S,--,--,--,35 - 49,"47% female , 53% male",table 1

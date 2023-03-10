@@ -1,30 +1,15 @@
 ##################################
-# 
-# This script fits a model to data on time-varying
-# sensitivity of different serology assays. 
-# The fitting is done taking into account different test
-# characteristics.
 #
-# This script generates the main results of the associated paper
-# "Dynamics of SARS-CoV-2 seroassay sensitivity: a systematic review
-# and modeling study"
+# This script does the same as script 05, but fitting
+# the model only to the datapoints where the time
+# from diagnosis to serotesting is reported, and
+# excluding those where we estimated those times
+# (i.e. those generated in script 02).
+#
+# The results of this script are reported in
+# Supplementary Section F of the associated manuscript
 # https://www.medrxiv.org/content/10.1101/2022.09.08.22279731v3
-# currently in press in Eurosurveillance
-# 
-# The results obtained from this script are used to generate
-# Figure 3, and Table 1. Some supplementary Figures (i.e. most
-# variants of our main analysis) are also generated with this script.
-#
-# Analogous to script 04, this script generates the following files:
-# * "../data/analysis_results/05_characteristics_XXX_posteriors_samples.csv":
-# All the draws obtained from MCMC with the model. Full generated analysis, but untidy.
-# * "../data/analysis_results/05_characteristics_XXX_assay_sensitivity_curve.csv": The
-# sensitivity vs time estimate for both, the average of each different type of assay
-# (as determined by assay characteristics), and each individual assay. These results
-# are the red and black lines, respectively, of Fig 3.
-# * "../data/analysis_results/05_characteristics_XXX_parameter_summary.csv": The
-# summary of all the parameters obtained in the model. The effect sizes reported
-# in the manuscript for different assay characteristics come from this file.
+# now in press at Eurosurveillance
 # 
 # Script authored by Daniel Herrera-Esposito.
 # For questions, contact me at dherrera1911[at]gmail.com
@@ -76,19 +61,8 @@ seroFitted$Direct <- ! seroFitted$LFA &
 seroFitted$Neutralization <- ! seroFitted$LFA &
   stringr::str_detect(seroFitted$design, "competitive")
 
-#seroFitted$ELISA <- stringr::str_detect(seroFitted$technique, "ELISA")
-#seroFitted$chemlum <- (stringr::str_detect(seroFitted$technique, "CMIA") |
-#                       stringr::str_detect(seroFitted$technique, "CLIA"))
-#seroFitted$IgM <- stringr::str_detect(seroFitted$antibodyTarget, "IgM")
-#seroFitted$IgA <- stringr::str_detect(seroFitted$antibodyTarget, "IgA")
-#seroFitted$IgG <- TRUE
-#seroFitted$Total <- seroFitted$IgM & seroFitted$IgA
-#seroFitted$sandwich <- stringr::str_detect(seroFitted$design, "sandwich")
-#seroFitted$indirect <- stringr::str_detect(seroFitted$design, "indirect")
-#seroFitted$competitive <- stringr::str_detect(seroFitted$design, "competitive")
-#seroFitted$notSandwich <- seroFitted$indirect | seroFitted$competitive
-
-
+# Remove assays where diagnosis to testing time was estimated
+seroFitted <- dplyr::filter(seroFitted, timeKnown)
 
 ############
 # Make indicator matrix with assay characters to fit
@@ -173,11 +147,11 @@ initList <- sample_initial_values(nChains=nChains, paramListName=paramListName,
 ###################
 
 # compile model
-regression_model <- rstan::stan_model("./stan_models/sensitivity_change_chars.stan",
-                                 model_name="time_change_sensitivity",
-                                 warn_pedantic=TRUE)
+#regression_model <- rstan::stan_model("./stan_models/sensitivity_change_chars.stan",
+#                                 model_name="time_change_sensitivity",
+#                                 warn_pedantic=TRUE)
 # load model if available
-#regression_model <- readRDS("./stan_models/sensitivity_change_chars.RDS")
+regression_model <- readRDS("./stan_models/sensitivity_change_chars.RDS")
 
 # Make a list with the input we pass to STAN
 assayDataList <- list(N=nrow(seroFitted),
@@ -222,9 +196,8 @@ posteriorTraces$studyAssay <- studyAssayVec[posteriorTraces$stu]
 posteriorTraces$studyCitation <- studyVec[posteriorTraces$stu]
 posteriorTraces <- ungroup(posteriorTraces)
 
-write.csv(posteriorTraces, paste("../data/analysis_results/05_characteristics_",
-                fileIdentifier, "_posterior_samples.csv", sep=""), row.names=FALSE)
-
+write.csv(posteriorTraces, paste("../data/analysis_results/08_characteristics_",
+                fileIdentifier, "_posterior_samples_known_times.csv", sep=""), row.names=FALSE)
 
 ###################
 # Save the predicted sensitivity profile for each test,
@@ -271,8 +244,8 @@ meanCharProfileDf$testName <- NA
 assayFitDf <- rbind(meanCharProfileDf, assayFitDf)
 
 # Export sensitivity profiles
-write.csv(assayFitDf, paste("../data/analysis_results/05_characteristics_",
-            fileIdentifier, "_assay_sensitivity_curve.csv", sep=""), row.names=FALSE)
+write.csv(assayFitDf, paste("../data/analysis_results/08_characteristics_",
+            fileIdentifier, "_assay_sensitivity_curve_known_times.csv", sep=""), row.names=FALSE)
 
 # Get summary statistics of the fitted parameters
 parameterSummary <- ungroup(posteriorTraces) %>%
@@ -308,7 +281,7 @@ for (cc in c(1:nrow(uniqueCharRows))) {
   }
 }
 
-write.csv(parameterSummary, paste("../data/analysis_results/05_characteristics_",
-            fileIdentifier, "_parameter_summary.csv", sep=""), row.names=FALSE)
+write.csv(parameterSummary, paste("../data/analysis_results/08_characteristics_",
+            fileIdentifier, "_parameter_summary_known_times.csv", sep=""), row.names=FALSE)
 
 

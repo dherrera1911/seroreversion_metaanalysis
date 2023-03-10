@@ -1,29 +1,16 @@
 ####################################################
 #
-# Plot sensitivity across time, both for the 'averages'
+# Tabulate the sensitivity across time, both for the 'averages'
 # of the different types of assays, and the assay-specific
-# sensitivity profiles.
-# Generates plots for figures 2B, 3B, 4B, 5B, 6B
-# and supplementary Figure S1
+# sensitivity profiles, rounding up the percentages and in a
+# tidy form.
+# Generates tables 1 and S1.
 # 
-# The inputs for plotting and statistical analysis are
-# the posterior means and intervals of sensitivity
-# across time, that are computed when fitting the
-# models, the original data points (to overlay with the fits),
-# and a dataset with original data and the results of
-# cross-validation.
-#
-# Files with sensitivity profiles are in ../data/processed_data/
-# and have names 'XXX_sensitivity_curve.csv', where XXX
-# indicates the model fitted.
+# Script authored by Daniel Herrera-Esposito.
+# For questions, contact me at dherrera1911[at]gmail.com
 # 
-# The original data points are in file
-# ../data/processed_data/PCR_to_serotest_all.csv
-#
-# The results of crossvalidation are in
-# '../data/analysis_results/XXX_grouped_CV', where
-# XXX indicates the model that was used for crossvalidation
-#
+# Final version revised 10/03/2023
+# 
 ####################################################
 
 library(dplyr)
@@ -39,8 +26,8 @@ library(ggthemes)
 library(lemon)
 library(cowplot)
 library(ggpubr)
-source("./functions_auxiliary.R")
-source("./functions_seroreversion_fit_analysis.R")
+source("../functions_auxiliary.R")
+source("../functions_seroreversion_fit_analysis.R")
 
 #################################
 #################################
@@ -49,9 +36,9 @@ source("./functions_seroreversion_fit_analysis.R")
 #################################
 
 # Load sensitivity profile of basic model
-basicModelProfile <- read.csv("../data/analysis_results/04_assay_sensitivity_curve.csv",
+basicModelProfile <- read.csv("../../data/analysis_results/04_assay_sensitivity_curve.csv",
                                stringsAsFactors=FALSE)
-fullModelProfile <- read.csv("../data/analysis_results/05_characteristics_fullModel_assay_sensitivity_curve.csv",
+fullModelProfile <- read.csv("../../data/analysis_results/05_characteristics_fullModel_assay_sensitivity_curve.csv",
                            stringsAsFactors=FALSE)
 
 tabulatedTimes <- seq(1, 14, 1)
@@ -63,7 +50,6 @@ meanProfiles$sensitivityQL <- as.character(round(meanProfiles$sensitivityQL*100)
 meanProfiles$sensitivityH <- as.character(round(meanProfiles$sensitivityH*100))
 meanProfiles$sensitivityQH <- as.character(round(meanProfiles$sensitivityQH*100))
 
-
 meanProfiles$sensitivityStr <- with(meanProfiles,
           paste(sensitivityMean, ' (', sensitivityL, '-', sensitivityH, ')', sep=""))
 
@@ -73,14 +59,12 @@ meanProfiles$antigen[with(meanProfiles, S)] <- "S"
 meanProfiles$antigen[with(meanProfiles, RBD)] <- "RBD"
 
 
-tidySens <- select(meanProfiles, time, antigen, LFA, sandwich, sensitivityStr) %>%
-  pivot_wider(., names_from='time', id_cols=c(antigen, LFA, sandwich),
+tidySens <- select(meanProfiles, time, antigen, LFA, Direct, Neutralization, sensitivityStr) %>%
+  pivot_wider(., names_from='time', id_cols=c(antigen, LFA, Direct, Neutralization),
                     values_from=sensitivityStr, names_prefix="")
 
 write.csv(tidySens, "../data/analysis_results/sensitivity_profile_table.csv",
 row.names=FALSE)
-
-
 
 #################################
 #################################
@@ -88,7 +72,7 @@ row.names=FALSE)
 #################################
 #################################
 
-assayChars <- read.csv("../data/raw_data/assay_characteristics.csv", stringsAsFactors=FALSE)
+assayChars <- read.csv("../../data/raw_data/assay_characteristics.csv", stringsAsFactors=FALSE)
 
 assayProfiles <- filter(fullModelProfile, !is.na(testName) & time %in% tabulatedTimes)
 assayProfiles$sensitivityMean <- as.character(round(assayProfiles$sensitivityMean*100))
@@ -97,7 +81,6 @@ assayProfiles$sensitivityQL <- as.character(round(assayProfiles$sensitivityQL*10
 assayProfiles$sensitivityH <- as.character(round(assayProfiles$sensitivityH*100))
 assayProfiles$sensitivityQH <- as.character(round(assayProfiles$sensitivityQH*100))
 
-
 assayProfiles$sensitivityStr <- with(assayProfiles,
           paste(sensitivityMean, ' (', sensitivityL, '-', sensitivityH, ')', sep=""))
 
@@ -105,19 +88,27 @@ assayTidySens <- select(assayProfiles, time, testName, sensitivityStr) %>%
   pivot_wider(., names_from='time', id_cols=testName,
                     values_from=sensitivityStr, names_prefix="")
 
-write.csv(assayTidySens, "../data/analysis_results/sensitivity_profile_table_AssaysFull.csv",
-row.names=FALSE)
+assayNamesTable <- dplyr::filter(assayChars, test_name_long %in% assayTidySens$testName) %>%
+  dplyr::select(., test_name_long, test_name_simplified) %>%
+  dplyr::rename(., testName=test_name_long)
+
+assayTidySens <- merge(assayNamesTable, assayTidySens)
+
+write.csv(assayTidySens, "../../data/analysis_results/sensitivity_profile_table_AssaysFull.csv",
+  row.names=FALSE)
 
 
 # Get assays missing from the full model
 missingAssaysInd <- which(!basicModelProfile$testName %in% assayProfiles$testName)
 missingAssays <- unique(basicModelProfile$testName[missingAssaysInd])
 
+# Get the characteristics of missing assays, to see what model
+# to use for their sensitivity
 missingAssayChars <- dplyr::filter(assayChars, test_name_long %in% missingAssays) %>%
   dplyr::select(., test_name_long, antigen.target, test.design, assay.type)
 
 # Load technique model profile and save those assays separately
-designModelProfile <- read.csv("../data/analysis_results/05_characteristics_design_assay_sensitivity_curve.csv",
+designModelProfile <- read.csv("../../data/analysis_results/05_characteristics_design_assay_sensitivity_curve.csv",
                                stringsAsFactors=FALSE)
 
 designModelAssays <- filter(designModelProfile, testName %in% missingAssays & !is.na(testName))
@@ -136,12 +127,18 @@ assayTidySens_design <- select(designModelAssays, time, testName, sensitivityStr
   pivot_wider(., names_from='time', id_cols=testName,
                     values_from=sensitivityStr, names_prefix="")
 
-write.csv(assayTidySens_design, "../data/analysis_results/sensitivity_profile_table_AssaysDesign.csv",
+assayNamesTable <- dplyr::filter(assayChars, test_name_long %in% assayTidySens_design$testName) %>%
+  dplyr::select(., test_name_long, test_name_simplified) %>%
+  dplyr::rename(., testName=test_name_long)
+
+assayTidySens_design <- merge(assayNamesTable, assayTidySens_design)
+
+write.csv(assayTidySens_design, "../../data/analysis_results/sensitivity_profile_table_AssaysDesign.csv",
 row.names=FALSE)
 
 
 # Load antigen model profile and save those assays separately
-antigenModelProfile <- read.csv("../data/analysis_results/05_characteristics_antigen_technique_assay_sensitivity_curve.csv",
+antigenModelProfile <- read.csv("../../data/analysis_results/05_characteristics_antigen_technique_assay_sensitivity_curve.csv",
                                stringsAsFactors=FALSE)
 
 antigenModelAssays <- filter(antigenModelProfile, testName %in% missingAssays & !is.na(testName))
@@ -160,27 +157,31 @@ assayTidySens_antigen <- select(antigenModelAssays, time, testName, sensitivityS
   pivot_wider(., names_from='time', id_cols=testName,
                     values_from=sensitivityStr, names_prefix="")
 
-write.csv(assayTidySens_antigen, "../data/analysis_results/sensitivity_profile_table_AssaysAntigen.csv",
+assayNamesTable <- dplyr::filter(assayChars, test_name_long %in% assayTidySens_antigen$testName) %>%
+  dplyr::select(., test_name_long, test_name_simplified) %>%
+  dplyr::rename(., testName=test_name_long)
+
+assayTidySens_antigen <- merge(assayNamesTable, assayTidySens_antigen)
+
+
+write.csv(assayTidySens_antigen, "../../data/analysis_results/sensitivity_profile_table_AssaysAntigen.csv",
 row.names=FALSE)
 
+# Make a table with tidy assay characteristics
+assayProfiles$Antigen[with(assayProfiles, N)] <- "Nucleocapsid"
+assayProfiles$Antigen[with(assayProfiles, S)] <- "Spike"
+assayProfiles$Antigen[with(assayProfiles, RBD)] <- "Receptor-binding domain"
 
-# Get basic model fit to the last assay
-basicModelAssays <- filter(basicModelProfile, testName %in% missingAssays[6] & !is.na(testName))
+assayProfiles$Design[assayProfiles$LFA] <- "LFA"
+assayProfiles$Design[with(assayProfiles, !LFA & !Direct=="No" &
+                             !Neutralization)] <- "Quantitative-Indirect"
+assayProfiles$Design[assayProfiles$Direct] <- "Quantitative-Direct"
+assayProfiles$Design[assayProfiles$Neutralization] <- "Quantitative-Competitive"
 
-basicModelAssays <- filter(basicModelAssays, !is.na(testName) & time %in% tabulatedTimes)
-basicModelAssays$sensitivityMean <- as.character(round(basicModelAssays$sensitivityMean*100))
-basicModelAssays$sensitivityL <- as.character(round(basicModelAssays$sensitivityL*100))
-basicModelAssays$sensitivityQL <- as.character(round(basicModelAssays$sensitivityQL*100))
-basicModelAssays$sensitivityH <- as.character(round(basicModelAssays$sensitivityH*100))
-basicModelAssays$sensitivityQH <- as.character(round(basicModelAssays$sensitivityQH*100))
+assayCharsTidy <- dplyr::select(assayProfiles, testName, Antigen, Design) %>%
+  unique(.)
 
-basicModelAssays$sensitivityStr <- with(basicModelAssays,
-          paste(sensitivityMean, ' (', sensitivityL, '-', sensitivityH, ')', sep=""))
-
-assayTidySens_basic <- select(basicModelAssays, time, testName, sensitivityStr) %>%
-  pivot_wider(., names_from='time', id_cols=testName,
-                    values_from=sensitivityStr, names_prefix="")
-
-write.csv(assayTidySens_basic, "../data/analysis_results/sensitivity_profile_table_AssaysBasic.csv",
+write.csv(assayCharsTidy, "../../data/analysis_results/tidy_assay_characteristics.csv",
 row.names=FALSE)
+
 

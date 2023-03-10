@@ -1,3 +1,30 @@
+###############################
+# 
+# This script does some pre-processing on the raw data
+# for its analysis. Some of the pre-processing steps taken:
+# * Convert reported ranges of diagnosis-to-serotest times to
+# their median time points
+# * Put together the datasets of known and estimated
+# diagnosis-to-serotest times 
+# * Remove rows that report results on multiple assays simultaneously
+# * Some rows report either only sensitivyt and 95%CI, or only
+# nPositive and nSampled. Use the presented values to fill in the
+# missing values for these rows.
+# * Tidy the columns with assay characteristics
+# * Remove rows of assay Obolensk, which doesn't have reported
+# diagnosis-to-test times nor a reliable case reporting
+#
+# The output of the script is the final dataset that is used
+# to fit the models in the paper, i.e.
+#"../data/processed_data/PCR_to_serotest_all.csv",
+# 
+# Script authored by Daniel Herrera-Esposito.
+# For questions, contact me at dherrera1911[at]gmail.com
+# 
+# Final version revised 10/03/2023
+# 
+###############################
+
 library(dplyr)
 library(tidyr)
 library(lubridate)

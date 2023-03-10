@@ -1,19 +1,26 @@
 ####################################################
 #
+# FIGURES 2, S5 of associated paper
+# "Dynamics of SARS-CoV-2 seroassay sensitivity: a systematic
+# review and modeling study"
+#
 # Plot the whisker plot that shows the slope and
 # intercept for each assay, obtained from the basic
-# model (without test characteristics).
-# Generates the plots for figures 1A, 1B
+# model (without test characteristics). Can do with either
+# all data (Fig 2), or data with only known diagnosis-to-test
+# times (Fig S5).
 # 
 # The inputs for plotting and statistical analysis are
 # the posterior samples of the fitted models, which
 # are in .csv files with the names
-# '05_characteristics_XXX_posterior_samples', where
-# XXX = the model identifier. These are generated in
-# script 05_characteristics_sensitivity_analysis.R
+# '04_parameter_summary.csv'.
 #
-####################################################
-
+# Script authored by Daniel Herrera-Esposito.
+# For questions, contact me at dherrera1911[at]gmail.com
+# 
+# Final version revised 10/03/2023
+# 
+###############################
 
 library(dplyr)
 library(tidyr)
@@ -27,8 +34,8 @@ library(ggthemes)
 library(lemon)
 library(cowplot)
 library(ggpubr)
-source("./functions_auxiliary.R")
-source("./functions_seroreversion_fit_analysis.R")
+source("../functions_auxiliary.R")
+source("../functions_seroreversion_fit_analysis.R")
 
 regLineSize=1
 ribbonAlpha=0.2
@@ -40,19 +47,29 @@ sampleLineAlpha=0.1
 dataAlpha <- 0.5
 
 # Load the pre-computed summary of parameters
-assaySummaryDf <- read.csv("../data/analysis_results/04_parameter_summary.csv",
-                           stringsAsFactors=FALSE) %>%
-  dplyr::filter(., !is.na(assay))
+knownTimesOnly <- TRUE
+if (!knownTimesOnly) {
+  assaySummaryDf <- read.csv("../../data/analysis_results/04_parameter_summary.csv",
+                             stringsAsFactors=FALSE) %>%
+    dplyr::filter(., !is.na(assay))
+  knownTimesStr <- ""
+} else {
+  assaySummaryDf <- read.csv("../../data/analysis_results/04_parameter_summary_known_times.csv",
+                             stringsAsFactors=FALSE) %>%
+    dplyr::filter(., !is.na(assay))
+  knownTimesStr <- "_known_times"
+}
 
-assayChars <- read.csv("../data/raw_data/assay_characteristics.csv",
+assayChars <- read.csv("../../data/raw_data/assay_characteristics.csv",
                        stringsAsFactors=FALSE)
 
+# Add columns to assay summary, with characteristics from the assay chars table
 assayInd <- match(assaySummaryDf$assay, assayChars$test_name_long)
 assaySummaryDf$assay2 <- assayChars$test_name_simplified[assayInd]
 assaySummaryDf$Antigen <- assayChars$antigen.target[assayInd]
 assaySummaryDf$Antigen[assaySummaryDf$Antigen == "--"] <- NA
-assaySummaryDf$Design <- assayChars$test.design[assayInd]
-assaySummaryDf$Design[assaySummaryDf$Design == ""] <- NA
+assaySummaryDf$Binding <- assayChars$test.design[assayInd]
+assaySummaryDf$Binding[assaySummaryDf$Design == ""] <- NA
 assaySummaryDf$Technique <- assayChars$assay.type[assayInd]
 
 ############
@@ -63,18 +80,28 @@ assaySummaryDf$S <- stringr::str_detect(assaySummaryDf$Antigen, "S") &
   !assaySummaryDf$RBD
 assaySummaryDf$N <- stringr::str_detect(assaySummaryDf$Antigen, "N") &
   !(assaySummaryDf$RBD | assaySummaryDf$S)
+assaySummaryDf$Direct <- assaySummaryDf$Binding == "sandwich"
+assaySummaryDf$Indirect <- assaySummaryDf$Binding == "indirect"
+assaySummaryDf$Neutralization <- assaySummaryDf$Binding == "competitive"
+assaySummaryDf$LFA <- stringr::str_detect(assaySummaryDf$Technique, "LFIA")
+
+# Turn binary columns into names for the plot
 assaySummaryDf$Antigen[assaySummaryDf$RBD] <- "Receptor-binding domain"
 assaySummaryDf$Antigen[assaySummaryDf$S] <- "Spike"
 assaySummaryDf$Antigen[assaySummaryDf$N] <- "Nucleocapsid"
 assaySummaryDf$Antigen[is.na(assaySummaryDf$Antigen)] <- "Unknown"
 assaySummaryDf$Antigen <- factor(assaySummaryDf$Antigen, levels=c("Nucleocapsid", "Spike",
                                             "Receptor-binding domain", "Unknown")) 
-assaySummaryDf$LFA <- stringr::str_detect(assaySummaryDf$Technique, "LFIA")
-binaryString <- c("No", "Yes")
-assaySummaryDf$LFA <- binaryString[as.integer(assaySummaryDf$LFA)+1]
-assaySummaryDf$Sandwich <- stringr::str_detect(assaySummaryDf$Design, "sandwich")
-assaySummaryDf$Sandwich <- binaryString[as.integer(assaySummaryDf$Sandwich)+1]
-assaySummaryDf$Sandwich[is.na(assaySummaryDf$Sandwich)] <- "Unknown"
+
+assaySummaryDf$Design[with(assaySummaryDf, LFA)] <- "LFA"
+assaySummaryDf$Design[with(assaySummaryDf, !LFA & Indirect)] <- "Quantitative-Indirect"
+assaySummaryDf$Design[with(assaySummaryDf, !LFA & Direct)] <- "Quantitative-Direct"
+assaySummaryDf$Design[with(assaySummaryDf, !LFA & Neutralization)] <- "Quantitative-Competitive"
+assaySummaryDf$Design[is.na(assaySummaryDf$Design)] <- "Unknown"
+levelOrder2 <- c("LFA", "Quantitative-Indirect", "Quantitative-Direct", "Quantitative-Competitive",
+  "Unknown")
+assaySummaryDf$Design <- factor(assaySummaryDf$Design, levels=levelOrder2)
+
 
 assaySummaryDf$shorterNames <- assaySummaryDf$assay2 %>%
   stringr::str_replace(., " \\s*\\([^\\)]+\\)", "") %>%
@@ -92,20 +119,21 @@ slopesDf <- dplyr::filter(assaySummaryDf, !is.na(assay) &
 sortedAssays <- slopesDf$shorterNames[order(slopesDf$paramMean, decreasing=T)]
 slopesDf$shorterNames <- factor(slopesDf$shorterNames, levels=sortedAssays)
 slopeHist <- slopesDf %>%
-  ggplot(., aes(x=paramMean, y=shorterNames, color=Antigen, shape=Sandwich,
-                linetype=LFA)) +
+  ggplot(., aes(x=paramMean, y=shorterNames, color=Antigen, shape=Design)) +
   geom_pointrange(aes(xmin=paramL, xmax=paramH)) +
   #facet_wrap(~Technique, ncol=1, scales="free_y") +
   theme_bw() +
   theme(axis.title.y=element_blank()) +
+  scale_shape_manual(values=c(5, 16, 15, 17, 4))+
+  scale_color_manual(values=c('brown1', 'darkgoldenrod2', 'deepskyblue', 'azure4'))+
   xlab("Assay slope") +
   geom_vline(xintercept=0) +
   labs(linetype="Lateral Flow Assay") +
   annotate("rect", xmin=-0.9, xmax=0.7, ymin=0.5, ymax=3.5,
            alpha=.1,fill = "blue")
 
-ggsave("../data/figures/whisker_plots_slopes_basic_model2.png", slopeHist,
-  units="cm", width=20, height=19)
+fileName <- paste("../../data/figures/whisker_plots_slopes_basic_model", knownTimesStr, ".png", sep="")
+ggsave(fileName, slopeHist, units="cm", width=20, height=19)
 
 # Whisker plot of the intercepts
 interceptsDf <- dplyr::filter(assaySummaryDf, !is.na(assay) &
@@ -122,7 +150,8 @@ interceptHist <- interceptsDf %>%
 # Put together both whisker plots in a figure
 paramPlot <- ggarrange(plotlist=list(slopeHist, interceptHist),
                        ncol=2)
-ggsave("../data/figures/whisker_plots_basic_model.png", paramPlot,
-  units="cm", width=22, height=14)
+fileName <- paste("../../data/figures/whisker_plots_basic_model", knownTimesStr, ".png", sep="")
+ggsave(fileName, slopeHist, units="cm", width=20, height=19)
+ggsave(fileName, paramPlot, units="cm", width=22, height=14)
 
 

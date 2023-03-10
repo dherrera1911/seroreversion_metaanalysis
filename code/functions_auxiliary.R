@@ -1,3 +1,18 @@
+##################################
+#
+# These functions provide some basic functionalities that are
+# repeatedly used in the analysis for the paper 
+# "Dynamics of SARS-CoV-2 seroassay sensitivity: a systematic
+# review and modeling study"
+# 
+# Script authored by Daniel Herrera-Esposito.
+# For questions, contact me at dherrera1911[at]gmail.com
+# 
+# Final version revised 10/03/2023
+# 
+##################################
+
+
 library(dplyr)
 library(lubridate)
 library(stringr)

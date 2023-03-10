@@ -1,13 +1,18 @@
 ####################################################
 #
 # Plot the whisker plots of the early and late slopes.
-# Generates the plot of Figure 7. 
+# Generates the plot of Figure S2
 #
 # Uses the posterior samples of the parameters of
 # the two-slope model, fitted in script
 # 06_positive_slopes_analysis.R
 #
 # Also computes some significance numbers
+# 
+# Script authored by Daniel Herrera-Esposito.
+# For questions, contact me at dherrera1911[at]gmail.com
+# 
+# Final version revised 10/03/2023
 #
 ####################################################
 
@@ -24,10 +29,10 @@ library(ggthemes)
 library(lemon)
 library(cowplot)
 library(ggpubr)
-source("./functions_auxiliary.R")
+source("../functions_auxiliary.R")
 
 # Load the posterior samples data
-twoSlopesPosterior <- read.csv("../data/analysis_results/06_late_slope_posterior_samples.csv",
+twoSlopesPosterior <- read.csv("../../data/analysis_results/06_late_slope_posterior_samples.csv",
                  stringsAsFactors=FALSE)
 
 # Compute the mean of the early and late slopes
@@ -45,7 +50,7 @@ assayLateSlopeSig <- dplyr::filter(twoSlopesPosterior, !is.na(assay)) %>%
   summarize(., positiveFraction=mean(.value>0))
 
 # Do some editing of assay names to better fit the plot
-assaySummaryDf <- read.csv("../data/analysis_results/06_parameter_summary.csv",
+assaySummaryDf <- read.csv("../../data/analysis_results/06_parameter_summary.csv",
                            stringsAsFactors=FALSE)
 
 assaySummaryDf$shorterNames <- assaySummaryDf$assay %>%
@@ -89,6 +94,6 @@ slopeLateHist <- slopesLateDf %>%
 # Put together both whisker plots in a figure and save
 paramPlot <- ggarrange(plotlist=list(slopeEarlyHist, slopeLateHist),
                        ncol=2)
-ggsave("../data/figures/whisker_plots_two_slopes.png", paramPlot,
+ggsave("../../data/figures/whisker_plots_two_slopes.png", paramPlot,
   units="cm", width=22, height=9)
 

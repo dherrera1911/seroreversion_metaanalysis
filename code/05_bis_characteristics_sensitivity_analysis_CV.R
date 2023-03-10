@@ -1,15 +1,18 @@
 ##################################
-##################################
 # 
-# This script fits a model to data on time-varying
-# sensitivity of different serology assays. Only data
-# of serology testing on previously diagnosed individuals
-# is used.
+# This script does the same analysis as script 05,
+# but implementing the cross-validation procedure to test
+# model prediction performance. The structure of the analysis
+# and of the output are similar to script 04_bis.
+# The results obtained here are the reported cross-validation
+# performances of the full model in the text, reported in the
+# Results section 2.
 # 
-# The fitting is done taking into account different test
-# characteristics
+# Script authored by Daniel Herrera-Esposito.
+# For questions, contact me at dherrera1911[at]gmail.com
 # 
-##################################
+# Final version revised 10/03/2023
+# 
 ##################################
 
 library(dplyr)
@@ -52,19 +55,28 @@ seroFitted$S <- stringr::str_detect(seroFitted$antigenTarget, "S") &
   !seroFitted$RBD
 seroFitted$N <- stringr::str_detect(seroFitted$antigenTarget, "N") &
   !(seroFitted$RBD | seroFitted$S)
+
+#seroFitted$LFA <- stringr::str_detect(seroFitted$technique, "LFIA")
+#seroFitted$Rest <- !seroFitted$LFA
+#seroFitted$ELISA <- stringr::str_detect(seroFitted$technique, "ELISA")
+#seroFitted$chemlum <- (stringr::str_detect(seroFitted$technique, "CMIA") |
+#                       stringr::str_detect(seroFitted$technique, "CLIA"))
+#seroFitted$IgM <- stringr::str_detect(seroFitted$antibodyTarget, "IgM")
+#seroFitted$IgA <- stringr::str_detect(seroFitted$antibodyTarget, "IgA")
+#seroFitted$IgG <- TRUE
+#seroFitted$Total <- seroFitted$IgM & seroFitted$IgA
+#seroFitted$sandwich <- stringr::str_detect(seroFitted$design, "sandwich")
+#seroFitted$indirect <- stringr::str_detect(seroFitted$design, "indirect")
+#seroFitted$competitive <- stringr::str_detect(seroFitted$design, "competitive")
+#seroFitted$notSandwich <- seroFitted$indirect | seroFitted$competitive
+
 seroFitted$LFA <- stringr::str_detect(seroFitted$technique, "LFIA")
-seroFitted$Rest <- !seroFitted$LFA
-seroFitted$ELISA <- stringr::str_detect(seroFitted$technique, "ELISA")
-seroFitted$chemlum <- (stringr::str_detect(seroFitted$technique, "CMIA") |
-                       stringr::str_detect(seroFitted$technique, "CLIA"))
-seroFitted$IgM <- stringr::str_detect(seroFitted$antibodyTarget, "IgM")
-seroFitted$IgA <- stringr::str_detect(seroFitted$antibodyTarget, "IgA")
-seroFitted$IgG <- TRUE
-seroFitted$Total <- seroFitted$IgM & seroFitted$IgA
-seroFitted$sandwich <- stringr::str_detect(seroFitted$design, "sandwich")
-seroFitted$indirect <- stringr::str_detect(seroFitted$design, "indirect")
-seroFitted$competitive <- stringr::str_detect(seroFitted$design, "competitive")
-seroFitted$notSandwich <- seroFitted$indirect | seroFitted$competitive
+seroFitted$Indirect <- ! seroFitted$LFA &
+  stringr::str_detect(seroFitted$design, "indirect")
+seroFitted$Direct <- ! seroFitted$LFA &
+  stringr::str_detect(seroFitted$design, "sandwich")
+seroFitted$Neutralization <- ! seroFitted$LFA &
+  stringr::str_detect(seroFitted$design, "competitive")
 
 
 
@@ -91,7 +103,8 @@ if (characteristics=="antigen") {
   fileIdentifier <- "design"
 } else if (characteristics=="fullModel") {
   #### Fit full model characteristics
-  charsName <- c("N", "S", "RBD", "LFA", "sandwich")
+  #charsName <- c("N", "S", "RBD", "LFA", "sandwich")
+  charsName <- c("N", "S", "RBD", "LFA", "Indirect", "Direct", "Neutralization")
   fileIdentifier <- "fullModel"
 }
 
@@ -113,11 +126,11 @@ nChars <- length(charsName)
 ###############
 # compile model
 ###############
-#outcome_reg <- rstan::stan_model("./sensitivity_change_chars.stan",
-#                                 model_name="time_change_sensitivity",
-#                                 warn_pedantic=TRUE)
+outcome_reg <- rstan::stan_model("./sensitivity_change_chars.stan",
+                                 model_name="time_change_sensitivity",
+                                 warn_pedantic=TRUE)
 # load model if available
-outcome_reg <- readRDS("./sensitivity_change_chars.RDS")
+#outcome_reg <- readRDS("./sensitivity_change_chars.RDS")
 
 
 ###############
