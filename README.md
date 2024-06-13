@@ -1,9 +1,116 @@
 # Dynamics of SARS-CoV-2 seroassay sensitivity: a systematic review and modeling study
 
-This is the code associated with the paper
-*Dynamics of SARS-CoV-2 seroassay sensitivity: a systematic review and modeling study*,
-(https://www.medrxiv.org/content/10.1101/2022.09.08.22279731v3),
-currently in press at Eurosurveillance.
+This repository contains the code and data required to reproduce the results
+of the paper "Dynamics of SARS-CoV-2 seroassay sensitivity: a systematic
+review and modelling study", Euro Surveill. 2023;28(21).
+(https://www.eurosurveillance.org/content/10.2807/1560-7917.ES.2023.28.21.2200809).
+The paper analyzes how the sensitivity of SARS-CoV-2 serological assays
+changes over time since infection, and how this change is influenced by
+assay characteristics.
+
+## Reproducing the analysis
+
+In the **code** directory, there are scripts that preprocess the data,
+fit the models, and analyze the results. The code is written in R
+and the Bayesian models are written in Stan.
+
+The scripts in the **code** directory are led by a number,
+indicating the order in which they should be run to fully
+reproduce the analysis. Scripts 01 to 03 preprocess the
+data, scripts 04 and 05 fit the main models in the
+paper (sensitivity vs time), and scripts 06 to
+11 are controls and additional analyses in the paper.
+
+It is not necessary to run all scripts to reproduce the analysis,
+as the data files in data/processed_data allow to jump
+straight into running scripts 04 and 05.
+
+The main outputs of scripts 04 and 05 are also included
+in the data/analysis_results directory, so that the
+figures and statistics in the paper can be reproduced
+without running the analysis. The main figures of the
+paper can be reproduced by running the script
+**code/plotting_tabulating_scripts/plot_sensitivity_profiles.R**.
+
+
+##  Analysis code
+
+Each script includes a description at the beggining.
+The scripts are numbered so as to be run in order.
+Paths are built so as to be ran from the directory where
+a script file is located.
+
+Summary of the scripts in the ****code**** directory:
+
+**01_death_dynamics_table.R**: (Preprocessing) Builds the
+data/raw_data/death_dynamics.csv file by putting together different
+case and death data sources.
+
+**02_estimate_seroreversion_delays.R**: (Preprocessing) Uses the data in
+data/raw_data/death_dynamics.csv to estimate the delays between
+diagnosis and serology testing for the data in **PCR_to_serotest_unknown.csv**
+
+**03_organize_seroreversion_data.R**: (Preprocessing) Tidies the
+data and does som extra pre-processing. The output file of this
+script is **PCR_to_serotest_all.csv**, the input to the
+statistical analysis.
+
+**04_average_sensitivity_analysis.R**: (Analysis) Fits a hierarchical
+Bayesian regression to the data in PCR_to_serotest_all.csv, without
+taking into account assay characteristics. Outputs files to
+data/analysis_results with descriptions of the fitted model
+
+**04_bis_average_sensitivity_analysis_CV.R**: (Analysis) Fits the
+same model as the previous file, but for doing cross-validation.
+Outputs the cross-validation results, but no model summary.
+
+**05_characteristics_sensitivity_analysis.R**: (Analysis) Fits a hierarchical
+Bayesian regression to the data in PCR_to_serotest_all.csv. Unlike script
+04, it includes an effect for the different test characteristics. 
+
+**05_bis_characteristics_sensitivity_analysis_CV.R**: (Analysis) Fits a
+hierarchical Bayesian model like the script above, but for
+doing cross-validation. Only outputs the CV results, and not a
+model summary.
+
+**06_positive_slope_analysis.R**: (Analysis) Fits a model with
+two slopes, an early slope and a later slope. It does so on
+a small set of tests that show positive slopes in the main analysis.
+
+**07_manufacturer_comparison.R**: (Analysis) Compares the results from
+previous model fittings to manufacturer reported sensitivities.
+
+**08_characteristics_analysis_known_times.R**: (Analysis) Does the
+same as script 05, but for excluding data points where we
+estimated the time from diagnosis to testing.
+
+**09_organize_specificity_data.R**: (Preprocessing) Prepare the
+specificity data to analyze how it changes across assays.
+
+**10_analyze_specificity_data.R**: (Analysis) Fit a Bayesian
+model to the specificity data, to find effects of assay
+characteristics on specificity.
+
+**11_serotracker_analysis.R**: (Analysis) Computes how many
+data points in SeroTracker, that are Unity-aligned, use
+assays at high-risk of seroreversion.
+
+**functions_auxiliary.R**: Contains miscellaneous functions for small tasks.
+
+**functions_seroreversion_fit_analysis.R**: Contains functions related to
+the Bayesian analysis fit. For example, preparing the initialization
+values, extracting the posterior samples in a tidy format, etc.
+
+Directory **plotting_tabulating_scripts** has scripts
+that generate the figures for the paper. Each script includes
+a description of what Figures it generates. Like the analysis
+scripts, paths are made so as to have these scripts ran
+from the directory where they are located.
+
+Directory **stan_models** has the .stan files that implement
+the Bayesian models that are fit in the main analysis scripts
+described above.
+
 
 ## Data files
 
@@ -95,84 +202,6 @@ The most important variables of this dataset are:
 | **sampleType** | Indicates what kind of population was sampled |
 | **midpointDate** | Median date of sample collection |
 
-
-##  Analysis code
-
-Each script includes a description at the beggining.
-The scripts are numbered so as to be run in order.
-Paths are built so as to be ran from the directory where
-a script file is located.
-
-Description of the scripts in the ****code**** directory:
-
-**01_death_dynamics_table.R**: (Preprocessing) Builds the
-data/raw_data/death_dynamics.csv file by putting together different
-case and death data sources.
-
-**02_estimate_seroreversion_delays.R**: (Preprocessing) Uses the data in
-data/raw_data/death_dynamics.csv to estimate the delays between
-diagnosis and serology testing for the data in **PCR_to_serotest_unknown.csv**
-
-**03_organize_seroreversion_data.R**: (Preprocessing) Tidies the
-data and does som extra pre-processing. The output file of this
-script is **PCR_to_serotest_all.csv**, the input to the
-statistical analysis.
-
-**04_average_sensitivity_analysis.R**: (Analysis) Fits a hierarchical
-Bayesian regression to the data in PCR_to_serotest_all.csv, without
-taking into account assay characteristics. Outputs files to
-data/analysis_results with descriptions of the fitted model
-
-**04_bis_average_sensitivity_analysis_CV.R**: (Analysis) Fits the
-same model as the previous file, but for doing cross-validation.
-Outputs the cross-validation results, but no model summary.
-
-**05_characteristics_sensitivity_analysis.R**: (Analysis) Fits a hierarchical
-Bayesian regression to the data in PCR_to_serotest_all.csv. Unlike script
-04, it includes an effect for the different test characteristics. 
-
-**05_bis_characteristics_sensitivity_analysis_CV.R**: (Analysis) Fits a
-hierarchical Bayesian model like the script above, but for
-doing cross-validation. Only outputs the CV results, and not a
-model summary.
-
-**06_positive_slope_analysis.R**: (Analysis) Fits a model with
-two slopes, an early slope and a later slope. It does so on
-a small set of tests that show positive slopes in the main analysis.
-
-**07_manufacturer_comparison.R**: (Analysis) Compares the results from
-previous model fittings to manufacturer reported sensitivities.
-
-**08_characteristics_analysis_known_times.R**: (Analysis) Does the
-same as script 05, but for excluding data points where we
-estimated the time from diagnosis to testing.
-
-**09_organize_specificity_data.R**: (Preprocessing) Prepare the
-specificity data to analyze how it changes across assays.
-
-**10_analyze_specificity_data.R**: (Analysis) Fit a Bayesian
-model to the specificity data, to find effects of assay
-characteristics on specificity.
-
-**11_serotracker_analysis.R**: (Analysis) Computes how many
-data points in SeroTracker, that are Unity-aligned, use
-assays at high-risk of seroreversion.
-
-**functions_auxiliary.R**: Contains miscellaneous functions for small tasks.
-
-**functions_seroreversion_fit_analysis.R**: Contains functions related to
-the Bayesian analysis fit. For example, preparing the initialization
-values, extracting the posterior samples in a tidy format, etc.
-
-Directory **plotting_tabulating_scripts** has scripts
-that generate the figures for the paper. Each script includes
-a description of what Figures it generates. Like the analysis
-scripts, paths are made so as to have these scripts ran
-from the directory where they are located.
-
-Directory **stan_models** has the .stan files that implement
-the Bayesian models that are fit in the main analysis scripts
-described above.
 
 ##  Meta-analysis summary
 
